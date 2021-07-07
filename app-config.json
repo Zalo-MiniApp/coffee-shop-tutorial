@@ -1,0 +1,19 @@
+{
+  "app": {
+    "title": "Highland Coffee",
+    "orientation": "auto",
+    "headerColor": "#FFFFFF",
+    "leftButton": "back"
+  },
+  "debug": false,
+  "listCSS": [],
+  "listSyncJS": [],
+  "listAsyncJS": [],
+  "pages": [
+    "/user",
+    "/form",
+    "/dynamic-route",
+    "/about",
+    "/404"
+  ]
+}

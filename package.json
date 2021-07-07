@@ -1,0 +1,36 @@
+{
+  "name": "highland-coffee",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Highland Coffee",
+  "repository": "",
+  "license": "UNLICENSED",
+  "browserslist": [
+    "Android >= 5",
+    "IOS >= 9.3",
+    "Edge >= 15",
+    "Safari >= 9.1",
+    "Chrome >= 49",
+    "Firefox >= 31",
+    "Samsung >= 5"
+  ],
+  "scripts": {
+    "start": "zmp start",
+    "deploy": "zmp deploy"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "swiper": "^6.7.5",
+    "zmp-framework": "^1.1.7",
+    "zmp-sdk": "^2.8.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react-refresh": "^1.3.5",
+    "cross-env": "^7.0.3",
+    "postcss-preset-env": "^6.7.0",
+    "sass": "^1.35.1",
+    "vite": "^2.4.1"
+  }
+}
