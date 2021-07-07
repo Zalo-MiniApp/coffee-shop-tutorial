@@ -10,28 +10,26 @@ import {
 } from 'zmp-framework/react';
 import AppItems from '../components/app-items';
 import UserCard from '../components/user-card';
+import AddressPicker from '../components/address-picker';
+import backgroundStore from '../../assets-src/background-store.png'
 
 const HomePage = () => {
   const user = useStore('user');
   return (
-    <Page name="home" navbarLarge>
+    <Page name="home">
       {/* Top Navbar */}
-      <Navbar transparent>
+      <Navbar backLink>
         <NavTitleLarge>Highland Coffee</NavTitleLarge>
       </Navbar>
       {/* Page content */}
-      <Card inset>
-        <p>Here is your blank ZMP app. Let's see what we have here.</p>
-      </Card>
+
       {/* User info */}
-      <List>
-        <ListItem link="/user/">
-          <UserCard user={user} />
+      <List style={{ margin: 0 }}>
+        <ListItem>
+          <AddressPicker />
         </ListItem>
       </List>
-
-      {/* Grid apps */}
-      <AppItems />
+      <img src={backgroundStore} style={{ width: '100%' }} />
 
       {/* Route */}
       <List>

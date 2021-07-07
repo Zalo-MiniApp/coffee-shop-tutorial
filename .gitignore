@@ -34,4 +34,5 @@ node_modules/
 .DS_Store
 Thumbs.db
 
-
+# Build directory
+www

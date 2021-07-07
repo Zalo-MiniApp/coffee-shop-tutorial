@@ -1,1 +1,38 @@
 /* Your app custom styles here */
+.text-primary {
+    color: var(--zmp-theme-color);
+}
+.text-secondary {
+    color: var(--zmp-actions-label-text-color);
+}
+.address-picker-actions {
+    .actions-button {
+        height: unset;
+        .actions-button-text {
+            padding: 32px 0;
+            height: unset;
+            display: flex;
+            align-items: center;
+            .description {
+                flex: 1;
+                text-align: left;
+                margin-left: 16px;
+                line-height: normal;
+            }
+        }
+        &.disabled {
+            background: #EEF1F6;
+            filter: grayscale(1);
+        }
+    }
+    .close-button {
+        position: absolute;
+        left: 16px;
+        top: 16px;
+        z-index: 1;
+    }
+    .title {
+        color: black;
+        font-size: 1rem;
+    }
+}
