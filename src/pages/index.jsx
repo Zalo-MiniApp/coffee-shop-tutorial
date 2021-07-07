@@ -11,14 +11,17 @@ import {
 import AppItems from '../components/app-items';
 import UserCard from '../components/user-card';
 import AddressPicker from '../components/address-picker';
-import backgroundStore from '../../assets-src/background-store.png'
+import Banner from '../components/banner';
+import Inquiry from '../components/inquiry';
+import Category from '../components/category';
+import BottomNavigation from '../components/bottom-navigation';
 
 const HomePage = () => {
   const user = useStore('user');
   return (
     <Page name="home">
       {/* Top Navbar */}
-      <Navbar backLink>
+      <Navbar backLink fill>
         <NavTitleLarge>Highland Coffee</NavTitleLarge>
       </Navbar>
       {/* Page content */}
@@ -29,14 +32,12 @@ const HomePage = () => {
           <AddressPicker />
         </ListItem>
       </List>
-      <img src={backgroundStore} style={{ width: '100%' }} />
+      <Banner />
 
-      {/* Route */}
-      <List>
-        <ListItem title="Dynamic (Component) Route" link="/dynamic-route/?blog=45&post=125&foo=bar" />
-        <ListItem title="Default Route (404)" link="/something-that-doesnt-exist" />
-        <ListItem title="About" link="/about/" />
-      </List>
+      <Inquiry />
+      <Category />
+
+      <BottomNavigation />
     </Page>
   );
 }

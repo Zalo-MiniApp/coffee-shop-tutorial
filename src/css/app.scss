@@ -5,6 +5,10 @@
 .text-secondary {
     color: var(--zmp-actions-label-text-color);
 }
+.page-content {
+    padding-top: 82px;
+    padding-bottom: 80px;
+}
 .address-picker-actions {
     .actions-button {
         height: unset;
