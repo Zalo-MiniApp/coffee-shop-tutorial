@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
-import { Avatar, Title, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, Row, Col, Icon } from 'zmp-framework/react';
+import { Avatar, Title, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, Row, Col, Icon, useStore } from 'zmp-framework/react';
 import pickup from '../../assets-src/pickup.svg'
 import delivery from '../../assets-src/delivery.svg'
+import ShopPicker from './shop-picker';
 
 const AddressPicker = ({ value, onChange }) => {
   const [showPicker, setShowPicker] = useState(false)
+  const selectedShop = useStore('selectedShop')
+
   return (
     <div style={{ display: 'flex', width: '100%' }}>
       <Avatar src={pickup} />
       <div style={{ marginLeft: 16 }}>
         <Title style={{ marginBottom: 0 }}>Tự đến lấy tại</Title>
-        <div>VNG Campus D7 - Lô Z.06, Đ...</div>
+        <div className="ellipsis">
+          {selectedShop.name} - {selectedShop.address}
+        </div>
       </div>
       <Button style={{ marginLeft: 'auto' }} fill onClick={() => setShowPicker(true)}>Thay đổi</Button>
 
@@ -28,7 +33,9 @@ const AddressPicker = ({ value, onChange }) => {
         }}
       >
         <ActionsGroup className="address-picker-actions">
-          <Icon className="close-button" zmp="zi-close"></Icon>
+          <Button typeName="ghost" className="close-button" onClick={() => setShowPicker(false)}>
+            <Icon zmp="zi-close" size={24}></Icon>
+          </Button>
           <ActionsLabel bold>
             <span className="title">Chọn phương thức nhận hàng</span>
           </ActionsLabel>
@@ -36,11 +43,15 @@ const AddressPicker = ({ value, onChange }) => {
             <Avatar src={pickup} />
             <div className="description">
               <b className="text-primary">Tự đến lấy</b>
-              <div className="text-secondary mt-2">VNG Campus D7 - Lô Z.06, Đ...</div>
+              <div className="text-secondary mt-2 ellipsis">
+                {selectedShop.name} - {selectedShop.address}
+              </div>
             </div>
-            <Button typeName="secondary" onClick={() => setShowPicker(true)}>Sửa</Button>
+            <ShopPicker onReturn={() => setShowPicker(true)}>
+              <Button typeName="secondary">Sửa</Button>
+            </ShopPicker>
           </ActionsButton>
-          <ActionsButton className="disabled">
+          <ActionsButton className="inactive">
             <Avatar src={delivery} />
             <div className="description">
               <b className="text-primary">Giao tận nơi</b>

@@ -1,9 +1,9 @@
 /* Your app custom styles here */
 .text-primary {
-    color: var(--zmp-theme-color);
+    color: var(--zmp-theme-color) !important;
 }
 .text-secondary {
-    color: var(--zmp-actions-label-text-color);
+    color: var(--zmp-actions-label-text-color) !important;
 }
 .page-content {
     padding-top: 82px;
@@ -22,21 +22,47 @@
                 text-align: left;
                 margin-left: 16px;
                 line-height: normal;
+                white-space: normal;
             }
         }
-        &.disabled {
+        &.inactive {
             background: #EEF1F6;
             filter: grayscale(1);
         }
     }
+    .actions-label {
+        background: #EEF1F6;
+        &:first-of-type {
+            background: white;
+        }
+    }
     .close-button {
         position: absolute;
-        left: 16px;
-        top: 16px;
+        left: 8px;
+        top: 8px;
         z-index: 1;
     }
     .title {
         color: black;
         font-size: 1rem;
     }
+    .searchbar {
+        border-radius: var(--zmp-searchbar-in-page-content-border-radius);
+        input {
+            border: none;
+        }
+    }
+}
+.inquiry {
+    select, .button {
+        background-color: white;
+        border: none;
+    }
+}
+.ellipsis {
+    width: calc(100vw - 200px);
+    min-width: -webkit-fill-available;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
