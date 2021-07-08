@@ -66,3 +66,31 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.bottom-navigation {
+    .cart {
+        position: fixed;
+        bottom: 64px;
+        width: 100%;
+        box-sizing: border-box;
+        border-top: .5px solid var(--zmp-card-inset-border-color);
+        background-color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 16px;
+        .button {
+            padding: 24px 32px;
+        }
+    }
+    .tabbar {
+        position: fixed;
+        height: 64px;
+    }
+    .link {
+        margin: 20px;
+        &.active {
+            border-top: 2px solid var(--zmp-theme-color);
+            color: var(--zmp-theme-color);
+        }
+    }
+}

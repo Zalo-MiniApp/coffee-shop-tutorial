@@ -3,6 +3,36 @@ import { createStore } from 'zmp-core/lite';
 const store = createStore({
   state: {
     categories: ['Cà Phê', 'Trà', 'Bánh Ngọt', 'Thức Uống Khác'],
+    products: [{
+      id: 1,
+      name: 'Phin Đen Đá',
+      price: 29000,
+      image: "../../assets-src/black-coffee.png",
+      sizes: [
+        { name: 'S', extra: 0 },
+        { name: 'M', extra: 6000 },
+        { name: 'L', extra: 10000 }
+      ],
+      toppings: [
+        { name: 'Thạch Vải', extra: 9000 },
+        { name: 'Vải', extra: 9000 }
+      ]
+    },
+    {
+      id: 2,
+      name: 'Phin Sữa Đá',
+      price: 29000,
+      image: "../../assets-src/milk-coffee.png",
+      sizes: [
+        { name: 'S', extra: 0 },
+        { name: 'M', extra: 6000 },
+        { name: 'L', extra: 10000 }
+      ],
+      toppings: [
+        { name: 'Thạch Vải', extra: 9000 },
+        { name: 'Vải', extra: 9000 }
+      ]
+    }],
     shops: [{
       selected: true,
       name: 'VNG Campus D7',
@@ -59,11 +89,15 @@ const store = createStore({
         hour: 17,
         minute: 0
       }
-    }]
+    }],
+    cart: []
   },
   getters: {
     categories({ state }) {
       return state.categories
+    },
+    products({ state }) {
+      return state.products
     },
     shops({ state }) {
       return state.shops;
@@ -73,6 +107,15 @@ const store = createStore({
     },
     selectableShops({ state }) {
       return state.shops.filter(s => !s.selected)
+    },
+    cart({ state }) {
+      return state.cart
+    },
+    totalQuantity({ state }) {
+      return state.cart.reduce((total, item) => total + item.quantity, 0)
+    },
+    totalAmount({ state }) {
+      return state.cart.reduce((total, item) => total + item.subtotal, 0)
     }
   },
   actions: {
@@ -82,6 +125,9 @@ const store = createStore({
         selected: shop.name === name
       }))
     },
+    addToCart({ state }, item) {
+      state.cart = state.cart.concat(item)
+    }
   },
 })
 
