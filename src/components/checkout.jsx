@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Button, Text, Actions, ActionsGroup, ActionsLabel, List, ListItem, Icon, Box, Avatar, Input, useStore, Link } from 'zmp-framework/react';
+import { Button, Text, Actions, ActionsGroup, ActionsLabel, List, ListItem, Icon, Box, Avatar, Input, useStore, Link, Checkbox } from 'zmp-framework/react';
 import ProductImage from './product-image'
 import shop from '../../assets-src/shop.svg'
 import clock from '../../assets-src/clock.svg'
@@ -60,13 +60,13 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
                 <Icon slot="content" zmp="zi-chevron-right" />
                 <Text className="mb-0">Hôm nay 15h30 - 08/05 (sớm nhất)</Text>
               </ListItem>
-              <ListItem>
-                <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -8, marginTop: 0, paddingTop: 16 }}>Số điện thoại</Box>
+              <ListItem className="editable-info">
+                <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -16, marginTop: 0, paddingTop: 16 }}>Số điện thoại</Box>
                 <Avatar slot="media" src={phone} size="24" />
-                <Text className="mb-0">033 707 6898</Text>
+                <div className="inline-input"><Input type="text" placeholder="Nhập số điện thoại..." /></div>
               </ListItem>
-              <ListItem>
-                <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -12, marginTop: 0, paddingTop: 16 }}>Ghi chú</Box>
+              <ListItem className="editable-info">
+                <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -16, marginTop: 0, paddingTop: 16 }}>Ghi chú</Box>
                 <img slot="media" src={note} size="24" />
                 <div className="inline-input"><Input type="textarea" placeholder="Nhập nội dung ghi chú..." resizable /></div>
               </ListItem>
@@ -95,6 +95,36 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
             </List>
           </ActionsLabel>
         </ActionsGroup>
+        <ActionsGroup />
+        <ActionsLabel className="p-0" style={{ position: 'sticky', bottom: 0, borderTop: `0.5px solid var(--zmp-color-nd200)` }}>
+          <List className="my-0">
+            <ListItem>
+              <Text slot="before-title" className="text-secondary mb-0">Mã ưu đãi</Text>
+              <Icon slot="content" zmp="zi-chevron-right" />
+              <Text slot="after" className="text-secondary mb-0">Chọn mã ưu đãi</Text>
+            </ListItem>
+            <ListItem>
+              <div>
+                <Box style={{ display: 'flex', alignItems: 'center' }}>
+                  <Checkbox
+                    defaultChecked
+                  />
+                  <Text style={{ textAlign: 'left', paddingLeft: 8 }} fontSize={12}>
+                    Tôi đồng ý nhận món từ <b>15h30 - 15h45</b>. Sau thời gian này, tôi chấp nhận hủy món và không được hoàn tiền.
+                    <a className="text-primary">Chọn giờ khác.</a>
+                  </Text>
+                </Box>
+                <Box style={{ display: 'flex', alignItems: 'center' }}>
+                  <Text>Tổng tiền</Text>
+                  <Price style={{ marginLeft: 'auto' }} fontSize={20} bold amount={totalAmount} />
+                </Box>
+                <Box>
+                  <Button large responsive fill>Thanh toán bằng ZaloPay</Button>
+                </Box>
+              </div>
+            </ListItem>
+          </List>
+        </ActionsLabel>
       </Actions>
     </>
   )

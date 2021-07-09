@@ -97,8 +97,14 @@
 }
 .inline-input {
     width: 100%;
+    .input-info {
+        display: none;
+    }
     input, textarea {
         border: none;
+        min-height: unset;
+        height: 32px;
+        padding: 8px 0 !important;
         &:focus {
             border: none;
             outline: none;
@@ -106,7 +112,14 @@
         }
     }
     textarea.resizable {
-        height: 32px;
-        padding: 8px !important;
+        padding-top: 12px !important;
     }
+}
+.editable-info {
+    .item-inner {
+        padding-bottom: 8px;
+    }
+}
+.actions-button a, .actions-label a {
+    color: white;
 }
