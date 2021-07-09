@@ -1,12 +1,8 @@
 import React from 'react';
 import {
   Page,
-  Navbar,
-  NavTitleLarge,
   List,
   ListItem,
-  useStore,
-  Card,
 } from 'zmp-framework/react';
 import AddressPicker from '../components/address-picker';
 import Banner from '../components/banner';
@@ -17,10 +13,6 @@ import BottomNavigation from '../components/bottom-navigation';
 const HomePage = () => {
   return (
     <Page name="home">
-      {/* Top Navbar */}
-      <Navbar backLink fill>
-        <NavTitleLarge>Highland Coffee</NavTitleLarge>
-      </Navbar>
       {/* Page content */}
 
       {/* User info */}

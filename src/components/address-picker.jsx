@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Avatar, Title, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, Row, Col, Icon, useStore } from 'zmp-framework/react';
+import { Avatar, Text, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, Row, Col, Icon, useStore } from 'zmp-framework/react';
 import pickup from '../../assets-src/pickup.svg'
 import delivery from '../../assets-src/delivery.svg'
 import ShopPicker from './shop-picker';
@@ -9,28 +9,19 @@ const AddressPicker = ({ value, onChange }) => {
   const selectedShop = useStore('selectedShop')
 
   return (
-    <div style={{ display: 'flex', width: '100%' }}>
+    <div style={{ display: 'flex', alignItems: 'center' }}>
       <Avatar src={pickup} />
       <div style={{ marginLeft: 16 }}>
-        <Title style={{ marginBottom: 0 }}>Tự đến lấy tại</Title>
-        <div className="ellipsis">
+        <Text bold className="mb-0">Tự đến lấy tại</Text>
+        <Text className="ellipsis mb-0">
           {selectedShop.name} - {selectedShop.address}
-        </div>
+        </Text>
       </div>
-      <Button style={{ marginLeft: 'auto' }} fill onClick={() => setShowPicker(true)}>Thay đổi</Button>
+      <Button style={{ marginLeft: 16 }} fill onClick={() => setShowPicker(true)}>Thay đổi</Button>
 
       <Actions
         opened={showPicker}
         onActionsClosed={() => setShowPicker(false)}
-        onActionsClose={() => {
-          console.log("closing");
-        }}
-        onActionsOpen={() => {
-          console.log("opening");
-        }}
-        onActionsOpened={() => {
-          console.log("opened");
-        }}
       >
         <ActionsGroup className="address-picker-actions">
           <Button typeName="ghost" className="close-button" onClick={() => setShowPicker(false)}>
@@ -42,10 +33,10 @@ const AddressPicker = ({ value, onChange }) => {
           <ActionsButton>
             <Avatar src={pickup} />
             <div className="description">
-              <b className="text-primary">Tự đến lấy</b>
-              <div className="text-secondary mt-2 ellipsis">
+              <Text bold fontSize="16" className="text-primary my-1">Tự đến lấy</Text>
+              <Text className="text-secondary ellipsis">
                 {selectedShop.name} - {selectedShop.address}
-              </div>
+              </Text>
             </div>
             <ShopPicker onReturn={() => setShowPicker(true)}>
               <Button typeName="secondary">Sửa</Button>
@@ -54,8 +45,8 @@ const AddressPicker = ({ value, onChange }) => {
           <ActionsButton className="inactive">
             <Avatar src={delivery} />
             <div className="description">
-              <b className="text-primary">Giao tận nơi</b>
-              <div className="text-secondary mt-2">Tài xế giao đến địa chỉ của bạn</div>
+              <Text bold fontSize="16" className="text-primary my-1">Giao tận nơi</Text>
+              <Text className="text-secondary">Tài xế giao đến địa chỉ của bạn</Text>
             </div>
           </ActionsButton>
         </ActionsGroup>

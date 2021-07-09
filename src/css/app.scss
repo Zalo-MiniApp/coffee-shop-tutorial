@@ -6,14 +6,13 @@
     color: var(--zmp-actions-label-text-color) !important;
 }
 .page-content {
-    padding-top: 82px;
     padding-bottom: 80px;
 }
 .address-picker-actions {
     .actions-button {
         height: unset;
         .actions-button-text {
-            padding: 32px 0;
+            padding: 24px 0;
             height: unset;
             display: flex;
             align-items: center;

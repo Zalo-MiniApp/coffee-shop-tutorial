@@ -7,7 +7,7 @@ const store = createStore({
       id: 1,
       name: 'Phin Đen Đá',
       price: 29000,
-      image: "../../assets-src/black-coffee.png",
+      image: "black-coffee",
       sizes: [
         { name: 'S', extra: 0 },
         { name: 'M', extra: 6000 },
@@ -22,7 +22,7 @@ const store = createStore({
       id: 2,
       name: 'Phin Sữa Đá',
       price: 29000,
-      image: "../../assets-src/milk-coffee.png",
+      image: "milk-coffee",
       sizes: [
         { name: 'S', extra: 0 },
         { name: 'M', extra: 6000 },

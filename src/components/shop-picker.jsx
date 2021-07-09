@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Avatar, Button, Text, Actions, ActionsGroup, ActionsLabel, ActionsButton, Row, Col, Icon, Searchbar, useStore } from 'zmp-framework/react';
+import { Avatar, Button, Text, Actions, ActionsGroup, ActionsLabel, ActionsButton, Row, Col, Icon, Searchbar, useStore, Link } from 'zmp-framework/react';
 import shop from '../../assets-src/shop.svg'
 import store from '../store'
 
@@ -13,7 +13,7 @@ const Shop = ({ name, address, selected, open, close }) => {
     <Avatar src={shop} size="24" />
     <div className="description">
       <Text bold fontSize="16">{name}</Text>
-      <div className="text-secondary mt-2">{address}</div>
+      <Text className="text-secondary">{address}</Text>
       <Text>Mở bán từ {padZero(open.hour)}h{padZero(open.minute)} - {padZero(close.hour)}h{padZero(close.minute)}</Text>
     </div>
   </ActionsButton>
@@ -78,9 +78,9 @@ const ShopPicker = ({ value, onChange, children, onReturn }) => {
                   <Text bold className="mb-0">Cửa hàng đang chọn</Text>
                 </Col>
                 <Col width="30" style={{ textAlign: 'right' }}>
-                  <a className="text-primary">
+                  <Link className="text-primary">
                     Tìm gần nhất
-                  </a>
+                  </Link>
                 </Col>
               </Row>
             </ActionsLabel>

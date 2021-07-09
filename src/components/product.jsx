@@ -2,6 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { Card, Text, Title, Actions, ActionsGroup, ActionsLabel, Button, Icon, Input, Row, Col, Box, List, ListItem } from 'zmp-framework/react';
 import { Price, ExtraPrice } from './prices'
 import store from '../store';
+import blackCoffee from '../../assets-src/black-coffee.png';
+import milkCoffee from '../../assets-src/milk-coffee.png'
 
 const Product = ({ id, name, price, image, sizes, toppings }) => {
     const [showOrder, setShowOrder] = useState(false)
@@ -9,6 +11,11 @@ const Product = ({ id, name, price, image, sizes, toppings }) => {
     const [size, setSize] = useState(sizes[0])
     const [topping, setTopping] = useState()
     const [note, setNote] = useState('')
+
+    const productImages = {
+        'black-coffee': blackCoffee,
+        'milk-coffee': milkCoffee
+    }
 
     const subtotal = useMemo(() => {
         let subtotal = quantity * price
@@ -44,9 +51,9 @@ const Product = ({ id, name, price, image, sizes, toppings }) => {
     return <div>
         <div onClick={() => setShowOrder(true)}>
             <Card inset style={{ textAlign: 'center' }}>
-                <img src={image} style={{ width: '100%' }} />
+                <img src={productImages[image]} style={{ width: '100%' }} />
                 <Text bold>{name}</Text>
-                <Price amount={price} />
+                <Price className="text-secondary" amount={price} />
             </Card>
         </div>
         <Actions
@@ -62,7 +69,7 @@ const Product = ({ id, name, price, image, sizes, toppings }) => {
                 </ActionsLabel>
                 <ActionsLabel style={{ backgroundColor: 'white' }}>
                     <Row>
-                        <Col style={{ flex: 1, paddingRight: 16 }}><img src={image} style={{ height: 100 }} /></Col>
+                        <Col style={{ flex: 1, paddingRight: 16 }}><img src={productImages[image]} style={{ height: 100 }} /></Col>
                         <Col style={{ flex: '1 1 auto', textAlign: 'left', alignSelf: 'center' }}>
                             <Title style={{ color: 'black' }} bold>{name}</Title>
                             <Price amount={price} />
