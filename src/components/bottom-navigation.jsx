@@ -4,6 +4,7 @@ import { Price } from './prices'
 import cup from '../../assets-src/cup.svg'
 import discount from '../../assets-src/discount.svg'
 import history from '../../assets-src/history.svg'
+import Checkout from './checkout'
 
 const BottomNavigation = () => {
     const totalQuantity = useStore('totalQuantity')
@@ -13,10 +14,12 @@ const BottomNavigation = () => {
         {totalQuantity > 0 && <div className="cart">
             <Box>
                 <Price fontSize={20} bold amount={totalAmount} className="mb-0" />
-                <span className="text-secondary">Bạn có {totalQuantity} món trong giỏ hàng.</span>
+                <Text className="text-secondary">Bạn có {totalQuantity} món trong giỏ hàng.</Text>
             </Box>
             <Box style={{ textAlign: 'right' }}>
-                <Button fill large>Giỏ hàng</Button>
+                <Checkout>
+                    <Button fill large>Giỏ hàng</Button>
+                </Checkout>
             </Box>
         </div>}
         <Tabbar bottom>

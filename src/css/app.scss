@@ -1,4 +1,7 @@
 /* Your app custom styles here */
+:root {
+    --zmp-textarea-height: 32px;
+}
 .text-primary {
     color: var(--zmp-theme-color) !important;
 }
@@ -31,6 +34,7 @@
     }
     .actions-label {
         background: #EEF1F6;
+        min-height: unset;
         &:first-of-type {
             background: white;
         }
@@ -47,9 +51,6 @@
     }
     .searchbar {
         border-radius: var(--zmp-searchbar-in-page-content-border-radius);
-        input {
-            border: none;
-        }
     }
 }
 .inquiry {
@@ -87,9 +88,25 @@
     }
     .link {
         margin: 20px;
+        font-weight: normal;
         &.active {
             border-top: 2px solid var(--zmp-theme-color);
             color: var(--zmp-theme-color);
         }
+    }
+}
+.inline-input {
+    width: 100%;
+    input, textarea {
+        border: none;
+        &:focus {
+            border: none;
+            outline: none;
+            box-shadow: none;
+        }
+    }
+    textarea.resizable {
+        height: 32px;
+        padding: 8px !important;
     }
 }

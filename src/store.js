@@ -2,6 +2,7 @@
 import { createStore } from 'zmp-core/lite';
 const store = createStore({
   state: {
+    shipping: false,
     categories: ['Cà Phê', 'Trà', 'Bánh Ngọt', 'Thức Uống Khác'],
     products: [{
       id: 1,
@@ -116,6 +117,9 @@ const store = createStore({
     },
     totalAmount({ state }) {
       return state.cart.reduce((total, item) => total + item.subtotal, 0)
+    },
+    shipping({ state }) {
+      return state.shipping
     }
   },
   actions: {
@@ -127,6 +131,9 @@ const store = createStore({
     },
     addToCart({ state }, item) {
       state.cart = state.cart.concat(item)
+    },
+    ship({ state }, value) {
+      state.shipping = value
     }
   },
 })

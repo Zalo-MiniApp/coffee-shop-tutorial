@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import { Avatar, Button, Text, Actions, ActionsGroup, ActionsLabel, ActionsButton, Row, Col, Icon, Searchbar, useStore, Link } from 'zmp-framework/react';
+import { Avatar, Button, Text, Actions, ActionsGroup, ActionsLabel, ActionsButton, Row, Col, Icon, Searchbar, useStore, Link, Box } from 'zmp-framework/react';
 import shop from '../../assets-src/shop.svg'
 import store from '../store'
 
-const Shop = ({ name, address, selected, open, close }) => {
+export const Shop = ({ name, address, selected, open, close }) => {
   const padZero = number => String(number).padStart(2, 0)
   const selectShop = () => {
     store.dispatch('selectShop', name)
@@ -63,34 +63,34 @@ const ShopPicker = ({ value, onChange, children, onReturn }) => {
             <Searchbar value={keyword} onChange={e => setKeyword(e.target.value)} type="text" placeholder="Tìm địa chỉ, tên chi nhánh..." clearButton />
           </ActionsLabel>
           {keyword ? <>
-            <ActionsLabel>
-              <Row>
-                <Col style={{ textAlign: 'left' }}>
-                  <Text bold className="mb-0">Kết quả</Text>
-                </Col>
-              </Row>
+            <ActionsLabel className="p-0">
+              <Box>
+                {
+                  shops.length ?
+                    <Text bold style={{ textAlign: 'left' }}>Kết quả</Text> :
+                    <Text bold>Không tìm thấy</Text>
+                }
+              </Box>
             </ActionsLabel>
             {shops.map(shop => <Shop key={shop.name} {...shop} />)}
           </> : <>
-            <ActionsLabel>
-              <Row>
-                <Col width="70" style={{ textAlign: 'left' }}>
-                  <Text bold className="mb-0">Cửa hàng đang chọn</Text>
-                </Col>
-                <Col width="30" style={{ textAlign: 'right' }}>
-                  <Link className="text-primary">
-                    Tìm gần nhất
-                  </Link>
-                </Col>
-              </Row>
+            <ActionsLabel className="p-0">
+              <Box>
+                <Row>
+                  <Col width="70" style={{ textAlign: 'left' }}>
+                    <Text bold className="mb-0">Cửa hàng đang chọn</Text>
+                  </Col>
+                  <Col width="30" style={{ textAlign: 'right' }}>
+                    <Link className="text-primary">
+                      Tìm gần nhất
+                    </Link>
+                  </Col>
+                </Row>
+              </Box>
             </ActionsLabel>
             <Shop {...selectedShop} />
-            <ActionsLabel>
-              <Row>
-                <Col style={{ textAlign: 'left' }}>
-                  <Text bold className="mb-0">Cửa hàng khác</Text>
-                </Col>
-              </Row>
+            <ActionsLabel className="p-0">
+              <Box style={{ textAlign: 'left' }}><Text bold>Cửa hàng khác</Text></Box>
             </ActionsLabel>
             {shops.map(shop => <Shop key={shop.name} {...shop} />)}
           </>}
