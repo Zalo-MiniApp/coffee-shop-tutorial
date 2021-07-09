@@ -2,6 +2,7 @@
 import { createStore } from 'zmp-core/lite';
 const store = createStore({
   state: {
+    showCheckout: false,
     shipping: false,
     categories: ['Cà Phê', 'Trà', 'Bánh Ngọt', 'Thức Uống Khác'],
     products: [{
@@ -120,6 +121,9 @@ const store = createStore({
     },
     shipping({ state }) {
       return state.shipping
+    },
+    showCheckout({ state }) {
+      return state.showCheckout
     }
   },
   actions: {
@@ -132,8 +136,21 @@ const store = createStore({
     addToCart({ state }, item) {
       state.cart = state.cart.concat(item)
     },
+    updateCartItem({ state }, { index, item }) {
+      state.cart[index] = item
+      state.cart = [...state.cart]
+    },
+    removeCartItem({ state }, index) {
+      state.cart = state.cart.filter((item, i) => i !== index)
+      if (state.cart.length === 0) {
+        state.showCheckout = false
+      }
+    },
     ship({ state }, value) {
       state.shipping = value
+    },
+    setShowCheckout({ state }, value) {
+      state.showCheckout = value
     }
   },
 })

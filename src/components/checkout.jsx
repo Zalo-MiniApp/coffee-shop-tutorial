@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Button, Text, Actions, ActionsGroup, ActionsLabel, List, ListItem, Icon, Box, Avatar, Input, useStore, Link, Checkbox } from 'zmp-framework/react';
 import ProductImage from './product-image'
 import shop from '../../assets-src/shop.svg'
@@ -6,29 +6,31 @@ import clock from '../../assets-src/clock.svg'
 import phone from '../../assets-src/phone.svg'
 import note from '../../assets-src/note.svg'
 import { Price } from './prices';
+import ProductOrder from './product-order';
+import store from '../store';
 
 const Checkout = ({ value, onChange, children, onReturn }) => {
-  const [showCheckout, setShowCheckout] = useState(false)
+  const showCheckout = useStore('showCheckout')
+  const setShowCheckout = (value) => {
+    store.dispatch('setShowCheckout', value)
+  }
   const selectedShop = useStore('selectedShop')
   const cart = useStore('cart')
   const totalAmount = useStore('totalAmount')
+
+  const [show, setShow] = useState(false)
+  useEffect(() => setShow(showCheckout), [showCheckout])
 
   return (
     <>
       <div onClick={() => setShowCheckout(true)}>{children}</div>
       <Actions
-        opened={showCheckout}
+        opened={show}
         onActionsClosed={() => setShowCheckout(false)}
         onActionsClose={() => {
           if (onReturn) {
             onReturn()
           }
-        }}
-        onActionsOpen={() => {
-          console.log("opening");
-        }}
-        onActionsOpened={() => {
-          console.log("opened");
         }}
       >
         <ActionsGroup className="address-picker-actions">
@@ -76,16 +78,18 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
             <Box style={{ textAlign: 'left' }}><Text bold>Thông tin đơn hàng</Text></Box>
             <List className="my-0">
               {cart.map((item, i) => <ListItem key={i}>
-                <ProductImage slot="media" image={item.image} style={{ width: 48 }} />
+                <ProductImage slot="media" image={item.product.image} style={{ width: 48 }} />
                 <Price slot="content" amount={item.subtotal} unit="đ" className="pr-4" />
                 <Box style={{ textAlign: 'left' }}>
                   <Text className="mb-0" bold>
-                    <span style={{ color: '#B22830' }}>{item.quantity}x</span> {item.name}
+                    <span style={{ color: '#B22830' }}>{item.quantity}x</span> {item.product.name}
                   </Text>
                   {item.size && <Text className="mb-0 text-secondary">
                     Size {item.size.name}
                   </Text>}
-                  <Link className="text-primary">Chỉnh sửa</Link>
+                  <ProductOrder product={item.product} cartItem={item} cartIndex={i}>
+                    <Link className="text-primary">Chỉnh sửa</Link>
+                  </ProductOrder>
                 </Box>
               </ListItem>)}
               <ListItem>

@@ -45,12 +45,6 @@ const ShopPicker = ({ value, onChange, children, onReturn }) => {
             onReturn()
           }
         }}
-        onActionsOpen={() => {
-          console.log("opening");
-        }}
-        onActionsOpened={() => {
-          console.log("opened");
-        }}
       >
         <ActionsGroup className="address-picker-actions">
           <Button typeName="ghost" className="close-button" onClick={() => setShowPicker(false)}>
@@ -60,7 +54,7 @@ const ShopPicker = ({ value, onChange, children, onReturn }) => {
             <span className="title">Chọn cửa hàng</span>
           </ActionsLabel>
           <ActionsLabel bold>
-            <Searchbar value={keyword} onChange={e => setKeyword(e.target.value)} type="text" placeholder="Tìm địa chỉ, tên chi nhánh..." clearButton />
+            <Searchbar value={keyword} onChange={e => setKeyword(e.target.value)} type="text" placeholder="Tìm địa chỉ, tên chi nhánh..." clearButton onSearchbarClear={() => setKeyword('')} />
           </ActionsLabel>
           {keyword ? <>
             <ActionsLabel className="p-0">

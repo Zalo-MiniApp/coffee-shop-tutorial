@@ -1,137 +1,19 @@
-import React, { useState, useMemo } from 'react';
-import { Card, Text, Title, Actions, ActionsGroup, ActionsLabel, Button, Icon, Input, Row, Col, Box, List, ListItem } from 'zmp-framework/react';
-import { Price, ExtraPrice } from './prices'
-import ProductImage from './product-image'
-import store from '../store';
+import React from 'react';
+import { Card, Text } from 'zmp-framework/react';
+import { Price } from './prices';
+import ProductImage from './product-image';
+import ProductOrder from './product-order';
 
-const Product = ({ id, name, price, image, sizes, toppings }) => {
-    const [showOrder, setShowOrder] = useState(false)
-    const [quantity, setQuantity] = useState(1)
-    const [size, setSize] = useState(sizes[0])
-    const [topping, setTopping] = useState()
-    const [note, setNote] = useState('')
+const Product = (props) => {
+    const { name, price, image } = props
+    return <ProductOrder product={props}>
+        <Card inset style={{ textAlign: 'center' }}>
+            <ProductImage image={image} style={{ width: '100%' }} />
+            <Text bold>{name}</Text>
+            <Price className="text-secondary" amount={price} />
+        </Card>
+    </ProductOrder>
 
-    const subtotal = useMemo(() => {
-        let subtotal = quantity * price
-        if (size) {
-            subtotal += size.extra
-        }
-        if (topping) {
-            subtotal += topping.extra
-        }
-        return subtotal;
-    }, [quantity, size, topping])
-
-    const order = () => {
-        store.dispatch('addToCart', {
-            id,
-            quantity,
-            size,
-            topping,
-            subtotal,
-            note,
-            name,
-            image
-        })
-    }
-    const addToCart = () => {
-        order()
-        setShowOrder(false)
-    }
-
-    const checkout = () => {
-        order()
-        setShowOrder(false)
-    }
-
-    return <div>
-        <div onClick={() => setShowOrder(true)}>
-            <Card inset style={{ textAlign: 'center' }}>
-                <ProductImage image={image} style={{ width: '100%' }} />
-                <Text bold>{name}</Text>
-                <Price className="text-secondary" amount={price} />
-            </Card>
-        </div>
-        <Actions
-            opened={showOrder}
-            onActionsClosed={() => setShowOrder(false)}
-        >
-            <ActionsGroup className="address-picker-actions">
-                <Button typeName="ghost" className="close-button" onClick={() => setShowOrder(false)}>
-                    <Icon zmp="zi-close" size={24}></Icon>
-                </Button>
-                <ActionsLabel bold>
-                    <span className="title">Chọn thức uống</span>
-                </ActionsLabel>
-                <ActionsLabel style={{ backgroundColor: 'white' }}>
-                    <Row>
-                        <Col style={{ flex: 1, paddingRight: 16 }}><ProductImage image={image} style={{ width: '100%' }} /></Col>
-                        <Col style={{ flex: '1 1 auto', textAlign: 'left', alignSelf: 'center' }}>
-                            <Title style={{ color: 'black' }} bold>{name}</Title>
-                            <Price amount={price} />
-                        </Col>
-                    </Row>
-                </ActionsLabel>
-                <ActionsLabel className="p-0" style={{ textAlign: 'left' }}>
-                    <Box><Text bold>Chọn Size</Text></Box>
-                    <List className="my-0">
-                        {sizes.map(s => <ListItem key={s.name} radio value={s.name} name="s" title={s.name} checked={size === s} onClick={() => setSize(s)}>
-                            {s.extra && <ExtraPrice amount={s.extra} />}
-                        </ListItem>)}
-                    </List>
-                </ActionsLabel>
-                <ActionsLabel className="p-0" style={{ textAlign: 'left' }}>
-                    <Box><Text bold>Chọn Topping</Text></Box>
-                    <List className="my-0">
-                        {toppings.map(t => <ListItem key={t.name} radio value={t.name} name="t" title={t.name} checked={topping === t} onClick={() => setTopping(t)}>
-                            {t.extra && <ExtraPrice amount={t.extra} />}
-                        </ListItem>)}
-                    </List>
-                </ActionsLabel>
-                <ActionsLabel className="p-0" style={{ textAlign: 'left' }}>
-                    <Box><Text bold>Số lượng</Text></Box>
-                    <List className="my-0">
-                        <ListItem>
-                            <div style={{ display: 'flex', margin: 'auto', color: 'black' }}>
-                                <Button small typeName="tertiary" onClick={() => setQuantity(quantity > 0 ? quantity - 1 : 0)}>-</Button>
-                                <Box mx={6} mt={1}>{quantity}</Box>
-                                <Button small typeName="tertiary" onClick={() => setQuantity(quantity + 1)}>+</Button>
-                            </div>
-                        </ListItem>
-                    </List>
-                </ActionsLabel>
-                <ActionsLabel className="p-0" style={{ textAlign: 'left' }}>
-                    <Box><Text bold>Ghi chú</Text></Box>
-                    <List className="my-0">
-                        <ListItem>
-                            <div style={{ flex: 1, height: 48 }}>
-                                <Input value={note} onChange={(e) => setNote(e.target.value)} type="text" placeholder="Nhập ghi chú (VD. Ít đá, nhiều đường...)" />
-                            </div>
-                        </ListItem>
-                    </List>
-                </ActionsLabel>
-            </ActionsGroup>
-            <ActionsGroup />
-            <ActionsGroup style={{ position: 'sticky', bottom: 0, borderTop: `0.5px solid var(--zmp-color-nd200)` }}>
-                <ActionsLabel className="p-2" style={{ textAlign: 'left' }}>
-                    <Row>
-                        <Col><Box>Tổng tiền</Box></Col>
-                        <Col style={{ textAlign: 'right' }}>
-                            <Box><Price className="text-primary" bold fontSize={20} amount={subtotal} /></Box>
-                        </Col>
-                    </Row>
-                    <Row gap="gap_4" className="px-2 pb-2" style={{ margin: 0 }}>
-                        <Col>
-                            <Button responsive typeName="secondary" onClick={checkout}>Mua ngay</Button>
-                        </Col>
-                        <Col>
-                            <Button responsive typeName="primary" onClick={addToCart}>Thêm vào giỏ</Button>
-                        </Col>
-                    </Row>
-                </ActionsLabel>
-            </ActionsGroup>
-        </Actions>
-    </div >
 }
 
 Product.displayName = 'zmp-product'
