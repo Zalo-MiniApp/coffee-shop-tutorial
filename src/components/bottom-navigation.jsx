@@ -1,5 +1,5 @@
-import React from 'react';
-import { Tabbar, Link, Box, Text, Button, useStore } from 'zmp-framework/react';
+import React, { useEffect, useState } from 'react';
+import { Tabbar, Link, Box, Text, Button, useStore, zmp } from 'zmp-framework/react';
 import { Price } from './prices'
 import cup from '../../assets-src/cup.svg'
 import discount from '../../assets-src/discount.svg'
@@ -9,6 +9,17 @@ import Checkout from './checkout'
 const BottomNavigation = () => {
     const totalQuantity = useStore('totalQuantity')
     const totalAmount = useStore('totalAmount')
+    const [currentPath, setCurrentPath] = useState()
+
+    zmp.views.main.router.on('routeChange', ({ path }) => {
+        setCurrentPath(path)
+    })
+
+    const links = [
+        { name: 'Đặt món', href: "/", icon: cup },
+        { name: 'Ưu đãi', href: "/discount", icon: discount },
+        { name: 'Lịch sử', href: "/history", icon: history },
+    ]
 
     return <div className="bottom-navigation">
         {totalQuantity > 0 && <div className="cart">
@@ -23,18 +34,10 @@ const BottomNavigation = () => {
             </Box>
         </div>}
         <Tabbar bottom>
-            <Link className="active">
-                <img src={cup} />
-                Đặt món
-            </Link>
-            <Link>
-                <img src={discount} />
-                Ưu đãi
-            </Link>
-            <Link>
-                <img src={history} />
-                Lịch sử
-            </Link>
+            {links.map(({ name, icon, href }) => <Link key={href} className={href === currentPath ? 'active' : 'inactive'} href={href}>
+                <img src={icon} />
+                {name}
+            </Link>)}
         </Tabbar>
     </div>;
 }

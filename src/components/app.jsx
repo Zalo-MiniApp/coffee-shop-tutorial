@@ -6,18 +6,19 @@ import {
   View,
 } from 'zmp-framework/react';
 import store from '../store';
+import BottomNavigation from './bottom-navigation';
 
 const MyApp = () => {
 
   // ZMP Parameters
   const zmpparams = {
     name: 'Highland Coffee', // App name
-      theme: 'auto', // Automatic theme detection
+    theme: 'auto', // Automatic theme detection
 
 
 
-      // App store
-      store: store,
+    // App store
+    store: store,
   };
 
   zmpready(() => {
@@ -25,11 +26,11 @@ const MyApp = () => {
   });
 
   return (
-    <App { ...zmpparams } >
+    <App {...zmpparams} >
 
-        {/* Your main view, should have "view-main" class */}
-        <View main className="safe-areas" url="/" />
-
+      {/* Your main view, should have "view-main" class */}
+      <View main className="safe-areas" url="/" />
+      <BottomNavigation />
     </App>
   );
 }
