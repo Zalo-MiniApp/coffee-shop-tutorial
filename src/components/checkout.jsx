@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Button, Text, Actions, ActionsGroup, ActionsLabel, List, ListItem, Icon, Box, Avatar, Input, useStore, Link, Checkbox } from 'zmp-framework/react';
+import { Button, Text, Actions, ActionsGroup, ActionsLabel, List, ListItem, Icon, Box, Avatar, Input, useStore, Link, Checkbox, zmp } from 'zmp-framework/react';
 import ProductImage from './product-image'
 import shop from '../../assets-src/shop.svg'
 import clock from '../../assets-src/clock.svg'
@@ -20,6 +20,12 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
 
   const [show, setShow] = useState(false)
   useEffect(() => setShow(showCheckout), [showCheckout])
+
+  const selectedDiscount = useStore('selectedDiscount')
+  const showDiscounts = () => {
+    zmp.views.main.router.navigate('/discount')
+    setShowCheckout(false)
+  }
 
   return (
     <>
@@ -105,7 +111,7 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
             <ListItem>
               <Text slot="before-title" className="text-secondary mb-0">Mã ưu đãi</Text>
               <Icon slot="content" zmp="zi-chevron-right" />
-              <Text slot="after" className="text-secondary mb-0">Chọn mã ưu đãi</Text>
+              <Link onClick={showDiscounts} slot="after" >{selectedDiscount ? <Text slot="after" bold className="mb-0">{selectedDiscount}</Text> : <Text className="text-secondary mb-0">Chọn mã ưu đãi</Text>}</Link>
             </ListItem>
             <ListItem>
               <div>

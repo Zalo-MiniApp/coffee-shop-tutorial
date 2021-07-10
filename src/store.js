@@ -92,7 +92,24 @@ const store = createStore({
         minute: 0
       }
     }],
-    cart: []
+    cart: [],
+    discounts: [{
+      code: 'GIAM20K',
+      name: 'Ưu đãi 20K! Đặt Highlands Coffee trên Zalo.',
+      expireDate: '10/05/2021',
+      image: 'discount-1'
+    }, {
+      code: 'GIAM35%',
+      name: 'Giảm 35% cho đơn hàng từ 5 món, tối đa 59K...',
+      expireDate: '10/05/2021',
+      image: 'discount-2'
+    }, {
+      code: 'GIAM30K',
+      name: 'Ưu đãi 30K cho đơn hàng 149K - Áp dụng cho dịch ...',
+      expireDate: '10/05/2021',
+      image: 'discount-3'
+    }],
+    selectedDiscount: null
   },
   getters: {
     categories({ state }) {
@@ -124,6 +141,12 @@ const store = createStore({
     },
     showCheckout({ state }) {
       return state.showCheckout
+    },
+    discounts({ state }) {
+      return state.discounts
+    },
+    selectedDiscount({ state }) {
+      return state.selectedDiscount
     }
   },
   actions: {
@@ -151,6 +174,12 @@ const store = createStore({
     },
     setShowCheckout({ state }, value) {
       state.showCheckout = value
+    },
+    useDiscount({ state }, discountCode) {
+      state.selectedDiscount = discountCode
+      if (state.cart.length > 0) {
+        state.showCheckout = true
+      }
     }
   },
 })
