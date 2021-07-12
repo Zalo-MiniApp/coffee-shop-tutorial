@@ -1,5 +1,8 @@
 
 import { createStore } from 'zmp-core/lite';
+import { login } from './services/highland';
+import { getAccessToken } from './services/zalo';
+
 const store = createStore({
   state: {
     showCheckout: false,
@@ -180,6 +183,10 @@ const store = createStore({
       if (state.cart.length > 0) {
         state.showCheckout = true
       }
+    },
+    async login({ state }) {
+      const token = await getAccessToken()
+      const data = await login(token)
     }
   },
 })
