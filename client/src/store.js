@@ -186,7 +186,9 @@ const store = createStore({
     },
     async login({ state }) {
       const token = await getAccessToken()
+      console.log(token)
       const data = await login(token)
+      console.log(data)
     }
   },
 })

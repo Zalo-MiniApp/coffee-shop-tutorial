@@ -1,10 +1,10 @@
 const env = process.env.NODE_ENV || 'development';
 const config = {
     development: {
-        mongodbUrl: ''
+        mongodbUrl: process.env.MONGODB_URL
     },
     production: {
-        mongodbUrl: ''
+        mongodbUrl: process.env.MONGODB_URL
     }
 }
 

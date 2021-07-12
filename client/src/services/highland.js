@@ -1,4 +1,4 @@
-const base = 'https://highland-coffee-server.herokuapp.com'
+const base = 'https://coffee-shop-server-api.herokuapp.com'
 
 export const request = (method, url, data) => fetch(`${base}/${url}`, {
   method: method,
