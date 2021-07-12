@@ -2,7 +2,7 @@ const express = require('express')
 const request = require('request');
 const { insertUser, listUsers } = require('./db');
 const app = express()
-const port = 5000
+const port = process.env.PORT || 5000
 
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
