@@ -7,9 +7,8 @@ export const request = (method, url, data) => fetch(`${base}/${url}`, {
 })
 
 export const login = async (access_token) => {
-  const data = await request('POST', 'login', {
+  const data = await request('POST', 'users/login', {
     access_token
   })
-  console.log(data)
   return data
 }
