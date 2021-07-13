@@ -1,5 +1,6 @@
 
 import { createStore } from 'zmp-core/lite';
+import { zmp } from 'zmp-framework/react';
 import { getCurrentUser, login } from './services/coffee';
 import { getAccessToken } from './services/zalo';
 
@@ -187,9 +188,14 @@ const store = createStore({
     async login({ state }) {
       const token = await getAccessToken()
       const data = await login(token)
-      console.log(data)
       const user = await getCurrentUser()
-      console.log(user)
+      console.log(user, user.name)
+      if (user.name) {
+        zmp.toast.create({
+          text: `Chào mừng bạn quay trở lại, ${user.name}`,
+          closeTimeout: 3000,
+        }).open()
+      }
     }
   },
 })
