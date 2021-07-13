@@ -49,7 +49,7 @@ const Heading = () => {
         {shipping ? <>
           <Avatar src={delivery} />
           <div style={{ marginLeft: 16 }}>
-            <Text bold className="mb-0">Giao tận nơi</Text>
+            <Text bold className="mb-0">Coffee Shop</Text>
             <Text className="ellipsis mb-0">
               Tài xế giao đến địa chỉ của bạn
             </Text>
@@ -57,7 +57,7 @@ const Heading = () => {
         </> : <>
           <Avatar src={pickup} />
           <div style={{ marginLeft: 16 }}>
-            <Text bold className="mb-0">Tự đến lấy tại</Text>
+            <Text bold className="mb-0">Coffee Shop</Text>
             <Text className="ellipsis mb-0">
               {selectedShop.name} - {selectedShop.address}
             </Text>
