@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Page } from 'zmp-framework/react';
-import AddressPicker from '../components/address-picker';
+import Heading from '../components/heading';
 import Banner from '../components/banner';
 import Inquiry from '../components/inquiry';
 import store from '../store';
@@ -13,7 +13,7 @@ const HomePage = () => {
 
   return (
     <Page name="home">
-      <AddressPicker />
+      <Heading />
       <Banner />
       <Inquiry />
       <ProductList />

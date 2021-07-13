@@ -1,11 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Button, Text, Actions, ActionsGroup, ActionsLabel, List, ListItem, Icon, Box, Avatar, Input, useStore, Link, Checkbox, zmp } from 'zmp-framework/react';
 import shop from '../../assets-src/shop.svg'
+import delivery from '../../assets-src/delivery.svg'
 import clock from '../../assets-src/clock.svg'
 import phone from '../../assets-src/phone.svg'
 import note from '../../assets-src/note.svg'
 import { Price } from './prices';
 import ProductOrder from './product-order';
+import AddressPicker from './address-picker';
 import store from '../store';
 
 const Checkout = ({ value, onChange, children, onReturn }) => {
@@ -16,6 +18,7 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
   const selectedShop = useStore('selectedShop')
   const cart = useStore('cart')
   const totalAmount = useStore('totalAmount')
+  const shipping = useStore('shipping')
 
   const [show, setShow] = useState(false)
   useEffect(() => setShow(showCheckout), [showCheckout])
@@ -24,6 +27,10 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
   const showDiscounts = () => {
     zmp.views.main.router.navigate('/discount')
     setShowCheckout(false)
+  }
+
+  const checkout = () => {
+    store.dispatch('checkout')
   }
 
   return (
@@ -46,17 +53,24 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
             <span className="title">Xác nhận đơn hàng</span>
           </ActionsLabel>
           <ActionsLabel className="p-0">
-            <Box style={{ textAlign: 'left' }}><Text bold>Tự đến lấy tại</Text></Box>
-            <List className="my-0">
-              <ListItem>
-                <Avatar slot="media" src={shop} size="24" />
-                <Icon slot="content" zmp="zi-chevron-right" />
-                <Box style={{ textAlign: 'left' }}>
-                  <Text bold fontSize="16">{selectedShop.name}</Text>
-                  <Text className="text-secondary">{selectedShop.address}</Text>
-                </Box>
-              </ListItem>
-            </List>
+            <Box style={{ textAlign: 'left' }}>
+              <Text bold>Phương thức nhận hàng</Text>
+            </Box>
+            <AddressPicker onOpen={() => setShowCheckout(false)} onReturn={() => setShowCheckout(true)}>
+              <List className="my-0">
+                <ListItem>
+                  {shipping ? <Avatar slot="media" src={delivery} size="24" /> : <Avatar slot="media" src={shop} size="24" />}
+                  <Icon slot="content" zmp="zi-chevron-right" />
+                  {shipping ? <Box style={{ textAlign: 'left' }}>
+                    <Text bold fontSize="16">Giao tận nơi</Text>
+                    <Text>Tài xế giao đến địa chỉ của bạn</Text>
+                  </Box> : <Box style={{ textAlign: 'left' }}>
+                    <Text bold fontSize="16">{selectedShop.name}</Text>
+                    <Text className="text-secondary">{selectedShop.address}</Text>
+                  </Box>}
+                </ListItem>
+              </List>
+            </AddressPicker>
           </ActionsLabel>
           <ActionsLabel className="p-0">
             <Box style={{ textAlign: 'left' }}><Text bold>Thông tin khách hàng</Text></Box>
@@ -128,7 +142,7 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
                   <Price style={{ marginLeft: 'auto' }} fontSize={20} bold amount={totalAmount} />
                 </Box>
                 <Box>
-                  <Button large responsive fill>Thanh toán bằng ZaloPay</Button>
+                  <Button onClick={checkout} large responsive fill>Thanh toán bằng ZaloPay</Button>
                 </Box>
               </div>
             </ListItem>

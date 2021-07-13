@@ -1,0 +1,74 @@
+import React, { useEffect, useState } from 'react';
+import api from 'zmp-sdk';
+import { Avatar, Text, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, List, ListItem, Icon, useStore } from 'zmp-framework/react';
+import pickup from '../../assets-src/pickup.svg'
+import delivery from '../../assets-src/delivery.svg'
+import ShopPicker from './shop-picker';
+import store from '../store';
+import { isFollowed, saveFollowStatus } from '../services/storage';
+import config from '../config'
+
+const Heading = () => {
+  const selectedShop = useStore('selectedShop')
+  const shipping = useStore('shipping')
+
+  const [followed, setFollowed] = useState()
+  useEffect(() => {
+    isFollowed().then(status => setFollowed(status))
+  })
+
+  const follow = () => {
+    api.followOA({
+      id: config.OA_ID,
+      success: () => {
+        saveFollowStatus(true)
+        setFollowed(true)
+        zmp.toast.create({
+          text: `Cảm ơn bạn đã theo dõi OA thành công!`,
+          closeTimeout: 3000,
+        }).open()
+      },
+      fail: (err) => {
+        console.log("Failed to follow OA. Details: ", err)
+      }
+    })
+  }
+
+  const message = () => {
+    api.openProfile({
+      type: 'oa',
+      id: config.OA_ID,
+      success: () => { },
+      fail: (err) => { }
+    });
+  }
+
+  return (
+    <List style={{ margin: 0 }}>
+      <ListItem>
+        {shipping ? <>
+          <Avatar src={delivery} />
+          <div style={{ marginLeft: 16 }}>
+            <Text bold className="mb-0">Giao tận nơi</Text>
+            <Text className="ellipsis mb-0">
+              Tài xế giao đến địa chỉ của bạn
+            </Text>
+          </div>
+        </> : <>
+          <Avatar src={pickup} />
+          <div style={{ marginLeft: 16 }}>
+            <Text bold className="mb-0">Tự đến lấy tại</Text>
+            <Text className="ellipsis mb-0">
+              {selectedShop.name} - {selectedShop.address}
+            </Text>
+          </div>
+        </>}
+        {followed ? <Button style={{ marginLeft: 16 }} fill onClick={message}>Nhắn tin</Button> : <Button typeName="secondary" style={{ marginLeft: 16 }} onClick={follow}>Theo dõi</Button>}
+      </ListItem>
+    </List>
+  )
+};
+
+Heading.displayName = 'zmp-heading'
+
+export default Heading;

@@ -166,6 +166,10 @@ const store = createStore({
       state.products = products
       state.loadingProducts = false
     },
+    async checkout({ state }) {
+      const { cart, selectedDiscount } = state
+      console.log({ cart, selectedDiscount })
+    },
     async login({ state }) {
       const token = await getAccessToken()
       const success = await login(token)

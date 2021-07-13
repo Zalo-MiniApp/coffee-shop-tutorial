@@ -19,8 +19,7 @@ export const Shop = ({ name, address, selected, open, close }) => {
   </ActionsButton>
 }
 
-const ShopPicker = ({ value, onChange, children, onReturn }) => {
-  const [showPicker, setShowPicker] = useState(false)
+const ShopPicker = ({ onBack }) => {
   const [keyword, setKeyword] = useState('')
   const selectedShop = useStore('selectedShop')
   const selectableShops = useStore('selectableShops')
@@ -36,60 +35,49 @@ const ShopPicker = ({ value, onChange, children, onReturn }) => {
 
   return (
     <>
-      <div onClick={() => setShowPicker(true)}>{children}</div>
-      <Actions
-        opened={showPicker}
-        onActionsClosed={() => setShowPicker(false)}
-        onActionsClose={() => {
-          if (onReturn) {
-            onReturn()
-          }
-        }}
-      >
-        <ActionsGroup className="address-picker-actions">
-          <Button typeName="ghost" className="close-button" onClick={() => setShowPicker(false)}>
-            <Icon zmp="zi-arrow-left" size={24}></Icon>
-          </Button>
-          <ActionsLabel bold>
-            <span className="title">Chọn cửa hàng</span>
+      <ActionsGroup className="address-picker-actions">
+        <Button typeName="ghost" className="close-button" onClick={onBack}>
+          <Icon zmp="zi-arrow-left" size={24}></Icon>
+        </Button>
+        <ActionsLabel bold>
+          <span className="title">Chọn cửa hàng</span>
+        </ActionsLabel>
+        <ActionsLabel bold>
+          <Searchbar value={keyword} onChange={e => setKeyword(e.target.value)} type="text" placeholder="Tìm địa chỉ, tên chi nhánh..." clearButton onSearchbarClear={() => setKeyword('')} />
+        </ActionsLabel>
+        {keyword ? <>
+          <ActionsLabel className="p-0">
+            <Box>
+              {
+                shops.length ?
+                  <Text bold style={{ textAlign: 'left' }}>Kết quả</Text> :
+                  <Text bold>Không tìm thấy</Text>
+              }
+            </Box>
           </ActionsLabel>
-          <ActionsLabel bold>
-            <Searchbar value={keyword} onChange={e => setKeyword(e.target.value)} type="text" placeholder="Tìm địa chỉ, tên chi nhánh..." clearButton onSearchbarClear={() => setKeyword('')} />
+          {shops.map(shop => <Shop key={shop.name} {...shop} />)}
+        </> : <>
+          <ActionsLabel className="p-0">
+            <Box>
+              <Row>
+                <Col width="70" style={{ textAlign: 'left' }}>
+                  <Text bold className="mb-0">Cửa hàng đang chọn</Text>
+                </Col>
+                <Col width="30" style={{ textAlign: 'right' }}>
+                  <Link className="text-primary">
+                    Tìm gần nhất
+                  </Link>
+                </Col>
+              </Row>
+            </Box>
           </ActionsLabel>
-          {keyword ? <>
-            <ActionsLabel className="p-0">
-              <Box>
-                {
-                  shops.length ?
-                    <Text bold style={{ textAlign: 'left' }}>Kết quả</Text> :
-                    <Text bold>Không tìm thấy</Text>
-                }
-              </Box>
-            </ActionsLabel>
-            {shops.map(shop => <Shop key={shop.name} {...shop} />)}
-          </> : <>
-            <ActionsLabel className="p-0">
-              <Box>
-                <Row>
-                  <Col width="70" style={{ textAlign: 'left' }}>
-                    <Text bold className="mb-0">Cửa hàng đang chọn</Text>
-                  </Col>
-                  <Col width="30" style={{ textAlign: 'right' }}>
-                    <Link className="text-primary">
-                      Tìm gần nhất
-                    </Link>
-                  </Col>
-                </Row>
-              </Box>
-            </ActionsLabel>
-            <Shop {...selectedShop} />
-            <ActionsLabel className="p-0">
-              <Box style={{ textAlign: 'left' }}><Text bold>Cửa hàng khác</Text></Box>
-            </ActionsLabel>
-            {shops.map(shop => <Shop key={shop.name} {...shop} />)}
-          </>}
-        </ActionsGroup>
-      </Actions>
+          <Shop {...selectedShop} />
+          <ActionsLabel className="p-0">
+            <Box style={{ textAlign: 'left' }}><Text bold>Cửa hàng khác</Text></Box>
+          </ActionsLabel>
+          {shops.map(shop => <Shop key={shop.name} {...shop} />)}
+        </>}
+      </ActionsGroup>
     </>
   )
 };

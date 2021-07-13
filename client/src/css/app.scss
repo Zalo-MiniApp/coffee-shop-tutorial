@@ -128,8 +128,18 @@
         padding-bottom: 8px;
     }
 }
-.actions-button a, .actions-label a {
+.actions-button a, .actions-label a, .button {
     color: white;
+    &.zmp-btn-secondary {
+        color: #0068FF;
+    }
+    &.zmp-btn-destructive {
+        color: #ef4e49
+    }
+    &.zmp-btn-tertiary {
+        color: var(--zmp-text-color);
+        background: white;
+    }
 }
 .discount-card {
     padding: 0;

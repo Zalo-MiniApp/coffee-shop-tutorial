@@ -1,42 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Avatar, Text, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, List, ListItem, Icon, useStore } from 'zmp-framework/react';
 import pickup from '../../assets-src/pickup.svg'
 import delivery from '../../assets-src/delivery.svg'
 import ShopPicker from './shop-picker';
 import store from '../store';
 
-const AddressPicker = ({ value, onChange }) => {
+const AddressPicker = ({ children, onReturn, onOpen }) => {
   const [showPicker, setShowPicker] = useState(false)
   const selectedShop = useStore('selectedShop')
   const shipping = useStore('shipping')
 
-  return (
+  const [mode, setMode] = useState()
+  useEffect(() => {
+    setMode('address')
+  }, [showPicker])
+  const selectShop = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setMode('shop')
+  }
 
-    <List style={{ margin: 0 }}>
-      <ListItem>
-        {shipping ? <>
-          <Avatar src={delivery} />
-          <div style={{ marginLeft: 16 }}>
-            <Text bold className="mb-0">Giao tận nơi</Text>
-            <Text className="ellipsis mb-0">
-              Tài xế giao đến địa chỉ của bạn
-            </Text>
-          </div>
-        </> : <>
-          <Avatar src={pickup} />
-          <div style={{ marginLeft: 16 }}>
-            <Text bold className="mb-0">Tự đến lấy tại</Text>
-            <Text className="ellipsis mb-0">
-              {selectedShop.name} - {selectedShop.address}
-            </Text>
-          </div>
-        </>}
-        <Button style={{ marginLeft: 16 }} fill onClick={() => setShowPicker(true)}>Thay đổi</Button>
-
-        <Actions
-          opened={showPicker}
-          onActionsClosed={() => setShowPicker(false)}
-        >
+  return <>
+    <div onClick={() => setShowPicker(true)}>{children}</div>
+    <Actions
+      opened={showPicker}
+      onActionsClosed={() => setShowPicker(false)}
+      onActionsClose={() => {
+        if (mode === 'shop') {
+          setMode('address')
+        } else if (onReturn) {
+          onReturn()
+        }
+      }}
+      onActionsOpen={() => {
+        if (onOpen) {
+          onOpen()
+        }
+      }}
+    > {
+        mode === 'address' ? <>
           <ActionsGroup className="address-picker-actions">
             <Button typeName="ghost" className="close-button" onClick={() => setShowPicker(false)}>
               <Icon zmp="zi-close" size={24}></Icon>
@@ -52,9 +54,7 @@ const AddressPicker = ({ value, onChange }) => {
                   {selectedShop.name} - {selectedShop.address}
                 </Text>
               </div>
-              <ShopPicker onReturn={() => setShowPicker(true)}>
-                <Button typeName="secondary">Sửa</Button>
-              </ShopPicker>
+              <Button typeName="secondary" onClick={selectShop}>Sửa</Button>
             </ActionsButton>
             <ActionsButton className={shipping ? 'active' : 'inactive'} onClick={() => store.dispatch('ship', true)}>
               <Avatar src={delivery} />
@@ -63,11 +63,10 @@ const AddressPicker = ({ value, onChange }) => {
                 <Text className="text-secondary">Tài xế giao đến địa chỉ của bạn</Text>
               </div>
             </ActionsButton>
-          </ActionsGroup>
-        </Actions>
-      </ListItem>
-    </List>
-  )
+          </ActionsGroup></> : <ShopPicker onBack={() => setMode('address')} />
+      }
+    </Actions>
+  </>
 };
 
 AddressPicker.displayName = 'zmp-address-picker'
