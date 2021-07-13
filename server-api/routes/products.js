@@ -5,9 +5,30 @@ var router = express.Router();
 /* Get list of products by categories */
 router.get('/', async function (req, res, next) {
   try {
-    result = await db.Products.aggregate([{
-      $group: { _id: "$category", products: { $push: "$$ROOT" } }
-    }])
+    result = await db.Products.find({})
+    res.send({
+      error: 0,
+      message: 'Success',
+      data: result,
+    })
+  } catch (error) {
+    res.send({ error: -1, message: 'Unknown exception' });
+    console.log('API-Exception', ex);
+  }
+});
+
+/* Get list of products by categories */
+router.get('/by-category', async function (req, res, next) {
+  try {
+    result = await db.Products.aggregate([
+      {
+        $group: {
+          _id: "$category",
+          products: { $push: "$$ROOT" },
+          count: { $sum: 1 }
+        }
+      },
+      { $sort: { count: -1 } }])
     res.send({
       error: 0,
       message: 'Success',
@@ -27,7 +48,7 @@ router.get('/dump', async function (req, res, next) {
       name: "Phin Sữa Đá",
       category: "Cà phê truyền thống",
       merchant: "Highland Coffee",
-      image: "data:image/png;base64,",
+      image: "https://www.highlandscoffee.com.vn/vnt_upload/product/03_2018/PHIN-SUA-DA.png",
       status: 1,
       price: Math.round(Math.random() * 50 + 10) * 1000,
       sizes: [

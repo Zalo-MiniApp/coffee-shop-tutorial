@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, Button, Card, zmp } from 'zmp-framework/react';
-import ProductImage from '../components/product-image';
+import MockImage from '../components/mock-image';
 import store from '../store';
 
 const Discount = ({ discount }) => {
@@ -18,7 +18,7 @@ const Discount = ({ discount }) => {
     }
 
     return <Card className="discount-card" inset>
-        <ProductImage image={image} className="discount-image" />
+        <MockImage image={image} className="discount-image" />
         <div className="discount-summary">
             <Text bold>{name}</Text>
             <Text className="text-secondary">HSD: {expireDate}</Text>

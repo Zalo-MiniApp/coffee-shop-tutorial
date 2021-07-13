@@ -1,7 +1,7 @@
 
 import { createStore } from 'zmp-core/lite';
 import { zmp } from 'zmp-framework/react';
-import { getCurrentUser, login } from './services/coffee';
+import { getCurrentUser, getProductsByCategory, login } from './services/coffee';
 import { getAccessToken } from './services/zalo';
 
 const store = createStore({
@@ -9,36 +9,8 @@ const store = createStore({
     showCheckout: false,
     shipping: false,
     categories: ['Cà Phê', 'Trà', 'Bánh Ngọt', 'Thức Uống Khác'],
-    products: [{
-      id: 1,
-      name: 'Phin Đen Đá',
-      price: 29000,
-      image: "black-coffee",
-      sizes: [
-        { name: 'S', extra: 0 },
-        { name: 'M', extra: 6000 },
-        { name: 'L', extra: 10000 }
-      ],
-      toppings: [
-        { name: 'Thạch Vải', extra: 9000 },
-        { name: 'Vải', extra: 9000 }
-      ]
-    },
-    {
-      id: 2,
-      name: 'Phin Sữa Đá',
-      price: 29000,
-      image: "milk-coffee",
-      sizes: [
-        { name: 'S', extra: 0 },
-        { name: 'M', extra: 6000 },
-        { name: 'L', extra: 10000 }
-      ],
-      toppings: [
-        { name: 'Thạch Vải', extra: 9000 },
-        { name: 'Vải', extra: 9000 }
-      ]
-    }],
+    loadingProducts: true,
+    products: [],
     shops: [{
       selected: true,
       name: 'VNG Campus D7',
@@ -122,6 +94,9 @@ const store = createStore({
     products({ state }) {
       return state.products
     },
+    loadingProducts({ state }) {
+      return state.loadingProducts
+    },
     shops({ state }) {
       return state.shops;
     },
@@ -185,16 +160,23 @@ const store = createStore({
         state.showCheckout = true
       }
     },
+    async fetchProducts({ state }) {
+      state.loadingProducts = true
+      const products = await getProductsByCategory()
+      state.products = products
+      state.loadingProducts = false
+    },
     async login({ state }) {
       const token = await getAccessToken()
-      const data = await login(token)
-      const user = await getCurrentUser()
-      console.log(user, user.name)
-      if (user.name) {
-        zmp.toast.create({
-          text: `Chào mừng bạn quay trở lại, ${user.name}`,
-          closeTimeout: 3000,
-        }).open()
+      const success = await login(token)
+      if (success) {
+        const user = await getCurrentUser()
+        if (user) {
+          zmp.toast.create({
+            text: `Chào mừng bạn quay trở lại, ${user.name}`,
+            closeTimeout: 3000,
+          }).open()
+        }
       }
     }
   },

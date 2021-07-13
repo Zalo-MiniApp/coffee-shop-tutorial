@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Card, Text, Title, Actions, ActionsGroup, ActionsLabel, Button, Icon, Input, Row, Col, Box, List, ListItem, useStore, zmp } from 'zmp-framework/react';
 import { Price, ExtraPrice } from './prices'
-import ProductImage from './product-image'
 import store from '../store';
 
 const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
@@ -106,7 +105,7 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
                 </ActionsLabel>
                 <ActionsLabel style={{ backgroundColor: 'white' }}>
                     <Row>
-                        <Col style={{ flex: 1, paddingRight: 16 }}><ProductImage image={image} style={{ width: '100%' }} /></Col>
+                        <Col style={{ flex: 1, paddingRight: 16 }}><img src={image} style={{ width: '100%' }} /></Col>
                         <Col style={{ flex: '1 1 auto', textAlign: 'left', alignSelf: 'center' }}>
                             <Title style={{ color: 'black' }} bold>{name}</Title>
                             <Price amount={price} />

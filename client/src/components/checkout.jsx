@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Button, Text, Actions, ActionsGroup, ActionsLabel, List, ListItem, Icon, Box, Avatar, Input, useStore, Link, Checkbox, zmp } from 'zmp-framework/react';
-import ProductImage from './product-image'
 import shop from '../../assets-src/shop.svg'
 import clock from '../../assets-src/clock.svg'
 import phone from '../../assets-src/phone.svg'
@@ -84,7 +83,7 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
             <Box style={{ textAlign: 'left' }}><Text bold>Thông tin đơn hàng</Text></Box>
             <List className="my-0">
               {cart.map((item, i) => <ListItem key={i}>
-                <ProductImage slot="media" image={item.product.image} style={{ width: 48 }} />
+                <img slot="media" src={item.product.image} style={{ width: 48 }} />
                 <Price slot="content" amount={item.subtotal} unit="đ" className="pr-4" />
                 <Box style={{ textAlign: 'left' }}>
                   <Text className="mb-0" bold>

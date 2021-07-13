@@ -1,6 +1,8 @@
 /* Your app custom styles here */
 :root {
     --zmp-textarea-height: 32px;
+    --skeleton-color: white;
+    --skeleton-icon-color: white;
 }
 .text-primary {
     color: var(--zmp-theme-color) !important;
@@ -163,4 +165,7 @@
             }
         }
     }
+}
+.skeleton-block, .skeleton-text {
+    border-radius: 8px;
 }
