@@ -2,20 +2,30 @@ import api from 'zmp-sdk';
 import config from '../config'
 
 const base = config.BASE_URL
+console.log(base)
 
 const saveToken = token => api.setStorage({
   data: { token },
   fail: (error) => console.log('Failed to save token to storage. Details: ', error)
 })
 
-const loadToken = () => api.getStorage({
-  keys: ['token'],
-  fail: (error) => console.log('Failed to get token from storage. Details: ', error)
-}).then(data => data.token)
+const loadToken = () => new Promise(resolve => {
+  api.getStorage({
+    keys: ['token'],
+    success: ({ token }) => {
+      resolve(token)
+    },
+    fail: (error) => {
+      console.log('Failed to get token from storage. Details: ', error)
+      resolve(null)
+    }
+  })
+})
 
 export const request = async (method, url, data) => {
   const headers = { "Content-Type": "application/json" }
   const token = await loadToken()
+  console.log('alo', token)
   if (token) {
     headers['Authorization'] = `Bearer ${token}`
   }

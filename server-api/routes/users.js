@@ -24,15 +24,18 @@ router.post('/login', async (req, res) => {
 			return res.send({ error: -1, message: 'Invalid access token' });
 		}
 		const { id, birthday, name, gender, picture } = await ZaloService.getZaloProfile(accessToken);
+		let pictureUrl = picture
+		if (picture.data) {
+			pictureUrl = picture.data.url
+		}
 		let user = await db.Users.updateOne({ zaloId: id }, {
 			birthday,
 			name,
 			gender,
-			picture: picture.data.url
+			picture: pictureUrl
 		}, { upsert: true });
 		if (user) {
 			const token = generateAccessToken(id)
-			console.log(token)
 			return res.send({
 				error: 0,
 				message: 'Success',

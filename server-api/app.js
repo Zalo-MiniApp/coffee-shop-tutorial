@@ -1,4 +1,3 @@
-var cors = require('cors')
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -22,7 +21,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // access origin
-app.use(cors());
+const allowedOrigins = ['https://h5.zdn.vn/', 'zbrowser://h5.zdn.vn/']
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  return next();
+})
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
