@@ -45,3 +45,10 @@ export const getCurrentUser = async () => {
     return response.data
   }
 }
+
+export const getProducts = async () => {
+  const response = await (await request('GET', 'products')).json()
+  if (response.data) {
+    return response.data
+  }
+}

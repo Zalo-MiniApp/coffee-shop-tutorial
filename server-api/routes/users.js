@@ -5,14 +5,6 @@ const { generateAccessToken, authenticateToken } = require('../services/token-se
 const ZaloService = require('./../services/zalo-service.js');
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-	db.Users.find({}, function (err, users) {
-		if (err) return console.error(err)
-		res.send(users)
-	});
-});
-
 router.get('/logged-in', authenticateToken, function (req, res, next) {
 	if (req.user) {
 		return res.send({

@@ -11,7 +11,9 @@ var schema = new mongoose.Schema({
     descrition: String,
     price: { type: Number, default: 0 },
     sale: { type: Number, default: 0 },
-    discount: { type: Number, default: 0 }
+    discount: { type: Number, default: 0 },
+    sizes: Array,
+    toppings: Array
 }, { timestamps: true });
 
 module.exports = mongoose.model('Product', schema);
