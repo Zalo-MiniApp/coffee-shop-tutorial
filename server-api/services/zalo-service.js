@@ -14,7 +14,7 @@ service.getZaloProfile = (accessToken) => {
             json: true
         }, (error, response, body) => {
             if (error) return reject(error);
-            return reject(body);
+            return resolve(body);
         });
     });
 }
