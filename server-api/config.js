@@ -1,10 +1,14 @@
 const env = process.env.NODE_ENV || 'development';
 const config = {
     development: {
-        mongodbUrl: process.env.MONGODB_URL
+        MONGODB_URL: process.env.MONGODB_URL,
+        ZALO_APP_ID: process.env.ZALO_APP_ID,
+        MINI_APP_ID: process.env.MINI_APP_ID
     },
     production: {
-        mongodbUrl: process.env.MONGODB_URL
+        MONGODB_URL: process.env.MONGODB_URL,
+        ZALO_APP_ID: process.env.ZALO_APP_ID,
+        MINI_APP_ID: process.env.MINI_APP_ID
     }
 }
 

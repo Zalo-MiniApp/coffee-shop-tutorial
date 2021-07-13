@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-  zalo_id: String,
+  zaloId: String,
   birthday: Date,
   name: String,
   gender: String,

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const config = require('../config');
 
-mongoose.connect(config.mongodbUrl);
+mongoose.connect(config.MONGODB_URL);
 
 //Listen status connect database
 mongoose.connection.on('error', function() {
