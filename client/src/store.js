@@ -1,6 +1,6 @@
 
 import { createStore } from 'zmp-core/lite';
-import { login } from './services/coffee';
+import { getCurrentUser, login } from './services/coffee';
 import { getAccessToken } from './services/zalo';
 
 const store = createStore({
@@ -188,6 +188,8 @@ const store = createStore({
       const token = await getAccessToken()
       const data = await login(token)
       console.log(data)
+      const user = await getCurrentUser()
+      console.log(user)
     }
   },
 })

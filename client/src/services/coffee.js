@@ -1,14 +1,33 @@
-const base = 'https://coffee-shop-server-api.herokuapp.com'
+import config from '../config'
 
-export const request = (method, url, data) => fetch(`${base}/${url}`, {
-  method: method,
-  body: JSON.stringify(data),
-  headers: { "Content-Type": "application/json" }
-})
+const base = config.BASE_URL
 
-export const login = async (access_token) => {
-  const data = await request('POST', 'users/login', {
-    access_token
+export const request = (method, url, data) => {
+  const headers = { "Content-Type": "application/json" }
+  const token = localStorage.getItem('token')
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`
+  }
+
+  return fetch(`${base}/${url}`, {
+    method: method,
+    body: JSON.stringify(data),
+    headers
   })
+}
+
+export const login = async (accessToken) => {
+  const response = await request('POST', 'users/login', {
+    accessToken
+  })
+  const data = await response.json()
+  if (data.token) {
+    localStorage.setItem('token', data.token)
+  }
+  return data
+}
+
+export const getCurrentUser = async () => {
+  const data = await (await request('GET', 'users/logged-in')).json()
   return data
 }
