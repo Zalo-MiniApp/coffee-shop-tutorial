@@ -28,7 +28,6 @@ export const request = async (method, url, data) => {
 }
 
 export const login = async (accessToken) => {
-  accessToken = '6aRT3XwNs4KTGzWD6v3TGHX6sGiOZemQGW7j5IANc1bCCDvNGwU_OnqBmrqThy5ESXd5Un6idrLFBPnPG8hjHKKly0eOZf8OGW-RAYE-x3DXCvfxFwN3KsfmfKmuuD9yNakzDXZAm1nx0ROZ9AtJF28KeGrMd-49BK2MG2xyddTgJi4wA_6u54iayJq_cu8gF4c58NhNrd5xGxDy9SFpO4qNj5mvfCuJTZV8BGFadY5QR9Sc5x_TFMaoenShkFOBSnod71IYhWDm4UWq9PcT04zCD-OmVHwEsK4'
   const response = await request('POST', 'users/login', {
     accessToken
   })
