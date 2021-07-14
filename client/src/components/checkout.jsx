@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Button, Text, Actions, ActionsGroup, ActionsLabel, List, ListItem, Icon, Box, Avatar, Input, useStore, Link, Checkbox, zmp } from 'zmp-framework/react';
+import { Button, Text, Actions, ActionsGroup, ActionsLabel, List, ListItem, Icon, Box, Avatar, Input, useStore, Link, Checkbox, zmp, Preloader } from 'zmp-framework/react';
 import shop from '../../assets-src/shop.svg'
 import delivery from '../../assets-src/delivery.svg'
 import clock from '../../assets-src/clock.svg'
@@ -29,8 +29,11 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
     setShowCheckout(false)
   }
 
-  const checkout = () => {
-    store.dispatch('checkout')
+  const [loading, setLoading] = useState(false)
+  const checkout = async () => {
+    setLoading(true)
+    await store.dispatch('checkout')
+    setLoading(false)
   }
 
   return (
@@ -103,8 +106,17 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
                   <Text className="mb-0" bold>
                     <span style={{ color: '#B22830' }}>{item.quantity}x</span> {item.product.name}
                   </Text>
-                  {item.size && <Text className="mb-0 text-secondary">
-                    Size {item.size.name}
+                  <div style={{ display: 'flex' }}>
+                    {item.size && <Text className="mb-0 text-secondary">
+                      Size {item.size.name}
+                      {item.topping && ', '}
+                    </Text>}
+                    {item.topping && <Text className="mb-0 text-secondary">
+                      {item.topping.name}
+                    </Text>}
+                  </div>
+                  {item.note && <Text className="mb-0 text-secondary">
+                    Ghi chú: {item.note}
                   </Text>}
                   <ProductOrder product={item.product} cartItem={item} cartIndex={i}>
                     <Link className="text-primary">Chỉnh sửa</Link>
@@ -142,7 +154,9 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
                   <Price style={{ marginLeft: 'auto' }} fontSize={20} bold amount={totalAmount} />
                 </Box>
                 <Box>
-                  <Button onClick={checkout} large responsive fill>Thanh toán bằng ZaloPay</Button>
+                  <Button onClick={checkout} large responsive fill disabled={loading}>
+                    {loading && <Preloader className="loading-button" />}
+                    Thanh toán bằng ZaloPay</Button>
                 </Box>
               </div>
             </ListItem>

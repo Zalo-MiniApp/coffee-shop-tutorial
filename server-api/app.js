@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var productsRouter = require('./routes/products');
+var ordersRouter = require('./routes/orders');
 
 var app = express();
 
@@ -21,10 +22,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // access origin
-const allowedOrigins = ['https://h5.zdn.vn/', 'zbrowser://h5.zdn.vn/']
+const allowedOrigins = ['https://h5.zdn.vn/', 'zbrowser://h5.zdn.vn/', 'http://localhost:3000']
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  if (allowedOrigins.includes) {
+  if (allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -34,6 +35,7 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
+app.use('/orders', ordersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

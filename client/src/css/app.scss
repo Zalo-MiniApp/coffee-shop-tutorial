@@ -184,3 +184,12 @@
     border-top-left-radius: var(--zmp-actions-border-radius);
     border-top-right-radius: var(--zmp-actions-border-radius);
 }
+.loading-button {
+    margin-right: 8px;
+    .spinner-path {
+        stroke: white;
+    }
+    .dot-path {
+        fill: white !important;
+    }
+}

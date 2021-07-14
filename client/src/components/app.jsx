@@ -23,6 +23,7 @@ const MyApp = () => {
 
   zmpready(() => {
     // Call ZMP APIs here
+    store.dispatch('login')
   });
 
   return (

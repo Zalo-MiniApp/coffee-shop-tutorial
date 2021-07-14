@@ -10,6 +10,7 @@ import config from '../config'
 import { updateFollowStatus } from '../services/coffee';
 
 const Heading = () => {
+  const user = useStore('user')
   const selectedShop = useStore('selectedShop')
   const shipping = useStore('shipping')
 
@@ -51,8 +52,8 @@ const Heading = () => {
   return (
     <List style={{ margin: 0 }}>
       <ListItem>
+        <Avatar src={user ? user.picture : (shipping ? delivery : pickup)} />
         {shipping ? <>
-          <Avatar src={delivery} />
           <div style={{ marginLeft: 16 }}>
             <Text bold className="mb-0">Coffee Shop</Text>
             <Text className="ellipsis mb-0">
@@ -60,7 +61,6 @@ const Heading = () => {
             </Text>
           </div>
         </> : <>
-          <Avatar src={pickup} />
           <div style={{ marginLeft: 16 }}>
             <Text bold className="mb-0">Coffee Shop</Text>
             <Text className="ellipsis mb-0">

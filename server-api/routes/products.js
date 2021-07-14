@@ -13,7 +13,7 @@ router.get('/', async function (req, res, next) {
     })
   } catch (error) {
     res.send({ error: -1, message: 'Unknown exception' });
-    console.log('API-Exception', ex);
+    console.log('API-Exception', error);
   }
 });
 
@@ -36,7 +36,7 @@ router.get('/by-category', async function (req, res, next) {
     })
   } catch (error) {
     res.send({ error: -1, message: 'Unknown exception' });
-    console.log('API-Exception', ex);
+    console.log('API-Exception', error);
   }
 });
 
@@ -68,7 +68,7 @@ router.get('/dump', async function (req, res, next) {
     })
   } catch (error) {
     res.send({ error: -1, message: 'Unknown exception' });
-    console.log('API-Exception', ex);
+    console.log('API-Exception', error);
   }
 });
 

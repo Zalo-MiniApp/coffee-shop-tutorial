@@ -64,3 +64,24 @@ export const updateFollowStatus = async (status) => {
     return false
   }
 }
+
+export const checkout = async (payload) => {
+  try {
+    const response = await request('POST', 'orders/checkout', payload)
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.log('Error placing an order. Details: ', error)
+    return false
+  }
+}
+
+export const getPlacedOrders = async () => {
+  try {
+    const response = await (await request('GET', 'orders/history')).json()
+    return response.data ?? []
+  } catch (error) {
+    console.log('Error fetching placed orders. Details: ', error)
+    return []
+  }
+}

@@ -1,17 +1,20 @@
 
 import { createStore } from 'zmp-core/lite';
 import { zmp } from 'zmp-framework/react';
-import { getCurrentUser, getProductsByCategory, login } from './services/coffee';
+import { checkout, getCurrentUser, getPlacedOrders, getProductsByCategory, login } from './services/coffee';
 import { getAccessToken } from './services/zalo';
 
 const store = createStore({
   state: {
+    user: null,
     showCheckout: false,
     shipping: false,
     followedOA: false,
     categories: ['Cà Phê', 'Trà', 'Bánh Ngọt', 'Thức Uống Khác'],
     loadingProducts: true,
     products: [],
+    loadingOrders: true,
+    orders: [],
     shops: [{
       selected: true,
       name: 'VNG Campus D7',
@@ -89,6 +92,9 @@ const store = createStore({
     selectedDiscount: null
   },
   getters: {
+    user({ state }) {
+      return state.user
+    },
     categories({ state }) {
       return state.categories
     },
@@ -130,6 +136,12 @@ const store = createStore({
     },
     followedOA({ state }) {
       return state.followedOA
+    },
+    orders({ state }) {
+      return state.orders
+    },
+    loadingOrders({ state }) {
+      return state.loadingOrders
     }
   },
   actions: {
@@ -167,15 +179,48 @@ const store = createStore({
     setFollowedOA({ state }, value) {
       state.followedOA = value
     },
+    setUser({ state }, user) {
+      state.user = user
+    },
+    reOrder({ state }, cart) {
+      state.cart = cart
+      state.showCheckout = true
+    },
     async fetchProducts({ state }) {
       state.loadingProducts = true
       const products = await getProductsByCategory()
       state.products = products
       state.loadingProducts = false
     },
+    async fetchOrders({ state }) {
+      state.loadingOrders = true
+      const orders = await getPlacedOrders()
+      state.orders = orders
+      state.loadingOrders = false
+    },
     async checkout({ state }) {
-      const { cart, selectedDiscount } = state
-      console.log({ cart, selectedDiscount })
+      const { cart, selectedDiscount, shipping, address } = state
+      let shop = null
+      if (!shipping) {
+        shop = state.shops.find(s => s.selected)
+      }
+      const result = await checkout({ cart, selectedDiscount, shipping, shop, address })
+      if (!result.error) {
+        zmp.toast.create({
+          text: "Cảm ơn bạn đã mua hàng tại Highland Coffee!",
+          closeTimeout: 3000,
+          position: 'center'
+        }).open()
+        state.showCheckout = false
+        state.cart = []
+        zmp.views.main.router.navigate('/history')
+      } else {
+        zmp.toast.create({
+          text: "Đã có lỗi xảy ra! Mã lỗi :" + result.message,
+          closeTimeout: 3000,
+          position: 'center'
+        }).open()
+      }
     },
     async login({ state, dispatch }) {
       const token = await getAccessToken()
@@ -183,10 +228,7 @@ const store = createStore({
       if (success) {
         const user = await getCurrentUser()
         if (user) {
-          zmp.toast.create({
-            text: `Chào mừng bạn quay trở lại, ${user.name}`,
-            closeTimeout: 3000,
-          }).open()
+          dispatch('setUser', user)
           dispatch('setFollowedOA', user.followedOA)
           console.log(user)
         }
