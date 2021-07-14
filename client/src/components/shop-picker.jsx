@@ -9,12 +9,33 @@ export const Shop = ({ name, address, selected, open, close }) => {
     store.dispatch('selectShop', name)
   }
 
+  const closed = useMemo(() => {
+    const now = new Date()
+    const hour = now.getHours()
+    const minute = now.getMinutes()
+    let closed = false
+    if (hour < open.hour) {
+      closed = true
+    } else if (hour === open.hour && minute < open.minute) {
+      closed = true
+    }
+    if (hour > close.hour) {
+      closed = true
+    } else if (hour === close.hour && minute > close.minute) {
+      closed = true
+    }
+    return closed
+  }, [open, close])
+
   return <ActionsButton className={selected ? 'active' : 'inactive'} style={{ backgroundColor: 'white' }} onClick={selectShop}>
     <Avatar src={shop} size="24" />
     <div className="description">
       <Text bold fontSize="16">{name}</Text>
       <Text className="text-secondary">{address}</Text>
-      <Text>Mở bán từ {padZero(open.hour)}h{padZero(open.minute)} - {padZero(close.hour)}h{padZero(close.minute)}</Text>
+      <Text>Mở bán từ {padZero(open.hour)}h{padZero(open.minute)} - {padZero(close.hour)}h{padZero(close.minute)}
+        {closed && <span style={{ color: '#B22830' }}> (Đã đóng cửa)</span>}
+      </Text>
+
     </div>
   </ActionsButton>
 }
