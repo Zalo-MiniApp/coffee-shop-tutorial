@@ -11,10 +11,10 @@ function authenticateToken(req, res, next) {
 
   if (token == null) return res.sendStatus(401)
 
-  jwt.verify(token, process.env.TOKEN_SECRET, (err, { zaloId }) => {
-    if (err) return res.sendStatus(403)
+  jwt.verify(token, process.env.TOKEN_SECRET, (err, data) => {
+    if (err || !data) return res.sendStatus(403)
 
-    db.Users.findOne({ zaloId }).then(user => {
+    db.Users.findOne({ zaloId: data.zaloId }).then(user => {
       req.user = user
       next()
     }).catch(err => {

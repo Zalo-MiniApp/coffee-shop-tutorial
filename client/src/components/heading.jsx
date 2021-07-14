@@ -1,32 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import api from 'zmp-sdk';
-import { Avatar, Text, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, List, ListItem, Icon, useStore } from 'zmp-framework/react';
+import { Avatar, Text, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, List, ListItem, Icon, useStore, zmp } from 'zmp-framework/react';
 import pickup from '../../assets-src/pickup.svg'
 import delivery from '../../assets-src/delivery.svg'
 import ShopPicker from './shop-picker';
 import store from '../store';
 import { isFollowed, saveFollowStatus } from '../services/storage';
 import config from '../config'
+import { updateFollowStatus } from '../services/coffee';
 
 const Heading = () => {
   const selectedShop = useStore('selectedShop')
   const shipping = useStore('shipping')
 
-  const [followed, setFollowed] = useState()
+  const followed = useStore('followedOA')
+  const setFollowed = (value) => {
+    store.dispatch('setFollowedOA', value)
+  }
   useEffect(() => {
     isFollowed().then(status => setFollowed(status))
-  })
+  }, [])
 
   const follow = () => {
     api.followOA({
       id: config.OA_ID,
       success: () => {
-        saveFollowStatus(true)
         setFollowed(true)
         zmp.toast.create({
           text: `Cảm ơn bạn đã theo dõi OA thành công!`,
           closeTimeout: 3000,
         }).open()
+        saveFollowStatus(true) // zmp storage
+        updateFollowStatus(true) // backend database
       },
       fail: (err) => {
         console.log("Failed to follow OA. Details: ", err)

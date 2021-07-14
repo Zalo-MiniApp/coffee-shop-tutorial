@@ -49,4 +49,20 @@ router.post('/login', async (req, res) => {
 	}
 });
 
+router.post('/followed', authenticateToken, async function (req, res, next) {
+	try {
+		const zaloId = req.user.zaloId
+		const followedOA = res.body.status
+		const user = await db.Users.updateOne({ zaloId }, { followedOA })
+		return res.send({
+			error: 0,
+			message: 'Success',
+			data: user
+		});
+	} catch (error) {
+		res.send({ error: -1, message: 'Unknown exception' });
+		console.log('API-Exception', ex);
+	}
+});
+
 module.exports = router;

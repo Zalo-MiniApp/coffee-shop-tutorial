@@ -53,3 +53,14 @@ export const getProductsByCategory = async () => {
     return []
   }
 }
+
+export const updateFollowStatus = async (status) => {
+  try {
+    const response = await request('POST', 'users/followed', { status })
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.log('Error update follow OA status. Details: ', error)
+    return false
+  }
+}

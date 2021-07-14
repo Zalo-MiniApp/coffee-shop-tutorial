@@ -7,6 +7,7 @@ var schema = new mongoose.Schema({
   gender: String,
   picture: String,
   status: { type: Number, default: 0 },
+  followedOA: Boolean
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', schema);

@@ -8,6 +8,7 @@ const store = createStore({
   state: {
     showCheckout: false,
     shipping: false,
+    followedOA: false,
     categories: ['Cà Phê', 'Trà', 'Bánh Ngọt', 'Thức Uống Khác'],
     loadingProducts: true,
     products: [],
@@ -126,6 +127,9 @@ const store = createStore({
     },
     selectedDiscount({ state }) {
       return state.selectedDiscount
+    },
+    followedOA({ state }) {
+      return state.followedOA
     }
   },
   actions: {
@@ -160,6 +164,9 @@ const store = createStore({
         state.showCheckout = true
       }
     },
+    setFollowedOA({ state }, value) {
+      state.followedOA = value
+    },
     async fetchProducts({ state }) {
       state.loadingProducts = true
       const products = await getProductsByCategory()
@@ -170,7 +177,7 @@ const store = createStore({
       const { cart, selectedDiscount } = state
       console.log({ cart, selectedDiscount })
     },
-    async login({ state }) {
+    async login({ state, dispatch }) {
       const token = await getAccessToken()
       const success = await login(token)
       if (success) {
@@ -180,6 +187,8 @@ const store = createStore({
             text: `Chào mừng bạn quay trở lại, ${user.name}`,
             closeTimeout: 3000,
           }).open()
+          dispatch('setFollowedOA', user.followedOA)
+          console.log(user)
         }
       }
     }
