@@ -193,3 +193,16 @@
         fill: white !important;
     }
 }
+.shipping-time {
+    .item-inner {
+        padding-top: 8px;
+        padding-bottom: 0;
+        > div {
+            flex: 1;
+        }
+    }
+    #shipping-time-picker {
+        border: none;
+        padding: 0;
+    }
+}

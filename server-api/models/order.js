@@ -7,6 +7,9 @@ var schema = new mongoose.Schema({
   total: Number,
   shipping: Boolean,
   address: String,
+  phone: String,
+  shippingTime: Object,
+  note: String,
   shop: Object,
   status: { type: Number, default: 0 },
 }, { timestamps: true });

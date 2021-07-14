@@ -89,7 +89,11 @@ const store = createStore({
       expireDate: '10/05/2021',
       image: 'discount-3'
     }],
-    selectedDiscount: null
+    selectedDiscount: null,
+    address: '',
+    shippingTime: null,
+    phone: '',
+    note: ''
   },
   getters: {
     user({ state }) {
@@ -142,7 +146,19 @@ const store = createStore({
     },
     loadingOrders({ state }) {
       return state.loadingOrders
-    }
+    },
+    address({ state }) {
+      return state.address
+    },
+    shippingTime({ state }) {
+      return state.shippingTime
+    },
+    phone({ state }) {
+      return state.phone
+    },
+    note({ state }) {
+      return state.note
+    },
   },
   actions: {
     selectShop({ state }, name) {
@@ -182,9 +198,24 @@ const store = createStore({
     setUser({ state }, user) {
       state.user = user
     },
-    reOrder({ state }, cart) {
+    reOrder({ state }, { cart, address, phone, note }) {
       state.cart = cart
+      state.address = address
+      state.phone = phone
+      state.note = note
       state.showCheckout = true
+    },
+    setAddress({ state }, value) {
+      state.address = value
+    },
+    setShippingTime({ state }, value) {
+      state.shippingTime = value
+    },
+    setPhone({ state }, value) {
+      state.phone = value
+    },
+    setNote({ state }, value) {
+      state.note = value
     },
     async fetchProducts({ state }) {
       state.loadingProducts = true
@@ -199,12 +230,12 @@ const store = createStore({
       state.loadingOrders = false
     },
     async checkout({ state }) {
-      const { cart, selectedDiscount, shipping, address } = state
+      const { cart, selectedDiscount, shipping, address, shippingTime, note, phone } = state
       let shop = null
       if (!shipping) {
         shop = state.shops.find(s => s.selected)
       }
-      const result = await checkout({ cart, selectedDiscount, shipping, shop, address })
+      const result = await checkout({ cart, selectedDiscount, shipping, shop, address, shippingTime, note, phone })
       if (!result.error) {
         zmp.toast.create({
           text: "Cảm ơn bạn đã mua hàng tại Highland Coffee!",
@@ -230,7 +261,6 @@ const store = createStore({
         if (user) {
           dispatch('setUser', user)
           dispatch('setFollowedOA', user.followedOA)
-          console.log(user)
         }
       }
     }

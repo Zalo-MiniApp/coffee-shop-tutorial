@@ -1,14 +1,15 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Button, Text, Actions, ActionsGroup, ActionsLabel, List, ListItem, Icon, Box, Avatar, Input, useStore, Link, Checkbox, zmp, Preloader } from 'zmp-framework/react';
 import shop from '../../assets-src/shop.svg'
-import delivery from '../../assets-src/delivery.svg'
-import clock from '../../assets-src/clock.svg'
-import phone from '../../assets-src/phone.svg'
-import note from '../../assets-src/note.svg'
+import deliveryIcon from '../../assets-src/delivery.svg'
+import clockIcon from '../../assets-src/clock.svg'
+import phoneIcon from '../../assets-src/phone.svg'
+import noteIcon from '../../assets-src/note.svg'
 import { Price } from './prices';
 import ProductOrder from './product-order';
 import AddressPicker from './address-picker';
 import store from '../store';
+import ShippingTimePicker from './shipping-time-picker';
 
 const Checkout = ({ value, onChange, children, onReturn }) => {
   const showCheckout = useStore('showCheckout')
@@ -36,6 +37,11 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
     setLoading(false)
   }
 
+  const phone = useStore('phone')
+  const address = useStore('address')
+  const shippingTime = useStore('shippingTime')
+  const note = useStore('note')
+
   return (
     <>
       <div onClick={() => setShowCheckout(true)}>{children}</div>
@@ -62,7 +68,7 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
             <AddressPicker onOpen={() => setShowCheckout(false)} onReturn={() => setShowCheckout(true)}>
               <List className="my-0">
                 <ListItem>
-                  {shipping ? <Avatar slot="media" src={delivery} size="24" /> : <Avatar slot="media" src={shop} size="24" />}
+                  {shipping ? <Avatar slot="media" src={deliveryIcon} size="24" /> : <Avatar slot="media" src={shop} size="24" />}
                   <Icon slot="content" zmp="zi-chevron-right" />
                   {shipping ? <Box style={{ textAlign: 'left' }}>
                     <Text bold fontSize="16">Giao tận nơi</Text>
@@ -78,21 +84,26 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
           <ActionsLabel className="p-0">
             <Box style={{ textAlign: 'left' }}><Text bold>Thông tin khách hàng</Text></Box>
             <List className="my-0">
-              <ListItem>
+              <ListItem className="editable-info">
+                <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -16, marginTop: 0, paddingTop: 16 }}>Địa chỉ</Box>
+                <img slot="media" src={deliveryIcon} style={{ width: 24 }} />
+                <div className="inline-input"><Input type="textarea" placeholder="Nhập nội dung ghi chú..." resizable value={address} onChange={e => store.dispatch('setAddress', e.target.value)} /></div>
+              </ListItem>
+              <ListItem className="shipping-time">
                 <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -8, marginTop: 0, paddingTop: 16 }}>Thời gian nhận hàng</Box>
-                <Avatar slot="media" src={clock} size="24" />
+                <Avatar slot="media" src={clockIcon} size="24" />
                 <Icon slot="content" zmp="zi-chevron-right" />
-                <Text className="mb-0">Hôm nay 15h30 - 08/05 (sớm nhất)</Text>
+                <ShippingTimePicker onChange={value => store.dispatch('setShippingTime', value)} placeholder="Thời gian nhận hàng" title="Thời gian nhận hàng" style={{ flex: 1 }} />
               </ListItem>
               <ListItem className="editable-info">
                 <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -16, marginTop: 0, paddingTop: 16 }}>Số điện thoại</Box>
-                <Avatar slot="media" src={phone} size="24" />
-                <div className="inline-input"><Input type="text" placeholder="Nhập số điện thoại..." /></div>
+                <Avatar slot="media" src={phoneIcon} size="24" />
+                <div className="inline-input"><Input type="text" placeholder="Nhập số điện thoại..." value={phone} onChange={e => store.dispatch('setPhone', e.target.value)} /></div>
               </ListItem>
               <ListItem className="editable-info">
                 <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -16, marginTop: 0, paddingTop: 16 }}>Ghi chú</Box>
-                <img slot="media" src={note} size="24" />
-                <div className="inline-input"><Input type="textarea" placeholder="Nhập nội dung ghi chú..." resizable /></div>
+                <img slot="media" src={noteIcon} size="24" />
+                <div className="inline-input"><Input type="textarea" placeholder="Nhập nội dung ghi chú..." resizable value={note} onChange={e => store.dispatch('setNote', e.target.value)} /></div>
               </ListItem>
             </List>
           </ActionsLabel>
