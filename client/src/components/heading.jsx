@@ -51,32 +51,26 @@ export const FollowOrMessage = () => {
 }
 
 const Heading = () => {
-  const user = useStore('user')
   const selectedShop = useStore('selectedShop')
+  const selectedAddress = useStore('selectedAddress')
   const shipping = useStore('shipping')
 
   return (
     <List style={{ margin: 0 }}>
       <ListItem>
-        <Avatar src={user ? user.picture : (shipping ? delivery : pickup)} />
-        {shipping ? <>
-          <div style={{ marginLeft: 16 }}>
+        <Avatar src={pickup} />
+        <div style={{ marginLeft: 16 }}>
+          {shipping ?
+            <Text bold className="mb-0">Coffee Shop</Text> :
             <Text bold className="mb-0">Coffee Shop</Text>
-            <Text className="ellipsis mb-0">
-              Tài xế giao đến địa chỉ của bạn
-            </Text>
-          </div>
-        </> : <>
-          <div style={{ marginLeft: 16 }}>
-            <Text bold className="mb-0">Coffee Shop</Text>
-            <Text className="ellipsis mb-0">
-              {selectedShop.name} - {selectedShop.address}
-            </Text>
-          </div>
-        </>}
+          }
+          <Text className="ellipsis mb-0">
+            {selectedShop.name} - {selectedShop.address}
+          </Text>
+        </div>
         <FollowOrMessage />
       </ListItem>
-    </List>
+    </List >
   )
 };
 

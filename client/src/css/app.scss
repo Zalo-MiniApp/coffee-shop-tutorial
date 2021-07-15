@@ -14,6 +14,7 @@
     padding-bottom: 80px;
 }
 .address-picker-actions {
+    box-shadow: var(--zmp-button-raised-box-shadow);
     .actions-group:first-child {
         position: sticky;
         top: 0;
@@ -28,6 +29,7 @@
     }
     .actions-button {
         height: unset;
+        padding: 0 16px;
         .actions-button-text {
             padding: 24px 0;
             height: unset;
@@ -65,6 +67,13 @@
     }
     .searchbar {
         border-radius: var(--zmp-searchbar-in-page-content-border-radius);
+    }
+}
+.picker.modal-in {
+    box-shadow: var(--zmp-button-raised-box-shadow);
+    .zmp-picker-sheet-header {
+        box-shadow: var(--zmp-button-raised-box-shadow);
+        padding: 16px;
     }
 }
 .inquiry {

@@ -3,7 +3,6 @@ import { Page, Box, Text, Button, zmp, useStore, SkeletonText, SkeletonBlock, Ro
 import store from '../store';
 import Loading from '../components/loading'
 import PlacedOrder from '../components/placed-order';
-import { FollowOrMessage } from '../components/heading';
 
 const Heading = () => {
   const user = useStore('user')
@@ -16,11 +15,10 @@ const Heading = () => {
     <List style={{ margin: 0 }}>
       <ListItem>
         <Avatar src={user.picture} />
-        <div style={{ marginLeft: 16 }}>
+        <div style={{ marginLeft: 16, flex: 1 }}>
           <Text bold className="mb-0">{user.name}</Text>
-          <Text className="ellipsis mb-0">{user.zaloId}</Text>
+          <Text className="ellipsis mb-0">ID: {user.zaloId}</Text>
         </div>
-        <FollowOrMessage />
       </ListItem>
     </List>
   )

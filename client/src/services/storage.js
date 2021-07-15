@@ -41,10 +41,14 @@ export const loadAddresses = () => new Promise(resolve => {
     keys: ['addresses'],
     success: ({ addresses }) => {
       if (addresses) {
-        resolve(addresses.filter(a => !!a && !!a.address))
-      } else {
-        resolve([])
+        if (!addresses.filter) {
+          addresses = JSON.parse(addresses)
+        }
+        if (addresses.filter) {
+          return resolve(addresses.filter(a => !!a && !!a.address))
+        }
       }
+      resolve([])
     },
     fail: (error) => {
       console.log('Failed to get addresses from storage. Details: ', error)
