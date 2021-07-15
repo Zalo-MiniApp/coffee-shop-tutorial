@@ -80,7 +80,10 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
                   <Icon slot="content" zmp="zi-chevron-right" />
                   {shipping ? <Box style={{ textAlign: 'left' }}>
                     <Text bold fontSize="16">Giao tận nơi</Text>
-                    <Text>{selectedAddress ? selectedAddress.address : "Tài xế giao đến địa chỉ của bạn"}</Text>
+                    {selectedAddress ? <>
+                      <Text bold className="mb-0">{selectedAddress.name} - {selectedAddress.phone}</Text>
+                      <Text>{selectedAddress.address}</Text>
+                    </> : <Text className="text-secondary">Tài xế giao đến địa chỉ của bạn</Text>}
                   </Box> : <Box style={{ textAlign: 'left' }}>
                     <Text bold fontSize="16">{selectedShop.name}</Text>
                     <Text className="text-secondary">{selectedShop.address}</Text>

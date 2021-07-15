@@ -79,7 +79,10 @@ const DeliveryMethodPicker = ({ children, onReturn, onOpen }) => {
               <Avatar src={delivery} />
               <div className="description">
                 <Text bold fontSize="16" className="text-primary my-1">Giao tận nơi</Text>
-                <Text className="text-secondary">{selectedAddress ? selectedAddress.address : "Tài xế giao đến địa chỉ của bạn"}</Text>
+                {selectedAddress ? <>
+                  <Text className="mb-0" bold>{selectedAddress.name} - {selectedAddress.phone}</Text>
+                  <Text>{selectedAddress.address}</Text>
+                </> : <Text className="text-secondary">Tài xế giao đến địa chỉ của bạn</Text>}
               </div>
               <Button typeName="secondary" onClick={e => showDetail(e, true)}>Sửa</Button>
             </ActionsButton>

@@ -14,7 +14,7 @@ export const Address = (props) => {
   return <ActionsButton className={selected ? 'active' : 'inactive'} style={{ backgroundColor: 'white' }} onClick={selectAddress}>
     <img src={delivery} style={{ width: 24 }} />
     <div className="description">
-      <Text bold fontSize="16">{name} - {phone}</Text>
+      <Text className="mb-0" bold fontSize="16">{name} - {phone}</Text>
       <Text className="text-secondary">{address}</Text>
     </div>
   </ActionsButton>
@@ -34,7 +34,13 @@ const AddressPicker = ({ onBack }) => {
       return selectableAddresses
     }
   }, [keyword, selectableAddresses])
-  const otherAddresses = useMemo(() => addresses.filter(address => address.address !== selectedAddress?.address), [addresses])
+  const otherAddresses = useMemo(() => addresses.filter(address => {
+    if (!selectedAddress) {
+      return addresses
+    } else {
+      return address.address !== selectedAddress.address
+    }
+  }), [addresses])
 
   const [showForm, setShowForm] = useState(false)
   const [name, setName] = useState('')
@@ -82,7 +88,7 @@ const AddressPicker = ({ onBack }) => {
               <div className="inline-input"><Input type="text" placeholder="Nhập số điện thoại..." value={phone} onChange={e => setPhone(e.target.value)} /></div>
             </ListItem>
             <ListItem className="editable-info">
-              <Button fill responsive large onClick={saveNewAddress} disabled={!name || !phone || !address}>Lưu địa chỉ</Button>
+              <Button className="mb-2" fill responsive large onClick={saveNewAddress} disabled={!name || !phone || !address}>Lưu địa chỉ</Button>
             </ListItem>
           </List>
         </ActionsLabel> : <>

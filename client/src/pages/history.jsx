@@ -1,8 +1,30 @@
 import React, { useEffect } from 'react';
-import { Page, Box, Text, Button, zmp, useStore, SkeletonText, SkeletonBlock, Row, Col, Searchbar } from 'zmp-framework/react';
+import { Page, Box, Text, Button, zmp, useStore, SkeletonText, SkeletonBlock, Row, Col, Searchbar, List, ListItem, Avatar } from 'zmp-framework/react';
 import store from '../store';
 import Loading from '../components/loading'
 import PlacedOrder from '../components/placed-order';
+import { FollowOrMessage } from '../components/heading';
+
+const Heading = () => {
+  const user = useStore('user')
+
+  if (!user) {
+    return <></>
+  }
+
+  return (
+    <List style={{ margin: 0 }}>
+      <ListItem>
+        <Avatar src={user.picture} />
+        <div style={{ marginLeft: 16 }}>
+          <Text bold className="mb-0">{user.name}</Text>
+          <Text className="ellipsis mb-0">{user.zaloId}</Text>
+        </div>
+        <FollowOrMessage />
+      </ListItem>
+    </List>
+  )
+};
 
 const Empty = () => <Box style={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
   <Box>
@@ -32,6 +54,7 @@ const History = () => {
 
   return (
     <Page name="history">
+      <Heading />
       {loading ? <Loading /> : <>
         {
           orders.length > 0 ? <Orders /> : <Empty />

@@ -9,11 +9,7 @@ import { isFollowed, saveFollowStatus } from '../services/storage';
 import config from '../config'
 import { updateFollowStatus } from '../services/coffee';
 
-const Heading = () => {
-  const user = useStore('user')
-  const selectedShop = useStore('selectedShop')
-  const shipping = useStore('shipping')
-
+export const FollowOrMessage = () => {
   const followed = useStore('followedOA')
   const setFollowed = (value) => {
     store.dispatch('setFollowedOA', value)
@@ -49,6 +45,16 @@ const Heading = () => {
     });
   }
 
+  return <>
+    {followed ? <Button style={{ marginLeft: 16 }} fill onClick={message}>Nhắn tin</Button> : <Button typeName="secondary" style={{ marginLeft: 16 }} onClick={follow}>Theo dõi</Button>}
+  </>
+}
+
+const Heading = () => {
+  const user = useStore('user')
+  const selectedShop = useStore('selectedShop')
+  const shipping = useStore('shipping')
+
   return (
     <List style={{ margin: 0 }}>
       <ListItem>
@@ -68,7 +74,7 @@ const Heading = () => {
             </Text>
           </div>
         </>}
-        {followed ? <Button style={{ marginLeft: 16 }} fill onClick={message}>Nhắn tin</Button> : <Button typeName="secondary" style={{ marginLeft: 16 }} onClick={follow}>Theo dõi</Button>}
+        <FollowOrMessage />
       </ListItem>
     </List>
   )
