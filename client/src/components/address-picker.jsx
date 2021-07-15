@@ -23,6 +23,7 @@ const AddressPicker = ({ children, onReturn, onOpen }) => {
   return <>
     <div onClick={() => setShowPicker(true)}>{children}</div>
     <Actions
+      className="address-picker-actions"
       opened={showPicker}
       onActionsClosed={() => setShowPicker(false)}
       onActionsClose={() => {
@@ -39,13 +40,15 @@ const AddressPicker = ({ children, onReturn, onOpen }) => {
       }}
     > {
         mode === 'address' ? <>
-          <ActionsGroup className="address-picker-actions">
+          <ActionsGroup>
             <Button typeName="ghost" className="close-button" onClick={() => setShowPicker(false)}>
               <Icon zmp="zi-close" size={24}></Icon>
             </Button>
             <ActionsLabel bold>
               <span className="title">Chọn phương thức nhận hàng</span>
             </ActionsLabel>
+          </ActionsGroup>
+          <ActionsGroup>
             <ActionsButton className={shipping ? 'inactive' : 'active'} onClick={() => store.dispatch('ship', false)}>
               <Avatar src={pickup} />
               <div className="description mr-2">

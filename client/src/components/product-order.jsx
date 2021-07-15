@@ -93,16 +93,19 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
             {children}
         </div>
         <Actions
+            className="address-picker-actions"
             opened={showOrder}
             onActionsClosed={() => setShowOrder(false)}
         >
-            <ActionsGroup className="address-picker-actions">
+            <ActionsGroup>
                 <Button typeName="ghost" className="close-button" onClick={() => setShowOrder(false)}>
                     <Icon zmp="zi-close" size={24}></Icon>
                 </Button>
                 <ActionsLabel bold>
                     <span className="title">Chọn thức uống</span>
                 </ActionsLabel>
+            </ActionsGroup>
+            <ActionsGroup>
                 <ActionsLabel style={{ backgroundColor: 'white' }}>
                     <Row>
                         <Col style={{ flex: 1, paddingRight: 16 }}><img src={image} style={{ width: '100%' }} /></Col>

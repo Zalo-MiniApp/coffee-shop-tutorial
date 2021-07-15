@@ -35,7 +35,6 @@ const ShippingTimePicker = ({ value, onChange, ...props }) => {
   };
 
   const defaultValue = useMemo(() => {
-    if (value) return value
     const now = datePickerData[0].values[0]
     return [now, now.getHours(), now.getMinutes()]
   })

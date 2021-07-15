@@ -42,10 +42,15 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
   const shippingTime = useStore('shippingTime')
   const note = useStore('note')
 
+  const changeShippingTime = () => {
+    document.querySelector('#shipping-time-picker').click()
+  }
+
   return (
     <>
       <div onClick={() => setShowCheckout(true)}>{children}</div>
       <Actions
+        className="address-picker-actions"
         opened={show}
         onActionsClosed={() => setShowCheckout(false)}
         onActionsClose={() => {
@@ -54,13 +59,15 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
           }
         }}
       >
-        <ActionsGroup className="address-picker-actions">
+        <ActionsGroup>
           <Button typeName="ghost" className="close-button" onClick={() => setShowCheckout(false)}>
             <Icon zmp="zi-arrow-left" size={24}></Icon>
           </Button>
           <ActionsLabel bold>
             <span className="title">Xác nhận đơn hàng</span>
           </ActionsLabel>
+        </ActionsGroup>
+        <ActionsGroup>
           <ActionsLabel className="p-0">
             <Box style={{ textAlign: 'left' }}>
               <Text bold>Phương thức nhận hàng</Text>
@@ -93,7 +100,7 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
                 <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -8, marginTop: 0, paddingTop: 16 }}>Thời gian nhận hàng</Box>
                 <Avatar slot="media" src={clockIcon} size="24" />
                 <Icon slot="content" zmp="zi-chevron-right" />
-                <ShippingTimePicker onChange={value => store.dispatch('setShippingTime', value)} placeholder="Thời gian nhận hàng" title="Thời gian nhận hàng" style={{ flex: 1 }} />
+                <ShippingTimePicker value={shippingTime} onChange={value => store.dispatch('setShippingTime', value)} placeholder="Thời gian nhận hàng" title="Thời gian nhận hàng" style={{ flex: 1 }} />
               </ListItem>
               <ListItem className="editable-info">
                 <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -16, marginTop: 0, paddingTop: 16 }}>Số điện thoại</Box>
@@ -142,7 +149,7 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
           </ActionsLabel>
         </ActionsGroup>
         <ActionsGroup />
-        <ActionsLabel className="p-0" style={{ position: 'sticky', bottom: 0, borderTop: `0.5px solid var(--zmp-color-nd200)` }}>
+        <ActionsLabel className="p-0" style={{ position: 'sticky', bottom: 0, boxShadow: `var(--zmp-button-raised-box-shadow)` }}>
           <List className="my-0">
             <ListItem>
               <Text slot="before-title" className="text-secondary mb-0">Mã ưu đãi</Text>
@@ -150,14 +157,13 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
               <Link onClick={showDiscounts} slot="after" >{selectedDiscount ? <Text slot="after" bold className="mb-0">{selectedDiscount}</Text> : <Text className="text-secondary mb-0">Chọn mã ưu đãi</Text>}</Link>
             </ListItem>
             <ListItem>
-              <div>
+              <div style={{ flex: 1 }}>
                 <Box style={{ display: 'flex', alignItems: 'center' }}>
                   <Checkbox
                     defaultChecked
                   />
-                  <Text style={{ textAlign: 'left', paddingLeft: 8 }} fontSize={12}>
-                    Tôi đồng ý nhận món từ <b>15h30 - 15h45</b>. Sau thời gian này, tôi chấp nhận hủy món và không được hoàn tiền.
-                    <a className="text-primary">Chọn giờ khác.</a>
+                  <Text style={{ textAlign: 'left', paddingLeft: 8, paddingTop: 8 }} fontSize={12}>
+                    Tôi đồng ý nhận món từ <b>{shippingTime[1]}h{`${shippingTime[2]}`.padStart(2, 0)} - {Number(shippingTime[1]) + 1}h{`${shippingTime[2]}`.padStart(2, 0)}</b>. <a onClick={changeShippingTime} className="text-primary" style={{ display: 'inline' }}>Chọn giờ khác.</a>
                   </Text>
                 </Box>
                 <Box style={{ display: 'flex', alignItems: 'center' }}>

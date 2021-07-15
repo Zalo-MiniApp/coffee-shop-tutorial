@@ -14,6 +14,18 @@
     padding-bottom: 80px;
 }
 .address-picker-actions {
+    .actions-group:first-child {
+        position: sticky;
+        top: 0;
+        z-index: 3000;
+        box-shadow: var(--zmp-button-raised-box-shadow);
+    }
+    .actions-group:nth-child(2) {
+        border-top: unset;
+        .actions-label:first-of-type {
+            background: #EEF1F6;
+        }
+    }
     .actions-button {
         height: unset;
         .actions-button-text {
@@ -76,7 +88,7 @@
         bottom: 64px;
         width: 100%;
         box-sizing: border-box;
-        border-top: .5px solid var(--zmp-card-inset-border-color);
+        box-shadow: var(--zmp-button-raised-box-shadow);
         background-color: white;
         display: flex;
         justify-content: space-between;

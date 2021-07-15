@@ -91,7 +91,7 @@ const store = createStore({
     }],
     selectedDiscount: null,
     address: '',
-    shippingTime: null,
+    shippingTime: [new Date(), new Date().getHours(), new Date().getMinutes()],
     phone: '',
     note: ''
   },

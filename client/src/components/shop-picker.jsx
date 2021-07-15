@@ -56,13 +56,15 @@ const ShopPicker = ({ onBack }) => {
 
   return (
     <>
-      <ActionsGroup className="address-picker-actions">
+      <ActionsGroup>
         <Button typeName="ghost" className="close-button" onClick={onBack}>
           <Icon zmp="zi-arrow-left" size={24}></Icon>
         </Button>
         <ActionsLabel bold>
           <span className="title">Chọn cửa hàng</span>
         </ActionsLabel>
+      </ActionsGroup>
+      <ActionsGroup>
         <ActionsLabel bold>
           <Searchbar value={keyword} onChange={e => setKeyword(e.target.value)} type="text" placeholder="Tìm địa chỉ, tên chi nhánh..." clearButton onSearchbarClear={() => setKeyword('')} />
         </ActionsLabel>
