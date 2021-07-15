@@ -105,10 +105,10 @@ const AddressPicker = ({ onBack }) => {
               <ActionsLabel className="p-0">
                 <Box>
                   <Row>
-                    <Col width="70" style={{ textAlign: 'left' }}>
+                    <Col width="60" style={{ textAlign: 'left' }}>
                       <Text bold className="mb-0">Địa chỉ đang chọn</Text>
                     </Col>
-                    <Col width="30" style={{ textAlign: 'right' }}>
+                    <Col width="40" style={{ textAlign: 'right' }}>
                       <Link className="text-primary" onClick={() => setShowForm(true)}>
                         Thêm địa chỉ mới
                       </Link>
