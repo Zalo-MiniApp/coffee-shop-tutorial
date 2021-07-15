@@ -34,7 +34,7 @@ const AddressPicker = ({ onBack }) => {
       return selectableAddresses
     }
   }, [keyword, selectableAddresses])
-  const otherAddresses = useMemo(() => addresses.filter(address => address.address !== selectedAddress.address), [addresses])
+  const otherAddresses = useMemo(() => addresses.filter(address => address.address !== selectedAddress?.address), [addresses])
 
   const [showForm, setShowForm] = useState(false)
   const [name, setName] = useState('')
