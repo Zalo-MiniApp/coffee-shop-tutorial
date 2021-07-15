@@ -2,6 +2,7 @@
 import { createStore } from 'zmp-core/lite';
 import { zmp } from 'zmp-framework/react';
 import { checkout, getCurrentUser, getPlacedOrders, getProductsByCategory, login } from './services/coffee';
+import { loadAddresses } from './services/storage';
 import { getAccessToken } from './services/zalo';
 
 const store = createStore({
@@ -15,6 +16,7 @@ const store = createStore({
     products: [],
     loadingOrders: true,
     orders: [],
+    selectedAddress: null,
     shops: [{
       selected: true,
       name: 'VNG Campus D7',
@@ -90,10 +92,9 @@ const store = createStore({
       image: 'discount-3'
     }],
     selectedDiscount: null,
-    address: '',
+    addresses: [],
     shippingTime: [new Date(), new Date().getHours(), new Date().getMinutes()],
-    phone: '',
-    note: ''
+    note: '',
   },
   getters: {
     user({ state }) {
@@ -113,6 +114,9 @@ const store = createStore({
     },
     selectedShop({ state }) {
       return state.shops.find(s => s.selected)
+    },
+    selectedAddress({ state }) {
+      return state.selectedAddress
     },
     selectableShops({ state }) {
       return state.shops.filter(s => !s.selected)
@@ -159,6 +163,9 @@ const store = createStore({
     note({ state }) {
       return state.note
     },
+    addresses({ state }) {
+      return state.addresses
+    }
   },
   actions: {
     selectShop({ state }, name) {
@@ -166,6 +173,9 @@ const store = createStore({
         ...shop,
         selected: shop.name === name
       }))
+    },
+    selectAddress({ state }, address) {
+      state.selectedAddress = address
     },
     addToCart({ state }, item) {
       state.cart = state.cart.concat(item)
@@ -200,7 +210,6 @@ const store = createStore({
     },
     reOrder({ state }, { cart, address, phone, note }) {
       state.cart = cart
-      state.address = address
       state.phone = phone
       state.note = note
       state.showCheckout = true
@@ -229,13 +238,20 @@ const store = createStore({
       state.orders = orders
       state.loadingOrders = false
     },
+    async fetchAddresses({ state }) {
+      const addresses = await loadAddresses()
+      state.addresses = addresses
+      if (!state.selectedAddress && addresses.length > 0) {
+        state.selectedAddress = addresses[addresses.length - 1]
+      }
+    },
     async checkout({ state }) {
-      const { cart, selectedDiscount, shipping, address, shippingTime, note, phone } = state
+      const { cart, selectedDiscount, shipping, selectedAddress, shippingTime, note } = state
       let shop = null
       if (!shipping) {
         shop = state.shops.find(s => s.selected)
       }
-      const result = await checkout({ cart, selectedDiscount, shipping, shop, address, shippingTime, note, phone })
+      const result = await checkout({ cart, selectedDiscount, shipping, shop, address: selectedAddress, shippingTime, note })
       if (!result.error) {
         zmp.toast.create({
           text: "Cảm ơn bạn đã mua hàng tại Highland Coffee!",

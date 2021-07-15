@@ -7,7 +7,7 @@ import phoneIcon from '../../assets-src/phone.svg'
 import noteIcon from '../../assets-src/note.svg'
 import { Price } from './prices';
 import ProductOrder from './product-order';
-import AddressPicker from './address-picker';
+import DeliveryMethodPicker from './delivery-method-picker';
 import store from '../store';
 import ShippingTimePicker from './shipping-time-picker';
 
@@ -17,6 +17,7 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
     store.dispatch('setShowCheckout', value)
   }
   const selectedShop = useStore('selectedShop')
+  const selectedAddress = useStore('selectedAddress')
   const cart = useStore('cart')
   const totalAmount = useStore('totalAmount')
   const shipping = useStore('shipping')
@@ -72,40 +73,30 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
             <Box style={{ textAlign: 'left' }}>
               <Text bold>Phương thức nhận hàng</Text>
             </Box>
-            <AddressPicker onOpen={() => setShowCheckout(false)} onReturn={() => setShowCheckout(true)}>
+            <DeliveryMethodPicker onOpen={() => setShowCheckout(false)} onReturn={() => setShowCheckout(true)}>
               <List className="my-0">
                 <ListItem>
                   {shipping ? <Avatar slot="media" src={deliveryIcon} size="24" /> : <Avatar slot="media" src={shop} size="24" />}
                   <Icon slot="content" zmp="zi-chevron-right" />
                   {shipping ? <Box style={{ textAlign: 'left' }}>
                     <Text bold fontSize="16">Giao tận nơi</Text>
-                    <Text>Tài xế giao đến địa chỉ của bạn</Text>
+                    <Text>{selectedAddress ? selectedAddress.address : "Tài xế giao đến địa chỉ của bạn"}</Text>
                   </Box> : <Box style={{ textAlign: 'left' }}>
                     <Text bold fontSize="16">{selectedShop.name}</Text>
                     <Text className="text-secondary">{selectedShop.address}</Text>
                   </Box>}
                 </ListItem>
               </List>
-            </AddressPicker>
+            </DeliveryMethodPicker>
           </ActionsLabel>
           <ActionsLabel className="p-0">
             <Box style={{ textAlign: 'left' }}><Text bold>Thông tin khách hàng</Text></Box>
             <List className="my-0">
-              <ListItem className="editable-info">
-                <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -16, marginTop: 0, paddingTop: 16 }}>Địa chỉ</Box>
-                <img slot="media" src={deliveryIcon} style={{ width: 24 }} />
-                <div className="inline-input"><Input type="textarea" placeholder="Nhập nội dung ghi chú..." resizable value={address} onChange={e => store.dispatch('setAddress', e.target.value)} /></div>
-              </ListItem>
               <ListItem className="shipping-time">
                 <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -8, marginTop: 0, paddingTop: 16 }}>Thời gian nhận hàng</Box>
                 <Avatar slot="media" src={clockIcon} size="24" />
                 <Icon slot="content" zmp="zi-chevron-right" />
                 <ShippingTimePicker value={shippingTime} onChange={value => store.dispatch('setShippingTime', value)} placeholder="Thời gian nhận hàng" title="Thời gian nhận hàng" style={{ flex: 1 }} />
-              </ListItem>
-              <ListItem className="editable-info">
-                <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -16, marginTop: 0, paddingTop: 16 }}>Số điện thoại</Box>
-                <Avatar slot="media" src={phoneIcon} size="24" />
-                <div className="inline-input"><Input type="text" placeholder="Nhập số điện thoại..." value={phone} onChange={e => store.dispatch('setPhone', e.target.value)} /></div>
               </ListItem>
               <ListItem className="editable-info">
                 <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -16, marginTop: 0, paddingTop: 16 }}>Ghi chú</Box>

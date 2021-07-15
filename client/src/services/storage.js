@@ -35,3 +35,26 @@ export const isFollowed = () => new Promise(resolve => {
     }
   })
 })
+
+export const loadAddresses = () => new Promise(resolve => {
+  api.getStorage({
+    keys: ['addresses'],
+    success: ({ addresses }) => {
+      resolve(addresses ?? [])
+    },
+    fail: (error) => {
+      console.log('Failed to get addresses from storage. Details: ', error)
+      resolve([])
+    }
+  })
+})
+
+export const saveAddress = async address => {
+  const addresses = await loadAddresses()
+  addresses.push(address)
+  api.setStorage({
+    data: { addresses },
+    fail: (error) => console.log('Failed to save new address to storage. Details: ', error)
+  })
+  return addresses
+}

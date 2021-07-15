@@ -16,7 +16,13 @@ const PlacedOrder = ({ order }) => {
             <Text className="text-secondary">
                 {new Date(createdAt).toLocaleDateString()} - {new Date(createdAt).toLocaleTimeString()}
             </Text>
-            <Text bold>{shipping ? address : shop.name}</Text>
+            {shipping ?
+                (address && <>
+                    <Text bold>{address.name} - {address.phone}</Text>
+                    <Text>{address.address}</Text></>
+                ) :
+                <Text bold>{shop.name}</Text>
+            }
             <div style={{ display: 'flex' }}>
                 <Price bold amount={total} />
                 {selectedDiscount && <Text className="text-secondary">&nbsp;- {selectedDiscount}</Text>}
