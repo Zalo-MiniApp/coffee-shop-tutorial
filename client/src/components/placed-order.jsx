@@ -7,6 +7,7 @@ const PlacedOrder = ({ order }) => {
     const { cart, createdAt, selectedDiscount, total, shipping, shop, address } = order
 
     const reOrder = () => {
+        zmp.views.main.router.navigate('/')
         store.dispatch('reOrder', order)
     }
 
