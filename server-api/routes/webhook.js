@@ -30,12 +30,12 @@ router.post('/', async function (req, res, next) {
 
 async function processFollowEvent(payload) {
   const { user_id_by_app, follower } = payload
-  const follower_id = follower.id
+  const followerId = follower.id
   await db.Users.updateOne({
     zaloId: user_id_by_app
   }, {
-    follower_id,
-    followedOA: true
+    followerId,
+    isFollowing: true
   }, {
     upsert: true
   })
@@ -43,12 +43,12 @@ async function processFollowEvent(payload) {
 
 async function processUnfollowEvent(payload) {
   const { user_id_by_app, follower } = payload
-  const follower_id = follower.id
+  const followerId = follower.id
   await db.Users.updateOne({
     zaloId: user_id_by_app
   }, {
-    follower_id,
-    followedOA: false
+    followerId,
+    isFollowing: false
   }, {
     upsert: true
   })

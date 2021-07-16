@@ -52,8 +52,8 @@ router.post('/login', async (req, res) => {
 router.post('/followed', authenticateToken, async function (req, res, next) {
 	try {
 		const zaloId = req.user.zaloId
-		const followedOA = req.body.status
-		const user = await db.Users.updateOne({ zaloId }, { followedOA })
+		const isFollowing = req.body.status
+		const user = await db.Users.updateOne({ zaloId }, { isFollowing })
 		return res.send({
 			error: 0,
 			message: 'Success',

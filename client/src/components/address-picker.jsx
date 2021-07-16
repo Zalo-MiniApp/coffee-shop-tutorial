@@ -60,7 +60,9 @@ const AddressPicker = ({ onBack }) => {
   }
 
   useEffect(() => {
-    setName(user.name)
+    if (!name && !!user) {
+      setName(user.name)
+    }
   }, [user])
 
   return (
