@@ -2,7 +2,7 @@
 import { createStore } from 'zmp-core/lite';
 import { zmp } from 'zmp-framework/react';
 import { checkout, getCurrentUser, getPlacedOrders, getProductsByCategory, login } from './services/coffee';
-import { loadAddresses } from './services/storage';
+import { loadAddresses, saveFollowStatus } from './services/storage';
 import { getAccessToken } from './services/zalo';
 
 const store = createStore({
@@ -254,8 +254,8 @@ const store = createStore({
       const result = await checkout({ cart, selectedDiscount, shipping, shop, address: selectedAddress, shippingTime, note })
       if (!result.error) {
         zmp.toast.create({
-          text: "Cảm ơn bạn đã mua hàng tại Highland Coffee!",
-          closeTimeout: 3000,
+          text: result.message,
+          closeTimeout: 5000,
           position: 'center'
         }).open()
         state.showCheckout = false
@@ -277,6 +277,7 @@ const store = createStore({
         if (user) {
           dispatch('setUser', user)
           dispatch('setFollowedOA', user.followedOA)
+          await saveFollowStatus(user.followedOA)
         }
       }
     }

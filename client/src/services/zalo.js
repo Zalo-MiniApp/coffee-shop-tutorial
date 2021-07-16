@@ -6,8 +6,8 @@ export const getAccessToken = () => new Promise(resolve => {
     success: async () => {
       api.getAccessToken({
         success: (token) => {
-          if (token === 'DEFAULT ACCESS TOKEN' && config.DEV_TOKEN) {
-            token = config.DEV_TOKEN
+          if (token === 'DEFAULT ACCESS TOKEN' && config.DEFAULT_ACCESS_TOKEN) {
+            token = config.DEFAULT_ACCESS_TOKEN
           }
           resolve(token)
         },
