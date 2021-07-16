@@ -24,6 +24,7 @@ const AddressPicker = ({ onBack }) => {
   const [keyword, setKeyword] = useState('')
   const selectedAddress = useStore('selectedAddress')
   const selectableAddresses = useStore('addresses')
+  const user = useStore('user')
 
   const addresses = useMemo(() => {
     if (keyword) {
@@ -57,6 +58,10 @@ const AddressPicker = ({ onBack }) => {
       onBack()
     }
   }
+
+  useEffect(() => {
+    setName(user.name)
+  }, [user])
 
   return (
     <>
