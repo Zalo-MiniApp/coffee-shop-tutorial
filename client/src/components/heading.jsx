@@ -2,33 +2,24 @@ import React, { useEffect, useState } from 'react';
 import api from 'zmp-sdk';
 import { Avatar, Text, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, List, ListItem, Icon, useStore, zmp } from 'zmp-framework/react';
 import pickup from '../../assets-src/pickup.svg'
-import delivery from '../../assets-src/delivery.svg'
-import ShopPicker from './shop-picker';
 import store from '../store';
-import { isFollowed, saveFollowStatus } from '../services/storage';
 import config from '../config'
-import { updateFollowStatus } from '../services/coffee';
 
 export const FollowOrMessage = () => {
-  const followed = useStore('followedOA')
-  const setFollowed = (value) => {
-    store.dispatch('setFollowedOA', value)
-  }
-  useEffect(() => {
-    isFollowed().then(status => setFollowed(status))
-  }, [])
-
+  const user = useStore('user')
   const follow = () => {
     api.followOA({
       id: config.OA_ID,
       success: () => {
-        setFollowed(true)
+        store.dispatch('setUser', {
+          ...user,
+          isFollowing: true
+        })
         zmp.toast.create({
           text: `Cảm ơn bạn đã theo dõi OA thành công!`,
           closeTimeout: 3000,
         }).open()
-        saveFollowStatus(true) // zmp storage
-        updateFollowStatus(true) // backend database
+        // updateFollowStatus(true) // Không cần gửi status về backend vì mình đã có webhook
       },
       fail: (err) => {
         console.log("Failed to follow OA. Details: ", err)
@@ -45,8 +36,10 @@ export const FollowOrMessage = () => {
     });
   }
 
+  if (!user) return <></>
+
   return <>
-    {followed ? <Button style={{ marginLeft: 16 }} fill onClick={message}>Nhắn tin</Button> : <Button typeName="secondary" style={{ marginLeft: 16 }} onClick={follow}>Theo dõi</Button>}
+    {user.isFollowing ? <Button style={{ marginLeft: 16 }} fill onClick={message}>Nhắn tin</Button> : <Button typeName="secondary" style={{ marginLeft: 16 }} onClick={follow}>Theo dõi</Button>}
   </>
 }
 
@@ -59,7 +52,7 @@ const Heading = () => {
     <List style={{ margin: 0 }}>
       <ListItem>
         <Avatar src={pickup} />
-        <div style={{ marginLeft: 16 }}>
+        <div style={{ marginLeft: 16, flex: 1 }}>
           {shipping ?
             <Text bold className="mb-0">Coffee Shop</Text> :
             <Text bold className="mb-0">Coffee Shop</Text>

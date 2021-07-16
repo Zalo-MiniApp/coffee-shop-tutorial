@@ -2,7 +2,7 @@
 import { createStore } from 'zmp-core/lite';
 import { zmp } from 'zmp-framework/react';
 import { checkout, getCurrentUser, getPlacedOrders, getProductsByCategory, login } from './services/coffee';
-import { loadAddresses, saveFollowStatus } from './services/storage';
+import { loadAddresses } from './services/storage';
 import { getAccessToken } from './services/zalo';
 
 const store = createStore({
@@ -10,7 +10,6 @@ const store = createStore({
     user: null,
     showCheckout: false,
     shipping: false,
-    followedOA: false,
     categories: ['Cà Phê', 'Trà', 'Bánh Ngọt', 'Thức Uống Khác'],
     loadingProducts: true,
     products: [],
@@ -142,9 +141,6 @@ const store = createStore({
     selectedDiscount({ state }) {
       return state.selectedDiscount
     },
-    followedOA({ state }) {
-      return state.followedOA
-    },
     orders({ state }) {
       return state.orders
     },
@@ -201,9 +197,6 @@ const store = createStore({
       if (state.cart.length > 0) {
         state.showCheckout = true
       }
-    },
-    setFollowedOA({ state }, value) {
-      state.followedOA = value
     },
     setUser({ state }, user) {
       state.user = user
@@ -276,8 +269,6 @@ const store = createStore({
         const user = await getCurrentUser()
         if (user) {
           dispatch('setUser', user)
-          dispatch('setFollowedOA', user.followedOA)
-          await saveFollowStatus(user.followedOA)
         }
       }
     }
