@@ -1,20 +1,11 @@
 var express = require('express');
-const request = require('request');
 const db = require('../models');
-const { generateAccessToken, authenticateToken } = require('../services/token-service');
+const AuthService = require('../services/auth-service');
 const ZaloService = require('./../services/zalo-service.js');
 var router = express.Router();
 
-router.get('/logged-in', authenticateToken, function (req, res, next) {
-	if (req.user) {
-		return res.send({
-			error: 0,
-			message: 'Success',
-			data: req.user
-		});
-	} else {
-		res.send({ error: -1, message: 'No user found!' });
-	}
+router.get('/logged-in', AuthService.verify, (req, res) => {
+	return res.send({ error: 0, message: 'Success', data: req.user });
 });
 
 router.post('/login', async (req, res) => {
@@ -35,12 +26,11 @@ router.post('/login', async (req, res) => {
 			picture: pictureUrl
 		}, { upsert: true });
 		if (user) {
-			const token = generateAccessToken(id)
+			const jwt = AuthService.genJSONWebToken(id, 3600);
 			return res.send({
 				error: 0,
 				message: 'Success',
-				data: user,
-				token
+				data: { ...user, jwt }
 			});
 		}
 	} catch (ex) {
@@ -49,7 +39,7 @@ router.post('/login', async (req, res) => {
 	}
 });
 
-router.post('/followed', authenticateToken, async function (req, res, next) {
+router.post('/update-follow-status', AuthService.verify, async (req, res, next) => {
 	try {
 		const zaloId = req.user.zaloId
 		const isFollowing = req.body.status
