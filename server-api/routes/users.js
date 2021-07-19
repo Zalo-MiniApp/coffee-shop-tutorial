@@ -19,8 +19,13 @@ router.post('/login', async (req, res) => {
 		if (picture.data) {
 			pictureUrl = picture.data.url
 		}
+		let birthDate = null
+		if (birthday) {
+			const parts = birthday.split('/')
+			birthDate = new Date(parts[2], parts[1] - 1, parts[0])
+		}
 		let user = await db.Users.updateOne({ zaloId: id }, {
-			birthday,
+			birthday: birthDate,
 			name,
 			gender,
 			picture: pictureUrl
