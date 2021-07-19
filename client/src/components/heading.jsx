@@ -2,30 +2,11 @@ import React, { useEffect, useState } from 'react';
 import api from 'zmp-sdk';
 import { Avatar, Text, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, List, ListItem, Icon, useStore, zmp } from 'zmp-framework/react';
 import pickup from '../../assets-src/pickup.svg'
-import store from '../store';
 import config from '../config'
+import { follow } from '../services/zalo';
 
 export const FollowOrMessage = () => {
   const user = useStore('user')
-  const follow = () => {
-    api.followOA({
-      id: config.OA_ID,
-      success: () => {
-        store.dispatch('setUser', {
-          ...user,
-          isFollowing: true
-        })
-        zmp.toast.create({
-          text: `Cảm ơn bạn đã theo dõi OA thành công!`,
-          closeTimeout: 3000,
-        }).open()
-        // updateFollowStatus(true) // Không cần gửi status về backend vì mình đã có webhook
-      },
-      fail: (err) => {
-        console.log("Failed to follow OA. Details: ", err)
-      }
-    })
-  }
 
   const message = () => {
     api.openProfile({

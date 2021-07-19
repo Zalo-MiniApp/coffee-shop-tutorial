@@ -47,6 +47,8 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
     document.querySelector('#shipping-time-picker').click()
   }
 
+  const [aggree, setAggree] = useState(true)
+
   return (
     <>
       <div onClick={() => setShowCheckout(true)}>{children}</div>
@@ -154,8 +156,12 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
               <div style={{ flex: 1 }}>
                 <Box style={{ display: 'flex', alignItems: 'center' }}>
                   <Checkbox
-                    defaultChecked
-                    label={<Text style={{ textAlign: 'left' }} fontSize={12}>
+                    checked={aggree}
+                    onChange={e => {
+                      console.log(e.target.checked);
+                      setAggree(e.target.checked)
+                    }}
+                    label={<Text style={{ textAlign: 'left', marginBottom: 0 }} fontSize={12}>
                       Tôi đồng ý nhận món từ <b>{shippingTime[1]}h{`${shippingTime[2]}`.padStart(2, 0)} - {Number(shippingTime[1]) + 1}h{`${shippingTime[2]}`.padStart(2, 0)}</b>. <a onClick={changeShippingTime} className="text-primary" style={{ display: 'inline' }}>Chọn giờ khác.</a>
                     </Text>}
                   />
@@ -166,7 +172,7 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
                   <Price style={{ marginLeft: 'auto' }} fontSize={20} bold amount={totalAmount} />
                 </Box>
                 <Box>
-                  <Button onClick={checkout} large responsive fill disabled={loading}>
+                  <Button onClick={checkout} large responsive fill disabled={loading || !aggree}>
                     {loading && <Preloader className="loading-button" />}
                     Thanh toán bằng ZaloPay</Button>
                 </Box>

@@ -39,18 +39,12 @@ router.post('/checkout', async (req, res, next) => {
       shippingTime,
       note,
     })
-    let message = 'Đặt hàng thành công!'
     const detail = cart.map(item => `${item.quantity}x ${item.product.name}`).join(', ')
     const response = await ZaloService.sendMessage(req.user.followerId, `Cảm ơn bạn đã đặt hàng tại Highland Coffee. Chi tiết đơn hàng: ${detail}. Tổng cộng: ${total} VND`)
-    if (!response.error) {
-      message += ' Vui lòng kiểm tra tin nhắn của bạn để theo dõi đơn hàng!'
-    } else {
-      message += ' Không thể gửi tin nhắn về cho người dùng, lý do chi tiết: ' + response.message
-    }
     console.log('[OA Message]', response)
     res.send({
       error: 0,
-      message,
+      message: 'Đặt hàng thành công!',
       data: doc,
     })
   } catch (error) {

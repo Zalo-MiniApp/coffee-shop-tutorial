@@ -3,7 +3,7 @@ import { createStore } from 'zmp-core/lite';
 import { zmp } from 'zmp-framework/react';
 import { checkout, getCurrentUser, getPlacedOrders, getProductsByCategory, login } from './services/coffee';
 import { loadAddresses, loadProductsFromCache, loadUserFromCache, saveProductsToCache, saveUserToCache } from './services/storage';
-import { getAccessToken } from './services/zalo';
+import { follow, getAccessToken } from './services/zalo';
 
 const store = createStore({
   state: {
@@ -253,13 +253,34 @@ const store = createStore({
       }
       const result = await checkout({ cart, selectedDiscount, shipping, shop, address: selectedAddress, shippingTime, note })
       if (!result.error) {
-        zmp.toast.create({
-          text: result.message,
-          closeTimeout: 5000,
-          position: 'center'
-        }).open()
         state.showCheckout = false
         state.cart = []
+        if (!state.user.isFollowing) {
+          zmp.dialog.create({
+            title: result.message,
+            content:
+              'Quan tâm Official Account của Shop để nhận thông tin đặt hàng lần sau?',
+            buttons: [
+              {
+                text: "Không",
+                close: true,
+              },
+              {
+                text: "Đồng Ý",
+                close: true,
+                onClick() {
+                  follow()
+                }
+              },
+            ],
+          }).open();
+        } else {
+          zmp.toast.create({
+            text: result.message,
+            closeTimeout: 5000,
+            position: 'center'
+          }).open()
+        }
         zmp.views.main.router.navigate('/history')
       } else {
         zmp.toast.create({
