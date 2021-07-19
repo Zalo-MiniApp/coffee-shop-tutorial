@@ -1,31 +1,64 @@
-# Instant Games Examples
+# Mini App For Coffee Shop
 
-This repository contains a collection of examples that show how to use the Facebook Instant Games SDK (FBInstant).
-There is also an excellent page here (https://www.facebook.com/fbgaminghome/developers/get-started) that can help you get started with the Facebook Instant Games.
+This repository contains sample code that helps you build a Mini App run on Zalo.
+
+The repository contains 2 section:
+- `client`: Coffee Shop front-end, created by using the `zmp-cli`. Miniapp client can be written in any library and frameworks, we recommend using React.JS to get the most out of our ZaUI. Documentation on how to create a new zmp client here: (https://miniapp.zalo.me/docs/docs/getting-started/#tạo-mới-dự-án-sử-dụng-zmp-framework)
+- `server-api`: Coffee Shop back-end, created using Node, Express and MongoDB. There is no limit on which programing languagues and server-side framework you can use.
 
 ## Pre-requisites
 
 1. [Install Node JS](https://nodejs.org/en/download/)
-1. [Install Yarn](https://yarnpkg.com/en/docs/install)
+1. [Install Mini App DevTools CLI](https://miniapp.zalo.me/docs/dev-tools)
 1. Download or clone this repository
 
 ## Setup
-1. Make sure that your Instant Game app is setup. For more information see [our Setup Guide](https://developers.facebook.com/docs/messenger-platform/getting-started/app-setup)
-1. In the root folder of this repo, run
-	```bash
-	$ yarn install
-	```
-1. Copy or rename the file `config.template.json` to `config.json` and replace the information needed from your app.
-	```json
-	{
-		"FB_appId":"<YOUR_APP_ID_HERE>",
-		"FB_uploadAccessToken": "<YOUR_UPLOAD_TOKEN_HERE>",
-		...
-	}
-	```
-Your app ID can be found at the landing page of your app's dashboard.
+![Demo](./demo.gif "How to run the project")
 
-Your upload access token can be found on the Instant Games -> Web Hosting tab of your app's dashboard.
+### Client
+1. Move to your client subfolder:
+	```bash
+	cd client
+	```
+1. Install dependencies
+	```bash
+	npm install
+	```
+1. Open `.env.development` and `.env.production` to setup environments (OA ID for the Follow/Message button, API base for fetching products, orders,...)
+
+1. Start client using zmp-cli
+	```bash
+	zmp start
+
+1. Open `localhost:3000` on your browser and start coding 🔥
+
+### Server API
+1. Move to your backend subfolder:
+	```bash
+	cd server-api
+	```
+1. Install dependencies
+	```bash
+	npm install
+	```
+1. Create a new file `.env` and put these configurations:
+	```bash
+	PORT=5000
+	MONGODB_URL=mongodb+srv://YOUR_MONGODB_CONNECTION_STRING
+	OA_TOKEN=YOUR_OA_TOKEN_STRING
+	```
+
+	- You can change the PORT to anything you want, however remember to sync the `VITE_BASE_URL` in `client/.env.development` to match the PORT that you choose.
+
+	- MONGODB_URL is required to connect to your MongoDB server.
+	
+	- OA_TOKEN is required to send message to your customer after they settled an order. How to get an OA_TOKEN here: (https://developers.zalo.me/docs/api/official-account-api/phu-luc/official-account-access-token-post-4307)
+
+1. Start server using npm script
+	```bash
+	npm start
+	```
+
 
 ## Client-side examples:
 Client-side examples are contained in the **`examples/`** folder:
