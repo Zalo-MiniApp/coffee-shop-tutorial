@@ -3,7 +3,7 @@ const config = {
   development: {
     BASE_URL: 'http://localhost:5000',
     OA_ID: '4318657068771012646',
-    DEFAULT_ACCESS_TOKEN: 'dfo54clF8mwPcO0HRiWc2foSWHTjrcLEskkt9rheGMxEluOEPgziIE6AgWT_lmXXrUdqSsNYE6p6v-42PCaU7jgOt7rNiJLwr9_YENYP8oECaCaa3PyWEFgIW7jOWJuVygl-HmsU0Zw5owXB2_btAu_UbKGWvMuAr-B5J5FJDIpNpl1F9PfE0ekcg41r-dCTdkgAO0-ZIXtxi-rQ3-Sp0QphadfV_5KbpVBnHcBt12NiqirkJ8PfCCUBla1CsMaRwEIfIscv0mJZaCDCRvCb97buncIJAclM8We'
+    DEFAULT_ACCESS_TOKEN: 'KYJpEX0sfnPL8VOv5J6Y4b0azpyMB_mJFaJHVouhn59jNVPmVK3mMc0KmmH5PyiiVGtfO3r9xGXX9CzdKsRUIdiIxG1QN-jDHpo_8MPtjtLHFky3QslhKdaxsIvXUCbiPn3xJdHJmmvVCVTiG5lC6s19x7XL7E0MSNMrT6aOeYLPJF9NNJp_U7DrpWr0P_mbSd3_KN4zxI5uQE5wUdxOCZWfuMf_GVGWN5BsV7GFvmvfMkSiHpBrGr9Lv3noG_9dO1U-565Bl5XIDhet4NImPnCyvouqQd4bOHeGBwOI'
   },
   production: {
     BASE_URL: 'https://coffee-shop-server-api.herokuapp.com',

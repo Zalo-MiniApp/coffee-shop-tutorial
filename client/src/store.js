@@ -2,7 +2,7 @@
 import { createStore } from 'zmp-core/lite';
 import { zmp } from 'zmp-framework/react';
 import { checkout, getCurrentUser, getPlacedOrders, getProductsByCategory, login } from './services/coffee';
-import { loadAddresses } from './services/storage';
+import { loadAddresses, loadProductsFromCache, loadUserFromCache, saveProductsToCache, saveUserToCache } from './services/storage';
 import { getAccessToken } from './services/zalo';
 
 const store = createStore({
@@ -221,8 +221,14 @@ const store = createStore({
     },
     async fetchProducts({ state }) {
       state.loadingProducts = true
+      const cachedProducts = await loadProductsFromCache()
+      if (cachedProducts.length) {
+        state.products = cachedProducts
+        state.loadingProducts = false
+      }
       const products = await getProductsByCategory()
       state.products = products
+      saveProductsToCache(products)
       state.loadingProducts = false
     },
     async fetchOrders({ state }) {
@@ -263,12 +269,17 @@ const store = createStore({
       }
     },
     async login({ state, dispatch }) {
+      const cachedUser = await loadUserFromCache()
+      if (cachedUser) {
+        dispatch('setUser', cachedUser)
+      }
       const token = await getAccessToken()
       const success = await login(token)
       if (success) {
         const user = await getCurrentUser()
         if (user) {
           dispatch('setUser', user)
+          saveUserToCache(user)
         }
       }
     }
