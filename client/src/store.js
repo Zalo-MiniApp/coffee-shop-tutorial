@@ -200,6 +200,7 @@ const store = createStore({
     },
     setUser({ state }, user) {
       state.user = user
+      saveUserToCache(user)
     },
     reOrder({ state }, { cart, address, phone, note }) {
       state.cart = cart
@@ -279,7 +280,6 @@ const store = createStore({
         const user = await getCurrentUser()
         if (user) {
           dispatch('setUser', user)
-          saveUserToCache(user)
         }
       }
     }
