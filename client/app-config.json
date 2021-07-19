@@ -2,7 +2,7 @@
   "app": {
     "title": "Highland Coffee",
     "orientation": "auto",
-    "leftButton": "back"
+    "leftButton": "none"
   },
   "debug": false,
   "listCSS": [],

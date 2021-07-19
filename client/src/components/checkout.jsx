@@ -157,10 +157,7 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
                 <Box style={{ display: 'flex', alignItems: 'center' }}>
                   <Checkbox
                     checked={aggree}
-                    onChange={e => {
-                      console.log(e.target.checked);
-                      setAggree(e.target.checked)
-                    }}
+                    onChange={e => setAggree(e.target.checked)}
                     label={<Text style={{ textAlign: 'left', marginBottom: 0 }} fontSize={12}>
                       Tôi đồng ý nhận món từ <b>{shippingTime[1]}h{`${shippingTime[2]}`.padStart(2, 0)} - {Number(shippingTime[1]) + 1}h{`${shippingTime[2]}`.padStart(2, 0)}</b>. <a onClick={changeShippingTime} className="text-primary" style={{ display: 'inline' }}>Chọn giờ khác.</a>
                     </Text>}

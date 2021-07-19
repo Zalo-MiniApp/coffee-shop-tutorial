@@ -29,6 +29,12 @@ const BottomNavigation = () => {
         }
     }, [totalQuantity])
 
+    const navigateWithoutAnimation = path => {
+        zmp.views.main.router.navigate(path, {
+            animate: false
+        })
+    }
+
     return <div className="bottom-navigation">
         {totalQuantity > 0 && <div className="cart">
             <Box>
@@ -42,7 +48,7 @@ const BottomNavigation = () => {
             </Box>
         </div>}
         <Tabbar bottom>
-            {links.map(({ name, icon, href }) => <Link key={href} className={href === currentPath ? 'active' : 'inactive'} href={href}>
+            {links.map(({ name, icon, href }) => <Link key={href} className={href === currentPath ? 'active' : 'inactive'} onClick={() => navigateWithoutAnimation(href)}>
                 <img src={icon} />
                 {name}
             </Link>)}
