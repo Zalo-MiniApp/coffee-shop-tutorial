@@ -14,9 +14,6 @@ const MyApp = () => {
   const zmpparams = {
     name: 'Highland Coffee', // App name
     theme: 'auto', // Automatic theme detection
-
-
-
     // App store
     store: store,
   };

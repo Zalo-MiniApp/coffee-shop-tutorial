@@ -24,7 +24,7 @@ const Heading = () => {
   )
 };
 
-const Empty = () => <Box style={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+const Empty = () => <Box style={{ height: 'calc(100% - 96px)', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
   <Box>
     <Text bold>Bạn chưa có đơn hàng!</Text>
     <Text className="text-secondary mt-4 mb-8">Hãy đặt món để thưởng thức dịch vụ hấp dẫn tại Highlands Coffee nhé!</Text>

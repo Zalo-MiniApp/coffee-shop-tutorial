@@ -13,6 +13,9 @@
 .page-content {
     padding-bottom: 80px;
 }
+.has-cart .page-content {
+    padding-bottom: 166px;
+}
 .address-picker-actions {
     box-shadow: var(--zmp-button-raised-box-shadow);
     .actions-group:first-child {

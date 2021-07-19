@@ -104,7 +104,7 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
               <ListItem className="editable-info">
                 <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -16, marginTop: 0, paddingTop: 16 }}>Ghi chú</Box>
                 <img slot="media" src={noteIcon} size="24" />
-                <div className="inline-input"><Input type="textarea" placeholder="Nhập nội dung ghi chú..." resizable value={note} onChange={e => store.dispatch('setNote', e.target.value)} /></div>
+                <div className="inline-input"><Input type="textarea" maxlength={500} placeholder="Nhập nội dung ghi chú... (tối đa 500 ký tự)" resizable value={note} onChange={e => store.dispatch('setNote', e.target.value)} /></div>
               </ListItem>
             </List>
           </ActionsLabel>
@@ -155,10 +155,11 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
                 <Box style={{ display: 'flex', alignItems: 'center' }}>
                   <Checkbox
                     defaultChecked
+                    label={<Text style={{ textAlign: 'left' }} fontSize={12}>
+                      Tôi đồng ý nhận món từ <b>{shippingTime[1]}h{`${shippingTime[2]}`.padStart(2, 0)} - {Number(shippingTime[1]) + 1}h{`${shippingTime[2]}`.padStart(2, 0)}</b>. <a onClick={changeShippingTime} className="text-primary" style={{ display: 'inline' }}>Chọn giờ khác.</a>
+                    </Text>}
                   />
-                  <Text style={{ textAlign: 'left', paddingLeft: 8, paddingTop: 8 }} fontSize={12}>
-                    Tôi đồng ý nhận món từ <b>{shippingTime[1]}h{`${shippingTime[2]}`.padStart(2, 0)} - {Number(shippingTime[1]) + 1}h{`${shippingTime[2]}`.padStart(2, 0)}</b>. <a onClick={changeShippingTime} className="text-primary" style={{ display: 'inline' }}>Chọn giờ khác.</a>
-                  </Text>
+
                 </Box>
                 <Box style={{ display: 'flex', alignItems: 'center' }}>
                   <Text>Tổng tiền</Text>

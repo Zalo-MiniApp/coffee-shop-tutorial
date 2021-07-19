@@ -21,6 +21,14 @@ const BottomNavigation = () => {
         { name: 'Lịch sử', href: "/history", icon: history },
     ]
 
+    useEffect(() => {
+        if (totalQuantity > 0) {
+            document.body.classList.add('has-cart')
+        } else {
+            document.body.classList.remove('has-cart')
+        }
+    }, [totalQuantity])
+
     return <div className="bottom-navigation">
         {totalQuantity > 0 && <div className="cart">
             <Box>
