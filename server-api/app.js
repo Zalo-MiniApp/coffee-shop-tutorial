@@ -3,13 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var cors = require('cors')
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var productsRouter = require('./routes/products');
-var ordersRouter = require('./routes/orders');
-var webhookRouter = require('./routes/webhook')
+var cors = require('cors');
 
 var app = express();
 
@@ -26,11 +20,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // access origin
 app.use(cors())
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/products', productsRouter);
-app.use('/orders', ordersRouter);
-app.use('/webhook', webhookRouter);
+app.use('/', require('./routes/index'));
+app.use('/users', require('./routes/users'));
+app.use('/products', require('./routes/products'));
+app.use('/orders', require('./routes/orders'));
+app.use('/webhook', require('./routes/webhook'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

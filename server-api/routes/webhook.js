@@ -3,7 +3,7 @@ const db = require('../models');
 var router = express.Router();
 
 /* Get orders history of logged in user */
-router.post('/', async function (req, res, next) {
+router.post('/', async (req, res, next) => {
   try {
     const payload = req.body
     console.log('[Webhook] Received payload', payload)

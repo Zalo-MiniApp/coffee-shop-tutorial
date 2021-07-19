@@ -1,11 +1,13 @@
 var express = require('express');
 const db = require('../models');
-const { authenticateToken } = require('../services/token-service');
+const AuthService = require('../services/auth-service');
 const ZaloService = require('./../services/zalo-service.js');
 var router = express.Router();
 
+router.use(AuthService.verify);
+
 /* Get orders history of logged in user */
-router.get('/history', authenticateToken, async function (req, res, next) {
+router.get('/history', async (req, res, next) => {
   try {
     const userId = req.user._id
     orders = await db.Orders.find({ user: userId }).sort({ createdAt: -1 })
@@ -13,7 +15,7 @@ router.get('/history', authenticateToken, async function (req, res, next) {
       error: 0,
       message: 'Success',
       data: orders,
-    })
+    });
   } catch (error) {
     res.send({ error: -1, message: 'Unknown exception' });
     console.log('API-Exception', error);
@@ -21,7 +23,7 @@ router.get('/history', authenticateToken, async function (req, res, next) {
 });
 
 /* Place an order */
-router.post('/checkout', authenticateToken, async function (req, res, next) {
+router.post('/checkout', async (req, res, next) => {
   try {
     const userId = req.user._id
     const { cart = [], selectedDiscount, shipping, shop, address, shippingTime, note } = req.body
