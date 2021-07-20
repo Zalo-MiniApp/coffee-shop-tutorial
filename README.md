@@ -59,83 +59,88 @@ The repository contains 2 section:
 	npm start
 	```
 
+## Deployment
 
-## Client-side examples:
-Client-side examples are contained in the **`examples/`** folder:
-* **`ads`**: Shows how to display Rewarded Videos and Interstitial Ads
-* **`bots`**: Shows how to send data from the game client to a bot and vice-versa
-* **`cross-promo`**: Shows how to prompt the player to switch to another one of your Instant Games
-* **`hello-world`**: An empty project with the boilerplate in place to get you up and running quickly
-* **`in-app-purchases`**: Shows how to use payments inside of your Instant Game
-* **`leaderboards`**: Shows how to use leaderboards (global and context-specific) in your Instant Game
-* **`secure-backend`**: Shows how to validate data in your backend to make sure they are authentically coming from your Instant Game, to prevent cheating
-* **`sending-messages`**: Shows how to show messages from your game to the current context (conversation)
-* **`shortcuts`**: Shows how to create a mobile home shortcut to the game
+### Client
+1. Move to your client subfolder:
+	```bash
+	cd client
+	```
+1. Deploy using zmp-cli (https://miniapp.zalo.me/docs/dev-tools/cli/commands/deploy), this will generate a QR code that can be scanned and opened inside Zalo
+	```bash
+	zmp deploy
+	```
 
-### Running Client-Side examples:
+Remember to update VITE_BASE_URL in `client/.env.production` to point to your server API address, since you won't be able to call localhost API.
 
-In order to run these examples you will need to use one of these tasks:
-* **`run-mock`**: Runs on localhost against a mocked version of the SDK
-* **`mock`**: It is the same as **`run-mock`**. Runs on localhost against a mocked version of the SDK
-* **`run-dist`**: Runs on localhost against the production SDK
-* **`dist`**: It is the same as **`run-dist`**. Runs on localhost against the production SDK
-* **`upload`**: Package and upload your game in order to test on mobile
+### Server API
 
-Below are some examples of how to execute these tasks:
+The source code in this example can be hosted anywhere. Here is an instruction on how to deploy it to [Heroku](https://www.heroku.com/)
 
-```bash
-$ yarn run-mock --project hello-world
-```
-Will run the **`hello-world`** project from localhost against a mocked version of the SDK (returns dummy data for every call). This way of running projects is especially useful for quickly iterating on local changes done to any of the projects.
+> Note: In order to test your application on Zalo by scanning QR code, you will need to host your backend in an external server.
 
-```bash
-$ yarn run-dist --project sending-messages
-```
-This will run the **`sending-messages`** project with HTTPS from localhost and embed it into [our embedded player](https://developers.facebook.com/docs/games/instant-games/test-publish-share) which allows you to connect to the latest version of the SDK. All data returned from the SDK will be authentic an updated. In order to use this option, you need to correctly set the `FB_appId` property on `config.json`.  If the app shows stuck in 0% loading, make sure to visit `https://localhost:8000` and follow the instructions on your browser trust the development certificates.
+1. Move to your backend subfolder:
+	```bash
+	cd server-api
+	```
+1. Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) and login
+	```bash
+	heroku login
+	```
+1. Init a git repository inside your backend source code, add Heroku as a remote
+	```bash
+	git init
+	heroku git:remote -a zmp-coffee-shop
+	```
+1. Commit your code to the repository and deploy it to Heroku using Git.
+	```bash
+	git add .
+	git commit -am "deployment with heroku is fun"
+	git push heroku master
+	```
 
-```bash
-$ yarn upload --project ads
-```
-This will package and upload the **`ads`** example to Web Hosting. After that you can set the game to production mode in order to test it from the uploaded build - and not localhost. This option is especially useful since it allows you to test on mobile devices ([More information here](https://developers.facebook.com/docs/games/instant-games/test-publish-share))
+Open your browser and visit your hosted backend at Herokuapp (https://app-name.herokuapp.com)
 
-## Server-side examples
-Server-side examples are contained in the **`servers-examples/`** folder:
-* **`nodejs-backend`**: It's a working backend for the `secure-backend` client demo, that shows how to perform server-side validations for client-signed calls from Instant Games.
-* **`nodejs-bot`**: It's a working backend for the `bots` client demo, that shows how to send and receive structured data from a game client.
+## Usage:
 
-### Running server-side examples
-Before running any of the server side examples, make sure to copy or rename the `template.env` into `.env` and provide the necessary information.
+### Client
 
+Client-side example are contained in the **`client/`** folder:
+* **`src`**: Contain all logic source code of your Mini App. Insdie `src` folder:
 
-You can run any of the server-side examples above by running the following commands on terminal:
-```
-$ cd /server-examples/nodejs-backend
-$ yarn install
- yarn install v1.7.0
- [1/4] Resolving packages...
- [2/4] Fetching packages...
- [3/4] Linking dependencies...
- [4/4] Building fresh packages...
- Done in 6.86s.
-$ node index
- Node app is running on port 5000
-```
-From that moment on, your server-side code is running on `http://localhost:5000`. By changing the client-side code to point to that endpoint, you can test the full end-to-end flow locally.
+	* **`components`**: Re-useable components written in React.JS
+	* **`css`**: Stylesheets, pre-processors also supported
+	* **`pages`**: a Page is also a component but will act as an entire view and must be registered inside `app-config.json` (https://miniapp.zalo.me/docs/framework/getting-started/app-config#pages)
+	* **`services`**: re-useable logic for complex tasks that should be separated from your component, such as fetching API, get access token from Zalo or caching stuff,...
+* **`assets-src`**: Contain binary source code of your Mini App, such as icon, background, etc,...
+* **`.env.*`**: Environment variables, zmp is using Vite build tools, read more about Vite env here (https://vitejs.dev/guide/env-and-mode.html#env-variables)
+	* **`.env.development`**: Loaded when running project locally with `zmp start`.
+	
+		> If you're using `getAccessToken` API from zmp (https://miniapp.zalo.me/docs/api/getAccessToken) when running on browser, zmp will always return "DEFAULT ACCESS TOKEN" because there is no logged in Zalo user. Specify a `VITE_DEFAULT_ACCESS_TOKEN` to mock a real Zalo user for development purpose.
 
-Alternatively, you can host your backend code in a service such as [Glitch](https://glitch.com/) or [Heroku](https://www.heroku.com/)
-> Note: for the **`nodejs-bot`** server-side demo, you will need to host your backend in an external server.([More information here](https://developers.facebook.com/docs/games/instant-games/getting-started/bot-setup))
+	* **`.env.production`**: Loaded when deploy project to Zalo with `zmp deploy`
+	* **`app-config.json`**: Global configuration for your Mini App (https://miniapp.zalo.me/docs/framework/getting-started/app-config)
 
+	Most of the time you won't need to touch these other files. `src` will be the busiest section of your development process.
+
+### Server API
+
+Server-side example are contained in the **`server-api/`** folder:
+
+* **`models`**: Mongoose Model, which helps you persist and read data via MongoDB
+* **`routes`**: mountable route handlers, you can call it Controllers if you cosidering MVC pattern
+* **`services`**: a Page is also a component but will act as an entire view and must be registered inside `app-config.json` (https://miniapp.zalo.me/docs/framework/getting-started/app-config#pages)
+* **`services`**: re-useable logic for complex tasks that should be separated from your routes, such as token handling and fetching Zalo OA API,..
+* **`app.js`**: your server entry point, which connects all pieces of your backend together. This is where you register new routes or middlewares, handling CORS stuff,...
+* **`config.js`**: your server configuration. Most of the time you will read configuration from environments variable (such as creating a `.env` on your local machine or `heroku config:set` on your hosting services). Here are the required configs:
+	* **`MONGODB_URL`**: Connection string to your MongoDB database
+	* **`ZALO_APP_ID`**: if you don't already have an APP ID, go to Zalo Developers to register one and put it here
+	* **`ZALO_APP_ID`**: ID of your Mini App
+	* **`OA_TOKEN`**: you will need this token to send Zalo messages to your customer after they finish a checkout to confirm their orders
 
 ## License
 
-Copyright (c) Facebook, Inc. and its affiliates. All rights reserved.
+Copyright (c) Zalo Group. and its affiliates. All rights reserved.
 
-The examples provided by Facebook are for non-commercial testing and evaluation
-purposes only. Facebook reserves all rights not expressly granted.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-FACEBOOK BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
-ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The examples provided by Zalo Group are for non-commercial testing and evaluation
+purposes only. Zalo Group reserves all rights not expressly granted.
