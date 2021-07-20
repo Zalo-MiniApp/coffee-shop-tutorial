@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Box, Button, Card, zmp } from 'zmp-framework/react';
+import { Text, Button, Card, zmp } from 'zmp-framework/react';
 import store from '../store';
 import { Price } from './prices'
 
@@ -11,7 +11,7 @@ const PlacedOrder = ({ order }) => {
         store.dispatch('reOrder', order)
     }
 
-    return <Card className="discount-card" className="discount-card" inset>
+    return <Card className="discount-card" inset>
         <img className="discount-image" src={cart[0].product.image} />
         <div className="discount-summary">
             <Text className="text-secondary">

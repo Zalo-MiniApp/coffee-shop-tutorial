@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import api from 'zmp-sdk';
-import { Avatar, Text, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, List, ListItem, Icon, useStore, zmp } from 'zmp-framework/react';
+import { Avatar, Text, Button, List, ListItem, useStore } from 'zmp-framework/react';
 import pickup from '../static/icons/pickup.svg'
 import config from '../config'
 import { follow } from '../services/zalo';
@@ -13,7 +13,7 @@ export const FollowOrMessage = () => {
       type: 'oa',
       id: config.OA_ID,
       success: () => { },
-      fail: (err) => { }
+      fail: () => { }
     });
   }
 
@@ -26,7 +26,6 @@ export const FollowOrMessage = () => {
 
 const Heading = () => {
   const selectedShop = useStore('selectedShop')
-  const selectedAddress = useStore('selectedAddress')
   const shipping = useStore('shipping')
 
   return (

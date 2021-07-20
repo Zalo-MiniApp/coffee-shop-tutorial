@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Avatar, Text, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, List, ListItem, Icon, useStore, Box } from 'zmp-framework/react';
+import { Avatar, Text, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, Icon, useStore } from 'zmp-framework/react';
 import pickup from '../static/icons/pickup.svg'
 import delivery from '../static/icons/delivery.svg'
 import ShopPicker from './shop-picker';

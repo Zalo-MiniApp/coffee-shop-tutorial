@@ -7,7 +7,7 @@ export const request = async (method, url, data) => {
   const headers = { "Content-Type": "application/json" }
   const token = await loadToken()
   if (token) {
-    headers['Authorization'] = `Bearer ${token}`
+    headers.Authorization = `Bearer ${token}`
   }
 
   return fetch(`${base}/${url}`, {
@@ -40,6 +40,7 @@ export const getCurrentUser = async () => {
     return response.data
   } catch (error) {
     console.log('Error get current user info. Details: ', error)
+    return null
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Page, Card, Navbar, Picker, Box } from "zmp-framework/react";
+import { Picker } from "zmp-framework/react";
 
 const datePickerData = [
   {
@@ -27,7 +27,7 @@ const datePickerData = [
   },
 ];
 
-const ShippingTimePicker = ({ value, onChange, ...props }) => {
+const ShippingTimePicker = ({ onChange, ...props }) => {
   const handleChangeDate = (picker, values) => {
     if (onChange) {
       onChange(values)

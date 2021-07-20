@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Text, Actions, ActionsGroup, ActionsLabel, List, ListItem, Icon, Box, Avatar, Input, useStore, Link, Checkbox, zmp, Preloader } from 'zmp-framework/react';
 import shop from '../static/icons/shop.svg'
 import deliveryIcon from '../static/icons/delivery.svg'
 import clockIcon from '../static/icons/clock.svg'
-import phoneIcon from '../static/icons/phone.svg'
 import noteIcon from '../static/icons/note.svg'
 import { Price } from './prices';
 import ProductOrder from './product-order';
@@ -11,7 +10,7 @@ import DeliveryMethodPicker from './delivery-method-picker';
 import store from '../store';
 import ShippingTimePicker from './shipping-time-picker';
 
-const Checkout = ({ value, onChange, children, onReturn }) => {
+const Checkout = ({ children, onReturn }) => {
   const showCheckout = useStore('showCheckout')
   const setShowCheckout = (value) => {
     store.dispatch('setShowCheckout', value)
@@ -38,8 +37,6 @@ const Checkout = ({ value, onChange, children, onReturn }) => {
     setLoading(false)
   }
 
-  const phone = useStore('phone')
-  const address = useStore('address')
   const shippingTime = useStore('shippingTime')
   const note = useStore('note')
 

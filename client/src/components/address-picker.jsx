@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Avatar, Button, Text, Actions, ActionsGroup, ActionsLabel, ActionsButton, Row, Col, Icon, Searchbar, useStore, Link, Box, List, ListItem, Input } from 'zmp-framework/react';
+import { Avatar, Button, Text, ActionsGroup, ActionsLabel, ActionsButton, Row, Col, Icon, Searchbar, useStore, Link, Box, List, ListItem, Input } from 'zmp-framework/react';
 import delivery from '../static/icons/delivery.svg'
-import { loadAddresses, saveAddress } from '../services/storage';
+import { saveAddress } from '../services/storage';
 import store from '../store'
 import phoneIcon from '../static/icons/phone.svg'
 

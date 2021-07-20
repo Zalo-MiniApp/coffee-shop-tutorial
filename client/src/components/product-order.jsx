@@ -1,10 +1,10 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Card, Text, Title, Actions, ActionsGroup, ActionsLabel, Button, Icon, Input, Row, Col, Box, List, ListItem, useStore, zmp } from 'zmp-framework/react';
+import { Text, Title, Actions, ActionsGroup, ActionsLabel, Button, Icon, Input, Row, Col, Box, List, ListItem, zmp } from 'zmp-framework/react';
 import { Price, ExtraPrice } from './prices'
 import store from '../store';
 
 const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
-    const { id, name, price, image, sizes, toppings } = product
+    const { name, price, image, sizes, toppings } = product
     const [showOrder, setShowOrder] = useState(false)
     const [quantity, setQuantity] = useState(1)
     const [size, setSize] = useState(sizes[0])

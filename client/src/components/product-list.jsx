@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Row, Col, Title, Box, SkeletonBlock, useStore, SkeletonText, SkeletonImage, SkeletonAvatar } from 'zmp-framework/react';
+import { Row, Col, Title, Box, SkeletonBlock, useStore, SkeletonText } from 'zmp-framework/react';
 import store from '../store';
 import Product from './product';
 

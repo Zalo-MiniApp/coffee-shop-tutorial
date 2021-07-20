@@ -22,10 +22,9 @@ export const loadAddresses = () => new Promise(resolve => {
   api.getStorage({
     keys: ['addresses'],
     success: ({ addresses }) => {
-      console.log('=======>>>', typeof addresses, addresses)
       if (addresses) {
         if (addresses.filter) {
-          return resolve(addresses.filter(a => !!a && !!a.address))
+          resolve(addresses.filter(a => !!a && !!a.address))
         }
       }
       resolve([])
