@@ -108,10 +108,10 @@ Open your browser and visit your hosted backend at Herokuapp (https://app-name.h
 Client-side example are contained in the **`client/`** folder:
 * **`src`**: Contain all logic source code of your Mini App. Insdie `src` folder:
 
-	* **`components`**: Re-useable components written in React.JS
+	* **`components`**: reuseable components written in React.JS
 	* **`css`**: Stylesheets, pre-processors also supported
 	* **`pages`**: a Page is also a component but will act as an entire view and must be registered inside `app-config.json` (https://miniapp.zalo.me/docs/framework/getting-started/app-config#pages)
-	* **`services`**: re-useable logic for complex tasks that should be separated from your component, such as fetching API, get access token from Zalo or caching stuff,...
+	* **`services`**: reuseable logic for complex tasks that should be separated from your component, such as fetching API, get access token from Zalo or caching stuff,...
 * **`assets-src`**: Contain binary source code of your Mini App, such as icon, background, etc,...
 * **`.env.*`**: Environment variables, zmp is using Vite build tools, read more about Vite env here (https://vitejs.dev/guide/env-and-mode.html#env-variables)
 	* **`.env.development`**: Loaded when running project locally with `zmp start`.
@@ -130,7 +130,7 @@ Server-side example are contained in the **`server-api/`** folder:
 * **`models`**: Mongoose Model, which helps you persist and read data via MongoDB
 * **`routes`**: mountable route handlers, you can call it Controllers if you cosidering MVC pattern
 * **`services`**: a Page is also a component but will act as an entire view and must be registered inside `app-config.json` (https://miniapp.zalo.me/docs/framework/getting-started/app-config#pages)
-* **`services`**: re-useable logic for complex tasks that should be separated from your routes, such as token handling and fetching Zalo OA API,..
+* **`services`**: reuseable logic for complex tasks that should be separated from your routes, such as token handling and fetching Zalo OA API,..
 * **`app.js`**: your server entry point, which connects all pieces of your backend together. This is where you register new routes or middlewares, handling CORS stuff,...
 * **`config.js`**: your server configuration. Most of the time you will read configuration from environments variable (such as creating a `.env` on your local machine or `heroku config:set` on your hosting services). Here are the required configs:
 	* **`MONGODB_URL`**: Connection string to your MongoDB database
