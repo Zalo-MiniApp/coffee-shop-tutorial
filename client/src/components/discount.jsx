@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, Button, Card, zmp } from 'zmp-framework/react';
 import MockImage from '../components/mock-image';
 import store from '../store';
+import '../css/discount.scss';
 
 const Discount = ({ discount }) => {
     const { image, name, expireDate, code } = discount

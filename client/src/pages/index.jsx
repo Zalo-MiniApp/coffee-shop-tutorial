@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Page } from 'zmp-framework/react';
 import Heading from '../components/heading';
 import Banner from '../components/banner';

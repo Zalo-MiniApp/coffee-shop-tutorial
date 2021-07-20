@@ -1,0 +1,14 @@
+.inquiry {
+  display: flex;
+  select, .button {
+      background-color: white;
+      border: none;
+  }
+  .button {
+      width: 48px;
+      height: 48px;
+      .icon {
+          margin-right: 0;
+      }
+  }
+}

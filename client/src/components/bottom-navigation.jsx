@@ -5,6 +5,7 @@ import cup from '../static/icons/cup.svg'
 import discount from '../static/icons/discount.svg'
 import history from '../static/icons/history.svg'
 import Checkout from './checkout'
+import '../css/bottom-navigation.scss'
 
 const BottomNavigation = () => {
     const totalQuantity = useStore('totalQuantity')

@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Text, Title, Actions, ActionsGroup, ActionsLabel, Button, Icon, Input, Row, Col, Box, List, ListItem, zmp } from 'zmp-framework/react';
 import { Price, ExtraPrice } from './prices'
 import store from '../store';
+import '../css/product-order.scss'
 
 const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
     const { name, price, image, sizes, toppings } = product
@@ -93,7 +94,7 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
             {children}
         </div>
         <Actions
-            className="address-picker-actions product-order"
+            className="custom-action-sheet product-order"
             opened={showOrder}
             onActionsClosed={() => setShowOrder(false)}
         >

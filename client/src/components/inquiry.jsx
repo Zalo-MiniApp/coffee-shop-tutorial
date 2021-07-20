@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Input, Button, Icon, useStore } from 'zmp-framework/react';
+import '../css/inquiry.scss'
 
 const Inquiry = () => {
     const categories = useStore('categories');

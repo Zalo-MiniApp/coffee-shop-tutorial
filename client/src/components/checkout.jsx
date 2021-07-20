@@ -9,6 +9,7 @@ import ProductOrder from './product-order';
 import DeliveryMethodPicker from './delivery-method-picker';
 import store from '../store';
 import ShippingTimePicker from './shipping-time-picker';
+import '../css/checkout.scss'
 
 const Checkout = ({ children, onReturn }) => {
   const showCheckout = useStore('showCheckout')
@@ -50,7 +51,7 @@ const Checkout = ({ children, onReturn }) => {
     <>
       <div onClick={() => setShowCheckout(true)}>{children}</div>
       <Actions
-        className="address-picker-actions"
+        className="custom-action-sheet"
         opened={show}
         onActionsClosed={() => setShowCheckout(false)}
         onActionsClose={() => {

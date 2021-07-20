@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Row, Col, Title, Box, SkeletonBlock, useStore, SkeletonText, Text } from 'zmp-framework/react';
 import store from '../store';
 import Product from './product';
+import '../css/product.scss'
 
 const ProductList = () => {
     const loading = useStore('loadingProducts')

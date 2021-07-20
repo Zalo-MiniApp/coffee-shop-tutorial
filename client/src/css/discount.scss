@@ -1,0 +1,36 @@
+
+.discount-card {
+  padding: 0;
+  border: none !important;
+  .zmp-card-body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 !important;
+      .discount-image {
+          width: 56px;
+          height: 56px;
+          padding: 0 16px;
+      }
+      .discount-summary {
+          border-left: 1px dashed #E4E8EC;
+          padding: 16px;
+          position: relative;
+          flex: 1;
+          .pie {
+              background: var(--zmp-page-bg-color);
+              position: absolute;
+              width: 16px;
+              height: 16px;
+              left: -8px;
+              border-radius: 100%;
+              &.top {
+                  top: -8px;
+              }
+              &.bottom {
+                  bottom: -8px;
+              }
+          }
+      }
+  }
+}

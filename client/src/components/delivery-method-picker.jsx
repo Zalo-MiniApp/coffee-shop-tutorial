@@ -39,7 +39,7 @@ const DeliveryMethodPicker = ({ children, onReturn, onOpen }) => {
   return <>
     <div onClick={() => setShowPicker(true)}>{children}</div>
     <Actions
-      className="address-picker-actions"
+      className="custom-action-sheet"
       opened={showPicker}
       onActionsClosed={() => setShowPicker(false)}
       onActionsClose={() => {
