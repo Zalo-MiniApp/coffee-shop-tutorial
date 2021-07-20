@@ -1,9 +1,9 @@
 
-import { createStore } from 'zmp-core/lite';
-import { zmp } from 'zmp-framework/react';
-import { checkout, getCurrentUser, getPlacedOrders, getProductsByCategory, login } from './services/coffee';
-import { loadAddresses, loadProductsFromCache, loadUserFromCache, saveProductsToCache, saveUserToCache } from './services/storage';
-import { follow, getAccessToken } from './services/zalo';
+import { createStore } from 'zmp-core/lite'
+import { zmp } from 'zmp-framework/react'
+import { checkout, getCurrentUser, getPlacedOrders, getProductsByCategory, login } from './services/coffee'
+import { loadAddresses, loadProductsFromCache, loadUserFromCache, saveProductsToCache, saveUserToCache } from './services/storage'
+import { follow, getAccessToken } from './services/zalo'
 
 const store = createStore({
   state: {
@@ -16,80 +16,54 @@ const store = createStore({
     loadingOrders: true,
     orders: [],
     selectedAddress: null,
-    shops: [{
-      selected: true,
-      name: 'VNG Campus D7',
-      address: 'Lô Z.06 - Đường số 13, KCX Tân Thuận, P. Tân Thuận Đông, Q.7, TP Hồ Chí Minh.',
-      open: {
-        hour: 8,
-        minute: 0
-      },
-      close: {
-        hour: 17,
-        minute: 0
+    shops: [
+      {
+        selected: true,
+        name: 'VNG Campus D7',
+        address: 'Lô Z.06 - Đường số 13, KCX Tân Thuận, P. Tân Thuận Đông, Q.7, TP Hồ Chí Minh.',
+        open: { hour: 8, minute: 0 },
+        close: { hour: 17, minute: 0 }
+      }, {
+        name: '210 Nguyễn Trãi',
+        address: '210 Nguyễn Trãi, Phường Phạm Ngũ Lão, Quận 1, Thành phố Hồ Chí Minh',
+        open: { hour: 8, minute: 0 },
+        close: { hour: 17, minute: 0 }
+      }, {
+        name: 'Opera House',
+        address: '07 Công Trường Lam Sơn, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh',
+        open: { hour: 8, minute: 0 },
+        close: { hour: 17, minute: 0 }
+      }, {
+        name: 'Sài Gòn Tower',
+        address: '29 Lê Duẩn, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh',
+        open: { hour: 8, minute: 0 },
+        close: { hour: 17, minute: 0 }
+      }, {
+        name: 'Sala 2',
+        address: '125 Nguyễn Cơ Thạch, An Lợi Đông, Quận 2, Thành phố Hồ Chí Minh',
+        open: { hour: 8, minute: 0 },
+        close: { hour: 17, minute: 0 }
       }
-    }, {
-      name: '210 Nguyễn Trãi',
-      address: '210 Nguyễn Trãi, Phường Phạm Ngũ Lão, Quận 1, Thành phố Hồ Chí Minh',
-      open: {
-        hour: 8,
-        minute: 0
-      },
-      close: {
-        hour: 17,
-        minute: 0
-      }
-    }, {
-      name: 'Opera House',
-      address: '07 Công Trường Lam Sơn, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh',
-      open: {
-        hour: 8,
-        minute: 0
-      },
-      close: {
-        hour: 17,
-        minute: 0
-      }
-    }, {
-      name: 'Sài Gòn Tower',
-      address: '29 Lê Duẩn, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh',
-      open: {
-        hour: 8,
-        minute: 0
-      },
-      close: {
-        hour: 17,
-        minute: 0
-      }
-    }, {
-      name: 'Sala 2',
-      address: '125 Nguyễn Cơ Thạch, An Lợi Đông, Quận 2, Thành phố Hồ Chí Minh',
-      open: {
-        hour: 8,
-        minute: 0
-      },
-      close: {
-        hour: 17,
-        minute: 0
-      }
-    }],
+    ],
     cart: [],
-    discounts: [{
-      code: 'GIAM20K',
-      name: 'Ưu đãi 20K! Đặt Highlands Coffee trên Zalo.',
-      expireDate: '10/05/2021',
-      image: 'discount-1'
-    }, {
-      code: 'GIAM35%',
-      name: 'Giảm 35% cho đơn hàng từ 5 món, tối đa 59K...',
-      expireDate: '10/05/2021',
-      image: 'discount-2'
-    }, {
-      code: 'GIAM30K',
-      name: 'Ưu đãi 30K cho đơn hàng 149K - Áp dụng cho dịch ...',
-      expireDate: '10/05/2021',
-      image: 'discount-3'
-    }],
+    discounts: [
+      {
+        code: 'GIAM20K',
+        name: 'Ưu đãi 20K! Đặt Highlands Coffee trên Zalo.',
+        expireDate: '10/05/2021',
+        image: 'discount-1'
+      }, {
+        code: 'GIAM35%',
+        name: 'Giảm 35% cho đơn hàng từ 5 món, tối đa 59K...',
+        expireDate: '10/05/2021',
+        image: 'discount-2'
+      }, {
+        code: 'GIAM30K',
+        name: 'Ưu đãi 30K cho đơn hàng 149K - Áp dụng cho dịch ...',
+        expireDate: '10/05/2021',
+        image: 'discount-3'
+      }
+    ],
     selectedDiscount: null,
     addresses: [],
     shippingTime: [new Date(), new Date().getHours(), new Date().getMinutes()],
@@ -109,7 +83,7 @@ const store = createStore({
       return state.loadingProducts
     },
     shops({ state }) {
-      return state.shops;
+      return state.shops
     },
     selectedShop({ state }) {
       return state.shops.find(s => s.selected)
@@ -202,7 +176,7 @@ const store = createStore({
       state.user = user
       saveUserToCache(user)
     },
-    reOrder({ state }, { cart, address, phone, note }) {
+    reOrder({ state }, { cart, phone, note }) {
       state.cart = cart
       state.phone = phone
       state.note = note
@@ -262,18 +236,18 @@ const store = createStore({
               'Quan tâm Official Account của Shop để nhận thông tin đặt hàng lần sau?',
             buttons: [
               {
-                text: "Không",
+                text: 'Không',
                 close: true,
               },
               {
-                text: "Đồng Ý",
+                text: 'Đồng Ý',
                 close: true,
                 onClick() {
                   follow()
                 }
               },
             ],
-          }).open();
+          }).open()
         } else {
           zmp.toast.create({
             text: result.message,
@@ -284,13 +258,13 @@ const store = createStore({
         zmp.views.main.router.navigate('/history')
       } else {
         zmp.toast.create({
-          text: "Đã có lỗi xảy ra! Mã lỗi :" + result.message,
+          text: 'Đã có lỗi xảy ra! Mã lỗi :' + result.message,
           closeTimeout: 3000,
           position: 'center'
         }).open()
       }
     },
-    async login({ state, dispatch }) {
+    async login({ dispatch }) {
       const cachedUser = await loadUserFromCache()
       if (cachedUser) {
         dispatch('setUser', cachedUser)
@@ -307,4 +281,4 @@ const store = createStore({
   },
 })
 
-export default store;
+export default store

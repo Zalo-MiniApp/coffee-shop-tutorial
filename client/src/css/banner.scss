@@ -1,0 +1,15 @@
+.banner {
+  position: relative;
+  img {
+      width: 100%;
+  }
+  .open-time {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      background: rgba(0, 0, 0, 0.75);
+      color: white;
+      border-radius: 8px;
+      padding: 4px 18px;
+  }
+}

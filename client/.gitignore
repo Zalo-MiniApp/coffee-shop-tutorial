@@ -29,6 +29,7 @@ node_modules/
 
 # dotenv environment variables file
 .env
+.env.*.local
 
 # Misc
 .DS_Store

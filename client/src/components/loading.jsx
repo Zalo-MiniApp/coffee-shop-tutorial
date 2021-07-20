@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, SkeletonText, SkeletonBlock, Row, Col } from 'zmp-framework/react';
+import React from 'react'
+import { Box, SkeletonText, SkeletonBlock, Row, Col } from 'zmp-framework/react'
 
 const Loading = () => <Box m={0} px={4} pb={2}>
   {[1, 2, 3].map(i => <Row key={i} gap="gap_4" className="mt-4">
@@ -14,4 +14,4 @@ const Loading = () => <Box m={0} px={4} pb={2}>
 
 Loading.displayName = 'zmp-loading'
 
-export default Loading;
+export default Loading

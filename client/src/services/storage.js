@@ -1,4 +1,4 @@
-import api from 'zmp-sdk';
+import api from 'zmp-sdk'
 
 export const saveToken = token => api.setStorage({
   data: { token },
@@ -22,10 +22,9 @@ export const loadAddresses = () => new Promise(resolve => {
   api.getStorage({
     keys: ['addresses'],
     success: ({ addresses }) => {
-      console.log('=======>>>', typeof addresses, addresses)
       if (addresses) {
         if (addresses.filter) {
-          return resolve(addresses.filter(a => !!a && !!a.address))
+          resolve(addresses.filter(a => !!a && !!a.address))
         }
       }
       resolve([])

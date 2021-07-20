@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Avatar, Text, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, List, ListItem, Icon, useStore, Box } from 'zmp-framework/react';
-import pickup from '../../assets-src/pickup.svg'
-import delivery from '../../assets-src/delivery.svg'
-import ShopPicker from './shop-picker';
-import store from '../store';
-import AddressPicker from './address-picker';
+import React, { useEffect, useState } from 'react'
+import { Avatar, Text, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, Icon, useStore } from 'zmp-framework/react'
+import pickup from '../static/icons/pickup.svg'
+import delivery from '../static/icons/delivery.svg'
+import ShopPicker from './shop-picker'
+import store from '../store'
+import AddressPicker from './address-picker'
 
 const DeliveryMethodPicker = ({ children, onReturn, onOpen }) => {
   const [showPicker, setShowPicker] = useState(false)
@@ -39,7 +39,7 @@ const DeliveryMethodPicker = ({ children, onReturn, onOpen }) => {
   return <>
     <div onClick={() => setShowPicker(true)}>{children}</div>
     <Actions
-      className="address-picker-actions"
+      className="custom-action-sheet"
       opened={showPicker}
       onActionsClosed={() => setShowPicker(false)}
       onActionsClose={() => {
@@ -90,8 +90,8 @@ const DeliveryMethodPicker = ({ children, onReturn, onOpen }) => {
       }
     </Actions>
   </>
-};
+}
 
 DeliveryMethodPicker.displayName = 'zmp-delivery-method-picker'
 
-export default DeliveryMethodPicker;
+export default DeliveryMethodPicker

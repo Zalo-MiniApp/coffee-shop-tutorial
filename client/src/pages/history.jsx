@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { Page, Box, Text, Button, zmp, useStore, SkeletonText, SkeletonBlock, Row, Col, Searchbar, List, ListItem, Avatar } from 'zmp-framework/react';
-import store from '../store';
+import React, { useEffect } from 'react'
+import { Page, Box, Text, Button, zmp, useStore, List, ListItem, Avatar } from 'zmp-framework/react'
+import store from '../store'
 import Loading from '../components/loading'
-import PlacedOrder from '../components/placed-order';
+import PlacedOrder from '../components/placed-order'
 
 const Heading = () => {
   const user = useStore('user')
@@ -12,23 +12,23 @@ const Heading = () => {
   }
 
   return (
-    <List style={{ margin: 0 }}>
+    <List className="m-0">
       <ListItem>
         <Avatar src={user.picture} />
-        <div style={{ marginLeft: 16, flex: 1 }}>
+        <div className="flex-1 ml-4">
           <Text bold className="mb-0">{user.name}</Text>
           <Text className="ellipsis mb-0">ID: {user.zaloId}</Text>
         </div>
       </ListItem>
     </List>
   )
-};
+}
 
-const Empty = () => <Box style={{ height: 'calc(100% - 96px)', display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
+const Empty = () => <Box className="d-flex h-100 h-center v-center text-center">
   <Box>
     <Text bold>Bạn chưa có đơn hàng!</Text>
     <Text className="text-secondary mt-4 mb-8">Hãy đặt món để thưởng thức dịch vụ hấp dẫn tại Highlands Coffee nhé!</Text>
-    <Button typeName="primary" onClick={() => zmp.views.main.router.navigate('/')} large style={{ width: 200, margin: 'auto' }}>Đặt món ngay</Button>
+    <Button className="m-auto" typeName="primary" onClick={() => zmp.views.main.router.navigate('/')} large>Đặt món ngay</Button>
   </Box>
 </Box>
 
@@ -59,6 +59,6 @@ const History = () => {
         }
       </>}
     </Page>
-  );
+  )
 }
-export default History;
+export default History

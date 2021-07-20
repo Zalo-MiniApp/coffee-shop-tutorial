@@ -1,0 +1,12 @@
+.product-row {
+  margin: 0;
+  padding: 0 16px 8px 16px;
+  width: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+
+  .product-column {
+      width: calc(50vw - 20px);
+      display: inline-block;
+  }
+}

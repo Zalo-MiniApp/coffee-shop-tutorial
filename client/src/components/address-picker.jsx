@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Avatar, Button, Text, Actions, ActionsGroup, ActionsLabel, ActionsButton, Row, Col, Icon, Searchbar, useStore, Link, Box, List, ListItem, Input } from 'zmp-framework/react';
-import delivery from '../../assets-src/delivery.svg'
-import { loadAddresses, saveAddress } from '../services/storage';
+import React, { useEffect, useMemo, useState } from 'react'
+import { Avatar, Button, Text, ActionsGroup, ActionsLabel, ActionsButton, Row, Col, Icon, Searchbar, useStore, Link, Box, List, ListItem, Input } from 'zmp-framework/react'
+import delivery from '../static/icons/delivery.svg'
+import { saveAddress } from '../services/storage'
 import store from '../store'
-import phoneIcon from '../../assets-src/phone.svg'
+import phoneIcon from '../static/icons/phone.svg'
 
 export const Address = (props) => {
   const { name, address, selected, phone } = props
@@ -11,8 +11,8 @@ export const Address = (props) => {
     store.dispatch('selectAddress', props)
   }
 
-  return <ActionsButton className={selected ? 'active' : 'inactive'} style={{ backgroundColor: 'white' }} onClick={selectAddress}>
-    <img src={delivery} style={{ width: 24 }} />
+  return <ActionsButton className={`bg-white ${selected ? 'active' : 'inactive'}`} onClick={selectAddress}>
+    <img src={delivery} className="custom-icon" />
     <div className="description">
       <Text className="mb-0" bold fontSize="16">{name} - {phone}</Text>
       <Text className="text-secondary">{address}</Text>
@@ -77,20 +77,20 @@ const AddressPicker = ({ onBack }) => {
       </ActionsGroup>
       <ActionsGroup>
         {showForm || selectableAddresses.length === 0 ? <ActionsLabel className="p-0">
-          <Box style={{ textAlign: 'left' }}><Text bold>Thêm địa chỉ nhận hàng</Text></Box>
+          <Box className="text-left"><Text bold>Thêm địa chỉ nhận hàng</Text></Box>
           <List className="my-0">
             <ListItem className="editable-info">
-              <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -16, marginTop: 0, paddingTop: 16 }}>Tên người nhận</Box>
+              <Box slot="root-start" className="label">Tên người nhận</Box>
               <Icon slot="media" zmp="zi-user-circle" size="24" />
               <div className="inline-input"><Input type="text" placeholder="Nhập tên người nhận..." value={name} onChange={e => setName(e.target.value)} /></div>
             </ListItem>
             <ListItem className="editable-info">
-              <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -16, marginTop: 0, paddingTop: 16 }}>Địa chỉ</Box>
+              <Box slot="root-start" className="label">Địa chỉ</Box>
               <Icon slot="media" zmp="zi-location-solid" size="24" />
               <div className="inline-input"><Input type="textarea" placeholder="Nhập địa chỉ..." resizable value={address} onChange={e => setAddress(e.target.value)} /></div>
             </ListItem>
             <ListItem className="editable-info">
-              <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -16, marginTop: 0, paddingTop: 16 }}>Số điện thoại</Box>
+              <Box slot="root-start" className="label">Số điện thoại</Box>
               <Avatar slot="media" src={phoneIcon} size="24" />
               <div className="inline-input"><Input type="text" placeholder="Nhập số điện thoại..." value={phone} onChange={e => setPhone(e.target.value)} /></div>
             </ListItem>
@@ -107,7 +107,7 @@ const AddressPicker = ({ onBack }) => {
               <Box>
                 {
                   addresses.length ?
-                    <Text bold style={{ textAlign: 'left' }}>Kết quả</Text> :
+                    <Text bold className="text-left">Kết quả</Text> :
                     <Text bold>Không tìm thấy</Text>
                 }
               </Box>
@@ -118,10 +118,10 @@ const AddressPicker = ({ onBack }) => {
               <ActionsLabel className="p-0">
                 <Box>
                   <Row>
-                    <Col width="60" style={{ textAlign: 'left' }}>
+                    <Col width="60" className="text-left">
                       <Text bold className="mb-0">Địa chỉ đang chọn</Text>
                     </Col>
-                    <Col width="40" style={{ textAlign: 'right' }}>
+                    <Col width="40" className="text-right">
                       <Link className="text-primary" onClick={() => setShowForm(true)}>
                         Thêm địa chỉ mới
                       </Link>
@@ -133,7 +133,7 @@ const AddressPicker = ({ onBack }) => {
             </>}
             {otherAddresses.length > 0 && <>
               <ActionsLabel className="p-0">
-                <Box style={{ textAlign: 'left' }}><Text bold>Địa chỉ khác</Text></Box>
+                <Box className="text-left"><Text bold>Địa chỉ khác</Text></Box>
               </ActionsLabel>
               {otherAddresses.map((address, i) => <Address key={i} {...address} />)}
             </>}
@@ -142,8 +142,8 @@ const AddressPicker = ({ onBack }) => {
       </ActionsGroup>
     </>
   )
-};
+}
 
 AddressPicker.displayName = 'zmp-address-picker'
 
-export default AddressPicker;
+export default AddressPicker
