@@ -6,8 +6,8 @@ import ProductOrder from './product-order';
 const Product = (props) => {
     const { name, price, image } = props
     return <ProductOrder product={props}>
-        <Card inset style={{ textAlign: 'center' }}>
-            <img src={image} style={{ width: '100%' }} />
+        <Card inset className="text-center">
+            <img src={image} className="w-100" />
             <Text bold>{name}</Text>
             <Price className="text-secondary" amount={price} />
         </Card>

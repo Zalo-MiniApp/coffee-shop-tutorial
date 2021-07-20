@@ -24,7 +24,7 @@ const PlacedOrder = ({ order }) => {
                 ) :
                 <Text bold>{shop.name}</Text>
             }
-            <div style={{ display: 'flex' }}>
+            <div className="d-flex">
                 <Price bold amount={total} />
                 {selectedDiscount && <Text className="text-secondary">&nbsp;- {selectedDiscount}</Text>}
             </div>

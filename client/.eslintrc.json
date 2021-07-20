@@ -15,10 +15,12 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "eslint-plugin-no-inline-styles"
     ],
     "rules": {
         "react/prop-types": 0,
+        "no-inline-styles/no-inline-styles": 2,
         "accessor-pairs": "error",
         "array-bracket-newline": "error",
         "array-bracket-spacing": [

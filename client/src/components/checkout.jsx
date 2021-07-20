@@ -69,7 +69,7 @@ const Checkout = ({ children, onReturn }) => {
         </ActionsGroup>
         <ActionsGroup>
           <ActionsLabel className="p-0">
-            <Box style={{ textAlign: 'left' }}>
+            <Box className="text-left">
               <Text bold>Phương thức nhận hàng</Text>
             </Box>
             <DeliveryMethodPicker onOpen={() => setShowCheckout(false)} onReturn={() => setShowCheckout(true)}>
@@ -77,13 +77,13 @@ const Checkout = ({ children, onReturn }) => {
                 <ListItem>
                   {shipping ? <Avatar slot="media" src={deliveryIcon} size="24" /> : <Avatar slot="media" src={shop} size="24" />}
                   <Icon slot="content" zmp="zi-chevron-right" />
-                  {shipping ? <Box style={{ textAlign: 'left' }}>
+                  {shipping ? <Box className="text-left">
                     <Text bold fontSize="16">Giao tận nơi</Text>
                     {selectedAddress ? <>
                       <Text bold className="mb-0">{selectedAddress.name} - {selectedAddress.phone}</Text>
                       <Text>{selectedAddress.address}</Text>
                     </> : <Text className="text-secondary">Tài xế giao đến địa chỉ của bạn</Text>}
-                  </Box> : <Box style={{ textAlign: 'left' }}>
+                  </Box> : <Box className="text-left">
                     <Text bold fontSize="16">{selectedShop.name}</Text>
                     <Text className="text-secondary">{selectedShop.address}</Text>
                   </Box>}
@@ -92,32 +92,32 @@ const Checkout = ({ children, onReturn }) => {
             </DeliveryMethodPicker>
           </ActionsLabel>
           <ActionsLabel className="p-0">
-            <Box style={{ textAlign: 'left' }}><Text bold>Thông tin khách hàng</Text></Box>
+            <Box className="text-left"><Text bold>Thông tin khách hàng</Text></Box>
             <List className="my-0">
               <ListItem className="shipping-time">
-                <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -8, marginTop: 0, paddingTop: 16 }}>Thời gian nhận hàng</Box>
+                <Box slot="root-start" className="label">Thời gian nhận hàng</Box>
                 <Avatar slot="media" src={clockIcon} size="24" />
                 <Icon slot="content" zmp="zi-chevron-right" />
-                <ShippingTimePicker value={shippingTime} onChange={value => store.dispatch('setShippingTime', value)} placeholder="Thời gian nhận hàng" title="Thời gian nhận hàng" style={{ flex: 1 }} />
+                <ShippingTimePicker value={shippingTime} onChange={value => store.dispatch('setShippingTime', value)} placeholder="Thời gian nhận hàng" title="Thời gian nhận hàng" className="flex-1" />
               </ListItem>
               <ListItem className="editable-info">
-                <Box slot="root-start" style={{ textAlign: 'left', marginLeft: 16, marginBottom: -16, marginTop: 0, paddingTop: 16 }}>Ghi chú</Box>
+                <Box slot="root-start" className="label">Ghi chú</Box>
                 <img slot="media" src={noteIcon} size="24" />
                 <div className="inline-input"><Input type="textarea" maxlength={500} placeholder="Nhập nội dung ghi chú... (tối đa 500 ký tự)" resizable value={note} onChange={e => store.dispatch('setNote', e.target.value)} /></div>
               </ListItem>
             </List>
           </ActionsLabel>
           <ActionsLabel className="p-0">
-            <Box style={{ textAlign: 'left' }}><Text bold>Thông tin đơn hàng</Text></Box>
+            <Box className="text-left"><Text bold>Thông tin đơn hàng</Text></Box>
             <List className="my-0">
               {cart.map((item, i) => <ListItem key={i}>
-                <img slot="media" src={item.product.image} style={{ width: 48 }} />
+                <img slot="media" src={item.product.image} className="product-image" />
                 <Price slot="content" amount={item.subtotal} unit="đ" className="pr-4" />
-                <Box style={{ textAlign: 'left' }}>
+                <Box className="text-left">
                   <Text className="mb-0" bold>
-                    <span style={{ color: '#B22830' }}>{item.quantity}x</span> {item.product.name}
+                    <span className="text-danger">{item.quantity}x</span> {item.product.name}
                   </Text>
-                  <div style={{ display: 'flex' }}>
+                  <div className="d-flex">
                     {item.size && <Text className="mb-0 text-secondary">
                       Size {item.size.name}
                       {item.topping && ', '}
@@ -142,7 +142,7 @@ const Checkout = ({ children, onReturn }) => {
           </ActionsLabel>
         </ActionsGroup>
         <ActionsGroup />
-        <ActionsLabel className="p-0" style={{ position: 'sticky', bottom: 0, boxShadow: `var(--zmp-button-raised-box-shadow)` }}>
+        <ActionsLabel className="sticky-action-footer">
           <List className="my-0">
             <ListItem>
               <Text slot="before-title" className="text-secondary mb-0">Mã ưu đãi</Text>
@@ -150,20 +150,20 @@ const Checkout = ({ children, onReturn }) => {
               <Link onClick={showDiscounts} slot="after" >{selectedDiscount ? <Text slot="after" bold className="mb-0">{selectedDiscount}</Text> : <Text className="text-secondary mb-0">Chọn mã ưu đãi</Text>}</Link>
             </ListItem>
             <ListItem>
-              <div style={{ flex: 1 }}>
-                <Box style={{ display: 'flex', alignItems: 'center' }}>
+              <div className="flex-1">
+                <Box className="d-flex v-center">
                   <Checkbox
                     checked={aggree}
                     onChange={e => setAggree(e.target.checked)}
-                    label={<Text style={{ textAlign: 'left', marginBottom: 0 }} fontSize={12}>
-                      Tôi đồng ý nhận món từ <b>{shippingTime[1]}h{`${shippingTime[2]}`.padStart(2, 0)} - {Number(shippingTime[1]) + 1}h{`${shippingTime[2]}`.padStart(2, 0)}</b>. <a onClick={changeShippingTime} className="text-primary" style={{ display: 'inline' }}>Chọn giờ khác.</a>
+                    label={<Text className="text-left mb-0" fontSize={12}>
+                      Tôi đồng ý nhận món từ <b>{shippingTime[1]}h{`${shippingTime[2]}`.padStart(2, 0)} - {Number(shippingTime[1]) + 1}h{`${shippingTime[2]}`.padStart(2, 0)}</b>. <a onClick={changeShippingTime} className="text-primary d-inline">Chọn giờ khác.</a>
                     </Text>}
                   />
 
                 </Box>
-                <Box style={{ display: 'flex', alignItems: 'center' }}>
+                <Box className="d-flex v-center space-between">
                   <Text>Tổng tiền</Text>
-                  <Price style={{ marginLeft: 'auto' }} fontSize={20} bold amount={totalAmount} />
+                  <Price fontSize={20} bold amount={totalAmount} />
                 </Box>
                 <Box>
                   <Button onClick={checkout} large responsive fill disabled={loading || !aggree}>

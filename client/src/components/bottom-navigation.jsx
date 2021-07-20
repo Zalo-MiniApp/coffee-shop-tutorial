@@ -41,7 +41,7 @@ const BottomNavigation = () => {
                 <Price fontSize={20} bold amount={totalAmount} className="mb-0" />
                 <Text className="text-secondary">Bạn có {totalQuantity} món trong giỏ hàng.</Text>
             </Box>
-            <Box style={{ textAlign: 'right' }}>
+            <Box className="text-right">
                 <Checkout>
                     <Button fill large>Giỏ hàng</Button>
                 </Checkout>

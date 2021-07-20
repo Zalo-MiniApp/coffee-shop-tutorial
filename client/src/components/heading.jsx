@@ -20,7 +20,7 @@ export const FollowOrMessage = () => {
   if (!user) return <></>
 
   return <>
-    {user.isFollowing ? <Button style={{ marginLeft: 16 }} fill onClick={message}>Nhắn tin</Button> : <Button typeName="secondary" style={{ marginLeft: 16 }} onClick={follow}>Theo dõi</Button>}
+    {user.isFollowing ? <Button className="ml-4" fill onClick={message}>Nhắn tin</Button> : <Button typeName="secondary ml-4" onClick={follow}>Theo dõi</Button>}
   </>
 }
 
@@ -29,10 +29,10 @@ const Heading = () => {
   const shipping = useStore('shipping')
 
   return (
-    <List style={{ margin: 0 }}>
+    <List className="m-0">
       <ListItem>
         <Avatar src={pickup} />
-        <div style={{ marginLeft: 16, flex: 1 }}>
+        <div className="ml-4 flex-1">
           {shipping ?
             <Text bold className="mb-0">Coffee Shop</Text> :
             <Text bold className="mb-0">Coffee Shop</Text>

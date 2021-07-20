@@ -27,13 +27,13 @@ export const Shop = ({ name, address, selected, open, close }) => {
     return closed
   }, [open, close])
 
-  return <ActionsButton className={selected ? 'active' : 'inactive'} style={{ backgroundColor: 'white' }} onClick={selectShop}>
+  return <ActionsButton className={`bg-white ${selected ? 'active' : 'inactive'}`} onClick={selectShop}>
     <Avatar src={shop} size="24" />
     <div className="description">
       <Text bold fontSize="16">{name}</Text>
       <Text className="text-secondary">{address}</Text>
       <Text>Mở bán từ {padZero(open.hour)}h{padZero(open.minute)} - {padZero(close.hour)}h{padZero(close.minute)}
-        {closed && <span style={{ color: '#B22830' }}> (Đã đóng cửa)</span>}
+        {closed && <span className="text-danger"> (Đã đóng cửa)</span>}
       </Text>
 
     </div>
@@ -73,7 +73,7 @@ const ShopPicker = ({ onBack }) => {
             <Box>
               {
                 shops.length ?
-                  <Text bold style={{ textAlign: 'left' }}>Kết quả</Text> :
+                  <Text bold className="text-left">Kết quả</Text> :
                   <Text bold>Không tìm thấy</Text>
               }
             </Box>
@@ -83,10 +83,10 @@ const ShopPicker = ({ onBack }) => {
           <ActionsLabel className="p-0">
             <Box>
               <Row>
-                <Col width="70" style={{ textAlign: 'left' }}>
+                <Col width="70" className="text-left">
                   <Text bold className="mb-0">Cửa hàng đang chọn</Text>
                 </Col>
-                <Col width="30" style={{ textAlign: 'right' }}>
+                <Col width="30" className="text-right">
                   <Link className="text-primary">
                     Tìm gần nhất
                   </Link>
@@ -96,7 +96,7 @@ const ShopPicker = ({ onBack }) => {
           </ActionsLabel>
           <Shop {...selectedShop} />
           <ActionsLabel className="p-0">
-            <Box style={{ textAlign: 'left' }}><Text bold>Cửa hàng khác</Text></Box>
+            <Box className="text-left"><Text bold>Cửa hàng khác</Text></Box>
           </ActionsLabel>
           {shops.map(shop => <Shop key={shop.name} {...shop} />)}
         </>}

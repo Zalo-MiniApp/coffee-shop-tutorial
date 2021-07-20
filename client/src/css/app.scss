@@ -10,6 +10,51 @@
 .text-secondary {
     color: var(--zmp-actions-label-text-color) !important;
 }
+.text-danger {
+    color: #B22830;
+}
+.text-black {
+    color: black;
+}
+.text-left {
+    text-align: left;
+}
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+.bg-white {
+    background-color: white !important;
+}
+.d-inline {
+    display: inline !important;
+}
+.d-flex {
+    display: flex;
+}
+.flex-1 {
+    flex: 1;
+}
+.h-center {
+    justify-content: center;
+}
+.v-center {
+    align-items: center;
+}
+.space-between {
+    justify-content: space-between;
+}
+.w-100 {
+    width: 100%;
+}
+.h-100 {
+    height: 100%;
+}
+.custom-icon {
+    width: 24px;
+}
 .page-content {
     padding-bottom: 80px;
 }
@@ -79,10 +124,24 @@
         padding: 16px;
     }
 }
+.sticky-action-footer {
+    padding: 0;
+    position: sticky;
+    bottom: 0;
+    box-shadow: var(--zmp-button-raised-box-shadow);
+}
 .inquiry {
+    display: flex;
     select, .button {
         background-color: white;
         border: none;
+    }
+    .button {
+        width: 48px;
+        height: 48px;
+        .icon {
+            margin-right: 0;
+        }
     }
 }
 .ellipsis {
@@ -145,11 +204,6 @@
     }
     textarea.resizable {
         padding-top: 12px !important;
-    }
-}
-.editable-info {
-    .item-inner {
-        padding-bottom: 8px;
     }
 }
 .actions-button a, .actions-label a, .button.button-fill {
@@ -217,7 +271,26 @@
         fill: white !important;
     }
 }
+.editable-info {
+    .label {
+        text-align: left;
+        margin-left: 16px;
+        margin-bottom: -16px;
+        margin-top: 0;
+        padding-top: 16px;
+    }
+    .item-inner {
+        padding-bottom: 8px;
+    }
+}
 .shipping-time {
+    .label {
+        text-align: left;
+        margin-left: 16px;
+        margin-top: 0;
+        margin-bottom: -4px;
+        padding-top: 16px;
+    }
     .item-inner {
         padding-top: 8px;
         padding-bottom: 0;
@@ -245,6 +318,44 @@
         padding: 4px 18px;
     }
 }
+.product-image {
+    width: 48px;
+}
 .zmp-checkbox-label {
     align-self: center;
+}
+.product-row {
+    margin: 0;
+    padding: 0 16px 8px 16px;
+    width: 100%;
+    overflow: auto;
+    box-sizing: border-box;
+
+    .product-column {
+        width: calc(50vw - 20px);
+        display: inline-block;
+    }
+}
+.product-order {
+    .product-preview {
+        .image {
+            flex: 1;
+            padding-right: 16px;
+        }
+        .description {
+            flex: 1 1 auto;
+            color: black;
+            align-self: center;
+            text-align: left;
+        }
+    }
+    .quantity-selector {
+        display: flex;
+        margin: auto;
+        color: black;
+    }
+    .note {
+        flex: 1;
+        height: 48px;
+    }
 }

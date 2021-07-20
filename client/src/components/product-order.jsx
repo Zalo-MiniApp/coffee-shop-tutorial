@@ -93,7 +93,7 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
             {children}
         </div>
         <Actions
-            className="address-picker-actions"
+            className="address-picker-actions product-order"
             opened={showOrder}
             onActionsClosed={() => setShowOrder(false)}
         >
@@ -106,16 +106,16 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
                 </ActionsLabel>
             </ActionsGroup>
             <ActionsGroup>
-                <ActionsLabel style={{ backgroundColor: 'white' }}>
+                <ActionsLabel className="bg-white product-preview">
                     <Row>
-                        <Col style={{ flex: 1, paddingRight: 16 }}><img src={image} style={{ width: '100%' }} /></Col>
-                        <Col style={{ flex: '1 1 auto', textAlign: 'left', alignSelf: 'center' }}>
-                            <Title style={{ color: 'black' }} bold>{name}</Title>
+                        <Col className="image"><img src={image} className="w-100" /></Col>
+                        <Col className="description">
+                            <Title bold>{name}</Title>
                             <Price amount={price} />
                         </Col>
                     </Row>
                 </ActionsLabel>
-                <ActionsLabel className="p-0" style={{ textAlign: 'left' }}>
+                <ActionsLabel className="p-0 text-left">
                     <Box><Text bold>Chọn Size</Text></Box>
                     <List className="my-0">
                         {sizes.map(s => <ListItem key={s.name} radio value={s.name} name="s" title={s.name} checked={size === s} onClick={() => setSize(s)}>
@@ -123,7 +123,7 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
                         </ListItem>)}
                     </List>
                 </ActionsLabel>
-                <ActionsLabel className="p-0" style={{ textAlign: 'left' }}>
+                <ActionsLabel className="p-0 text-left">
                     <Box><Text bold>Chọn Topping</Text></Box>
                     <List className="my-0">
                         {toppings.map(t => <ListItem key={t.name} radio value={t.name} name="t" title={t.name} checked={topping === t} onClick={() => setTopping(t)}>
@@ -131,11 +131,11 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
                         </ListItem>)}
                     </List>
                 </ActionsLabel>
-                <ActionsLabel className="p-0" style={{ textAlign: 'left' }}>
+                <ActionsLabel className="p-0 text-left">
                     <Box><Text bold>Số lượng</Text></Box>
                     <List className="my-0">
                         <ListItem>
-                            <div style={{ display: 'flex', margin: 'auto', color: 'black' }}>
+                            <div className="quantity-selector">
                                 <Button small typeName="tertiary" onClick={decreaseQuantity}>-</Button>
                                 <Box mx={6} mt={1}>{quantity}</Box>
                                 <Button small typeName="tertiary" onClick={increaseQuantity}>+</Button>
@@ -143,11 +143,11 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
                         </ListItem>
                     </List>
                 </ActionsLabel>
-                <ActionsLabel className="p-0" style={{ textAlign: 'left' }}>
+                <ActionsLabel className="p-0 text-left">
                     <Box><Text bold>Ghi chú</Text></Box>
                     <List className="my-0">
                         <ListItem>
-                            <div style={{ flex: 1, height: 48 }}>
+                            <div className="note">
                                 <Input value={note} onChange={(e) => setNote(e.target.value)} type="text" placeholder="Nhập ghi chú (VD. Ít đá, nhiều đường...)" />
                             </div>
                         </ListItem>
@@ -155,15 +155,15 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
                 </ActionsLabel>
             </ActionsGroup>
             <ActionsGroup />
-            <ActionsGroup style={{ position: 'sticky', bottom: 0, borderTop: `0.5px solid var(--zmp-color-nd200)` }}>
-                <ActionsLabel className="p-2" style={{ textAlign: 'left' }}>
+            <ActionsGroup className="sticky-action-footer">
+                <ActionsLabel className="p-2 text-left">
                     <Row>
                         <Col><Box>Tổng tiền</Box></Col>
-                        <Col style={{ textAlign: 'right' }}>
+                        <Col className="text-right">
                             <Box><Price className="text-primary" bold fontSize={20} amount={subtotal} /></Box>
                         </Col>
                     </Row>
-                    <Row gap="gap_4" className="px-2 pb-2" style={{ margin: 0 }}>
+                    <Row gap="gap_4" className="px-2 pb-2 m-0">
                         {cartItem ?
                             <Col>
                                 {quantity > 0 ?
