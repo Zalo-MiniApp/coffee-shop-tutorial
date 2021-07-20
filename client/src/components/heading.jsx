@@ -45,7 +45,7 @@ const Heading = () => {
         </div>
         <FollowOrMessage />
       </ListItem>
-    </List >
+    </List>
   )
 }
 
