@@ -4,7 +4,7 @@ import { loadToken, saveToken } from './storage'
 const base = config.BASE_URL
 
 export const request = async (method, url, data) => {
-  const headers = { "Content-Type": "application/json" }
+  const headers = { 'Content-Type': 'application/json' }
   const token = await loadToken()
   if (token) {
     headers.Authorization = `Bearer ${token}`

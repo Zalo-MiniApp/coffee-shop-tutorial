@@ -1,5 +1,5 @@
-import React, { useMemo } from "react"
-import { Picker } from "zmp-framework/react"
+import React, { useMemo } from 'react'
+import { Picker } from 'zmp-framework/react'
 
 const datePickerData = [
   {
@@ -9,7 +9,7 @@ const datePickerData = [
       date.setDate(date.getDate() + day)
       return date
     }),
-    displayValues: ["Hôm nay", "Ngày mai"].concat([2, 3, 4, 5, 6, 7, 8, 9, 10].map(day => {
+    displayValues: ['Hôm nay', 'Ngày mai'].concat([2, 3, 4, 5, 6, 7, 8, 9, 10].map(day => {
       const date = new Date()
       date.setDate(date.getDate() + day)
       return date.toLocaleDateString()

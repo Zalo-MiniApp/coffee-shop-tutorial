@@ -1,0 +1,51 @@
+module.exports = {
+  root: true,
+  env: {
+    browser: true,
+    es6: true,
+    node: true,
+  },
+  globals: {
+    XMLHttpRequest: true,
+    Blob: true,
+    Document: true,
+    FormData: true,
+  },
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 2020,
+    sourceType: 'module',
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+  plugins: ['react', 'eslint-plugin-no-inline-styles'],
+  extends: ['eslint:recommended', 'plugin:react/recommended'],
+  rules: {
+    'indent': ['off'],
+    'quotes': ['off'],
+    'prefer-destructuring': ['off'],
+    'prefer-object-spread': ['off'],
+    'prefer-ob': ['off'],
+    'react/react-in-jsx-scope': ['off'],
+    'react/no-string-refs': ['off'],
+    'react/prop-types': ['off'],
+    'react/display-name': ['off'],
+    'react/jsx-no-target-blank': ['off'],
+    'react/no-unescaped-entities': ['off'],
+    'no-console': ['off'],
+    'no-restricted-globals': ['off'],
+    'no-restricted-imports': ['off'],
+    'no-nested-ternary': ['off'],
+    'no-param-reassign': ['error', { props: false }],
+    'import/extensions': ['off'],
+    'import/prefer-default-export': ['off'],
+    'import/no-unresolved': ['off'],
+    'import/no-extraneous-dependencies': ['off'],
+    'no-inline-styles/no-inline-styles': ['warn'],
+  },
+}

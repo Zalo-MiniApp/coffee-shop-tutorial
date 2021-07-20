@@ -236,11 +236,11 @@ const store = createStore({
               'Quan tâm Official Account của Shop để nhận thông tin đặt hàng lần sau?',
             buttons: [
               {
-                text: "Không",
+                text: 'Không',
                 close: true,
               },
               {
-                text: "Đồng Ý",
+                text: 'Đồng Ý',
                 close: true,
                 onClick() {
                   follow()
@@ -258,7 +258,7 @@ const store = createStore({
         zmp.views.main.router.navigate('/history')
       } else {
         zmp.toast.create({
-          text: "Đã có lỗi xảy ra! Mã lỗi :" + result.message,
+          text: 'Đã có lỗi xảy ra! Mã lỗi :' + result.message,
           closeTimeout: 3000,
           position: 'center'
         }).open()
