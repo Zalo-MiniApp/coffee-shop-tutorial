@@ -36,25 +36,27 @@ const BottomNavigation = () => {
     })
   }
 
-  return <div className="bottom-navigation">
-    {totalQuantity > 0 && <div className="cart">
-      <Box>
-        <Price fontSize={20} bold amount={totalAmount} className="mb-0" />
-        <Text className="text-secondary">Bạn có {totalQuantity} món trong giỏ hàng.</Text>
-      </Box>
-      <Box className="text-right">
-        <Checkout>
-          <Button fill large>Giỏ hàng</Button>
-        </Checkout>
-      </Box>
-    </div>}
-    <Tabbar bottom>
-      {links.map(({ name, icon, href }) => <Link key={href} className={href === currentPath ? 'active' : 'inactive'} onClick={() => navigateWithoutAnimation(href)}>
-        <img src={icon} />
-        {name}
-      </Link>)}
-    </Tabbar>
-  </div>
+  return (
+    <div className="bottom-navigation">
+      {totalQuantity > 0 && <div className="cart">
+        <Box>
+          <Price fontSize={20} bold amount={totalAmount} className="mb-0" />
+          <Text className="text-secondary">Bạn có {totalQuantity} món trong giỏ hàng.</Text>
+        </Box>
+        <Box className="text-right">
+          <Checkout>
+            <Button fill large>Giỏ hàng</Button>
+          </Checkout>
+        </Box>
+      </div>}
+      <Tabbar bottom>
+        {links.map(({ name, icon, href }) => <Link key={href} className={href === currentPath ? 'active' : 'inactive'} onClick={() => navigateWithoutAnimation(href)}>
+          <img src={icon} />
+          {name}
+        </Link>)}
+      </Tabbar>
+    </div>
+  )
 }
 
 BottomNavigation.displayName = 'zmp-bottom-navigation'

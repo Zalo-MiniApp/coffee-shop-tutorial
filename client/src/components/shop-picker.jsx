@@ -27,17 +27,19 @@ export const Shop = ({ name, address, selected, open, close }) => {
     return closed
   }, [open, close])
 
-  return <ActionsButton className={`bg-white ${selected ? 'active' : 'inactive'}`} onClick={selectShop}>
-    <Avatar src={shop} size="24" />
-    <div className="description">
-      <Text bold fontSize="16">{name}</Text>
-      <Text className="text-secondary">{address}</Text>
-      <Text>Mở bán từ {padZero(open.hour)}h{padZero(open.minute)} - {padZero(close.hour)}h{padZero(close.minute)}
-        {closed && <span className="text-danger"> (Đã đóng cửa)</span>}
-      </Text>
+  return (
+    <ActionsButton className={`bg-white ${selected ? 'active' : 'inactive'}`} onClick={selectShop}>
+      <Avatar src={shop} size="24" />
+      <div className="description">
+        <Text bold fontSize="16">{name}</Text>
+        <Text className="text-secondary">{address}</Text>
+        <Text>Mở bán từ {padZero(open.hour)}h{padZero(open.minute)} - {padZero(close.hour)}h{padZero(close.minute)}
+          {closed && <span className="text-danger"> (Đã đóng cửa)</span>}
+        </Text>
 
-    </div>
-  </ActionsButton>
+      </div>
+    </ActionsButton>
+  )
 }
 
 const ShopPicker = ({ onBack }) => {

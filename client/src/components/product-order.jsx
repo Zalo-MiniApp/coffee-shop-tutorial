@@ -65,7 +65,7 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
     zmp.dialog.create({
       title: 'Xác nhận',
       content:
-                'Bạn có chắc muốn xoá sản phẩm này khỏi đơn hàng?',
+        'Bạn có chắc muốn xoá sản phẩm này khỏi đơn hàng?',
       buttons: [
         {
           text: 'Không',
@@ -89,102 +89,104 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
     store.dispatch('setShowCheckout', true)
   }
 
-  return <div>
-    <div onClick={() => setShowOrder(true)}>
-      {children}
+  return (
+    <div>
+      <div onClick={() => setShowOrder(true)}>
+        {children}
+      </div>
+      <Actions
+        className="custom-action-sheet product-order"
+        opened={showOrder}
+        onActionsClosed={() => setShowOrder(false)}
+      >
+        <ActionsGroup>
+          <Button typeName="ghost" className="close-button" onClick={() => setShowOrder(false)}>
+            <Icon zmp="zi-close" size={24}></Icon>
+          </Button>
+          <ActionsLabel bold>
+            <span className="title">Chọn thức uống</span>
+          </ActionsLabel>
+        </ActionsGroup>
+        <ActionsGroup>
+          <ActionsLabel className="bg-white product-preview">
+            <Row>
+              <Col className="image"><img src={image} className="w-100" /></Col>
+              <Col className="description">
+                <Title bold>{name}</Title>
+                <Price amount={price} />
+              </Col>
+            </Row>
+          </ActionsLabel>
+          <ActionsLabel className="p-0 text-left">
+            <Box><Text bold>Chọn Size</Text></Box>
+            <List className="my-0">
+              {sizes.map(s => <ListItem key={s.name} radio value={s.name} name="s" title={s.name} checked={size === s} onClick={() => setSize(s)}>
+                {s.extra && <ExtraPrice amount={s.extra} />}
+              </ListItem>)}
+            </List>
+          </ActionsLabel>
+          <ActionsLabel className="p-0 text-left">
+            <Box><Text bold>Chọn Topping</Text></Box>
+            <List className="my-0">
+              {toppings.map(t => <ListItem key={t.name} radio value={t.name} name="t" title={t.name} checked={topping === t} onClick={() => setTopping(t)}>
+                {t.extra && <ExtraPrice amount={t.extra} />}
+              </ListItem>)}
+            </List>
+          </ActionsLabel>
+          <ActionsLabel className="p-0 text-left">
+            <Box><Text bold>Số lượng</Text></Box>
+            <List className="my-0">
+              <ListItem>
+                <div className="quantity-selector">
+                  <Button small typeName="tertiary" onClick={decreaseQuantity}>-</Button>
+                  <Box mx={6} mt={1}>{quantity}</Box>
+                  <Button small typeName="tertiary" onClick={increaseQuantity}>+</Button>
+                </div>
+              </ListItem>
+            </List>
+          </ActionsLabel>
+          <ActionsLabel className="p-0 text-left">
+            <Box><Text bold>Ghi chú</Text></Box>
+            <List className="my-0">
+              <ListItem>
+                <div className="note">
+                  <Input value={note} onChange={(e) => setNote(e.target.value)} type="text" placeholder="Nhập ghi chú (VD. Ít đá, nhiều đường...)" />
+                </div>
+              </ListItem>
+            </List>
+          </ActionsLabel>
+        </ActionsGroup>
+        <ActionsGroup />
+        <ActionsGroup className="sticky-action-footer">
+          <ActionsLabel className="p-2 text-left">
+            <Row>
+              <Col><Box>Tổng tiền</Box></Col>
+              <Col className="text-right">
+                <Box><Price className="text-primary" bold fontSize={20} amount={subtotal} /></Box>
+              </Col>
+            </Row>
+            <Row gap="gap_4" className="px-2 pb-2 m-0">
+              {cartItem ?
+                <Col>
+                  {quantity > 0 ?
+                    <Button responsive typeName="primary" onClick={checkout}>Cập nhật giỏ hàng</Button> :
+                    <Button responsive typeName="destructive" onClick={removeFromCart}>Xoá khỏi giỏ hàng</Button>}
+                </Col> :
+                <>
+                  <Col>
+                    <Button responsive typeName="secondary" onClick={checkout}>Mua ngay</Button>
+                  </Col>
+                  <Col>
+                    <Button responsive typeName="primary" onClick={addToCart}>Thêm vào giỏ</Button>
+                  </Col>
+                </>
+              }
+            </Row>
+          </ActionsLabel>
+        </ActionsGroup>
+      </Actions>
     </div>
-    <Actions
-      className="custom-action-sheet product-order"
-      opened={showOrder}
-      onActionsClosed={() => setShowOrder(false)}
-    >
-      <ActionsGroup>
-        <Button typeName="ghost" className="close-button" onClick={() => setShowOrder(false)}>
-          <Icon zmp="zi-close" size={24}></Icon>
-        </Button>
-        <ActionsLabel bold>
-          <span className="title">Chọn thức uống</span>
-        </ActionsLabel>
-      </ActionsGroup>
-      <ActionsGroup>
-        <ActionsLabel className="bg-white product-preview">
-          <Row>
-            <Col className="image"><img src={image} className="w-100" /></Col>
-            <Col className="description">
-              <Title bold>{name}</Title>
-              <Price amount={price} />
-            </Col>
-          </Row>
-        </ActionsLabel>
-        <ActionsLabel className="p-0 text-left">
-          <Box><Text bold>Chọn Size</Text></Box>
-          <List className="my-0">
-            {sizes.map(s => <ListItem key={s.name} radio value={s.name} name="s" title={s.name} checked={size === s} onClick={() => setSize(s)}>
-              {s.extra && <ExtraPrice amount={s.extra} />}
-            </ListItem>)}
-          </List>
-        </ActionsLabel>
-        <ActionsLabel className="p-0 text-left">
-          <Box><Text bold>Chọn Topping</Text></Box>
-          <List className="my-0">
-            {toppings.map(t => <ListItem key={t.name} radio value={t.name} name="t" title={t.name} checked={topping === t} onClick={() => setTopping(t)}>
-              {t.extra && <ExtraPrice amount={t.extra} />}
-            </ListItem>)}
-          </List>
-        </ActionsLabel>
-        <ActionsLabel className="p-0 text-left">
-          <Box><Text bold>Số lượng</Text></Box>
-          <List className="my-0">
-            <ListItem>
-              <div className="quantity-selector">
-                <Button small typeName="tertiary" onClick={decreaseQuantity}>-</Button>
-                <Box mx={6} mt={1}>{quantity}</Box>
-                <Button small typeName="tertiary" onClick={increaseQuantity}>+</Button>
-              </div>
-            </ListItem>
-          </List>
-        </ActionsLabel>
-        <ActionsLabel className="p-0 text-left">
-          <Box><Text bold>Ghi chú</Text></Box>
-          <List className="my-0">
-            <ListItem>
-              <div className="note">
-                <Input value={note} onChange={(e) => setNote(e.target.value)} type="text" placeholder="Nhập ghi chú (VD. Ít đá, nhiều đường...)" />
-              </div>
-            </ListItem>
-          </List>
-        </ActionsLabel>
-      </ActionsGroup>
-      <ActionsGroup />
-      <ActionsGroup className="sticky-action-footer">
-        <ActionsLabel className="p-2 text-left">
-          <Row>
-            <Col><Box>Tổng tiền</Box></Col>
-            <Col className="text-right">
-              <Box><Price className="text-primary" bold fontSize={20} amount={subtotal} /></Box>
-            </Col>
-          </Row>
-          <Row gap="gap_4" className="px-2 pb-2 m-0">
-            {cartItem ?
-              <Col>
-                {quantity > 0 ?
-                  <Button responsive typeName="primary" onClick={checkout}>Cập nhật giỏ hàng</Button> :
-                  <Button responsive typeName="destructive" onClick={removeFromCart}>Xoá khỏi giỏ hàng</Button>}
-              </Col> :
-              <>
-                <Col>
-                  <Button responsive typeName="secondary" onClick={checkout}>Mua ngay</Button>
-                </Col>
-                <Col>
-                  <Button responsive typeName="primary" onClick={addToCart}>Thêm vào giỏ</Button>
-                </Col>
-              </>
-            }
-          </Row>
-        </ActionsLabel>
-      </ActionsGroup>
-    </Actions>
-  </div >
+  )
 }
 
 ProductOrder.displayName = 'zmp-product-order'

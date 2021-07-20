@@ -10,7 +10,9 @@ const mockImages = {
 }
 
 const MockImage = ({ image, ...props }) => {
-  return <img {...props} src={mockImages[image]} />
+  return (
+    <img {...props} src={mockImages[image]} />
+  )
 }
 
 MockImage.displayName = 'zmp-mock-image'

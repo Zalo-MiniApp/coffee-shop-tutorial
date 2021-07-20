@@ -17,11 +17,13 @@ export const FollowOrMessage = () => {
     })
   }
 
-  if (!user) return <></>
+  if (!user) return null
 
-  return <>
-    {user.isFollowing ? <Button className="ml-4" fill onClick={message}>Nhắn tin</Button> : <Button typeName="secondary ml-4" onClick={follow}>Theo dõi</Button>}
-  </>
+  return (
+    <>
+      {user.isFollowing ? <Button className="ml-4" fill onClick={message}>Nhắn tin</Button> : <Button typeName="secondary ml-4" onClick={follow}>Theo dõi</Button>}
+    </>
+  )
 }
 
 const Heading = () => {
