@@ -1,7 +1,7 @@
 import React from 'react';
-import discount1 from '../../assets-src/discount-1.png'
-import discount2 from '../../assets-src/discount-2.png'
-import discount3 from '../../assets-src/discount-3.png'
+import discount1 from '../static/icons/discount-1.png'
+import discount2 from '../static/icons/discount-2.png'
+import discount3 from '../static/icons/discount-3.png'
 
 const mockImages = {
     'discount-1': discount1,

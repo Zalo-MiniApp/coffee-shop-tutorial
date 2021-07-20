@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, useStore } from 'zmp-framework/react';
-import backgroundStore from '../../assets-src/background-store.png'
+import backgroundStore from '../static/images/background-store.png'
 
 const Banner = () => {
     const selectedShop = useStore('selectedShop')

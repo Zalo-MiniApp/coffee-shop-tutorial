@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Button, Text, Actions, ActionsGroup, ActionsLabel, List, ListItem, Icon, Box, Avatar, Input, useStore, Link, Checkbox, zmp, Preloader } from 'zmp-framework/react';
-import shop from '../../assets-src/shop.svg'
-import deliveryIcon from '../../assets-src/delivery.svg'
-import clockIcon from '../../assets-src/clock.svg'
-import phoneIcon from '../../assets-src/phone.svg'
-import noteIcon from '../../assets-src/note.svg'
+import shop from '../static/icons/shop.svg'
+import deliveryIcon from '../static/icons/delivery.svg'
+import clockIcon from '../static/icons/clock.svg'
+import phoneIcon from '../static/icons/phone.svg'
+import noteIcon from '../static/icons/note.svg'
 import { Price } from './prices';
 import ProductOrder from './product-order';
 import DeliveryMethodPicker from './delivery-method-picker';

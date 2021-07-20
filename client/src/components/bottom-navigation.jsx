@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Tabbar, Link, Box, Text, Button, useStore, zmp } from 'zmp-framework/react';
 import { Price } from './prices'
-import cup from '../../assets-src/cup.svg'
-import discount from '../../assets-src/discount.svg'
-import history from '../../assets-src/history.svg'
+import cup from '../static/icons/cup.svg'
+import discount from '../static/icons/discount.svg'
+import history from '../static/icons/history.svg'
 import Checkout from './checkout'
 
 const BottomNavigation = () => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from 'zmp-sdk';
 import { Avatar, Text, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, List, ListItem, Icon, useStore, zmp } from 'zmp-framework/react';
-import pickup from '../../assets-src/pickup.svg'
+import pickup from '../static/icons/pickup.svg'
 import config from '../config'
 import { follow } from '../services/zalo';
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Avatar, Button, Text, Actions, ActionsGroup, ActionsLabel, ActionsButton, Row, Col, Icon, Searchbar, useStore, Link, Box, List, ListItem, Input } from 'zmp-framework/react';
-import delivery from '../../assets-src/delivery.svg'
+import delivery from '../static/icons/delivery.svg'
 import { loadAddresses, saveAddress } from '../services/storage';
 import store from '../store'
-import phoneIcon from '../../assets-src/phone.svg'
+import phoneIcon from '../static/icons/phone.svg'
 
 export const Address = (props) => {
   const { name, address, selected, phone } = props
