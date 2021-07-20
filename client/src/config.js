@@ -5,4 +5,4 @@ const config = {
   DEFAULT_ACCESS_TOKEN: import.meta.env.VITE_DEFAULT_ACCESS_TOKEN
 }
 
-export default config;
+export default config

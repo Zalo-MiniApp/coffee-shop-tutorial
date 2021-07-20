@@ -1,4 +1,4 @@
-import api from 'zmp-sdk';
+import api from 'zmp-sdk'
 
 export const saveToken = token => api.setStorage({
   data: { token },

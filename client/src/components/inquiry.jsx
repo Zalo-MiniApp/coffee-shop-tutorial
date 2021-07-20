@@ -1,9 +1,9 @@
-import React from 'react';
-import { Box, Input, Button, Icon, useStore } from 'zmp-framework/react';
+import React from 'react'
+import { Box, Input, Button, Icon, useStore } from 'zmp-framework/react'
 import '../css/inquiry.scss'
 
 const Inquiry = () => {
-    const categories = useStore('categories');
+    const categories = useStore('categories')
 
     return <Box className="inquiry" px="2">
         <div className="flex-1 pr-4">
@@ -19,4 +19,4 @@ const Inquiry = () => {
 
 Inquiry.displayName = 'zmp-inquiry'
 
-export default Inquiry;
+export default Inquiry

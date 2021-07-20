@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { Avatar, Button, Text, ActionsGroup, ActionsLabel, ActionsButton, Row, Col, Icon, Searchbar, useStore, Link, Box } from 'zmp-framework/react';
+import React, { useMemo, useState } from 'react'
+import { Avatar, Button, Text, ActionsGroup, ActionsLabel, ActionsButton, Row, Col, Icon, Searchbar, useStore, Link, Box } from 'zmp-framework/react'
 import shop from '../static/icons/shop.svg'
 import store from '../store'
 
@@ -103,8 +103,8 @@ const ShopPicker = ({ onBack }) => {
       </ActionsGroup>
     </>
   )
-};
+}
 
 ShopPicker.displayName = 'zmp-shop-picker'
 
-export default ShopPicker;
+export default ShopPicker

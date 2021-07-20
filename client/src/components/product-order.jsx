@@ -1,7 +1,7 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { Text, Title, Actions, ActionsGroup, ActionsLabel, Button, Icon, Input, Row, Col, Box, List, ListItem, zmp } from 'zmp-framework/react';
+import React, { useState, useMemo, useEffect } from 'react'
+import { Text, Title, Actions, ActionsGroup, ActionsLabel, Button, Icon, Input, Row, Col, Box, List, ListItem, zmp } from 'zmp-framework/react'
 import { Price, ExtraPrice } from './prices'
-import store from '../store';
+import store from '../store'
 import '../css/product-order.scss'
 
 const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
@@ -38,7 +38,7 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
             subtotal += topping.extra
         }
         subtotal *= quantity
-        return subtotal;
+        return subtotal
     }, [quantity, size, topping])
 
     const order = () => {
@@ -80,7 +80,7 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
                     }
                 },
             ],
-        }).open();
+        }).open()
     }
 
     const checkout = () => {
@@ -189,4 +189,4 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
 
 ProductOrder.displayName = 'zmp-product-order'
 
-export default ProductOrder;
+export default ProductOrder

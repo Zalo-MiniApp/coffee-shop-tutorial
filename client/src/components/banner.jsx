@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, useStore } from 'zmp-framework/react';
+import React from 'react'
+import { Text, useStore } from 'zmp-framework/react'
 import backgroundStore from '../static/images/background-store.png'
 import '../css/banner.scss'
 
@@ -16,4 +16,4 @@ const Banner = () => {
 
 Banner.displayName = 'zmp-banner'
 
-export default Banner;
+export default Banner

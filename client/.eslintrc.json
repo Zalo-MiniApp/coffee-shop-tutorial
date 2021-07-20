@@ -262,7 +262,10 @@
             "error",
             "never"
         ],
-        "semi": "off",
+        "semi": [
+            "error",
+            "never"
+        ],
         "semi-spacing": "error",
         "semi-style": [
             "error",

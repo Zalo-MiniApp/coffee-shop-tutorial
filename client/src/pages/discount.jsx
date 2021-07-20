@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { Page, Box, Text, Button, Searchbar, zmp, useStore } from 'zmp-framework/react';
+import React, { useMemo, useState } from 'react'
+import { Page, Box, Text, Button, Searchbar, zmp, useStore } from 'zmp-framework/react'
 import Discount from '../components/discount'
 
 const DiscountPage = () => {
@@ -35,6 +35,6 @@ const DiscountPage = () => {
         </Box>
       }
     </Page>
-  );
+  )
 }
-export default DiscountPage;
+export default DiscountPage

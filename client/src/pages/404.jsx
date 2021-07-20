@@ -1,6 +1,6 @@
-import React from 'react';
-import { Page, Card, Title, Box } from 'zmp-framework/react';
-import NavbarBack from '../components/navbar-back';
+import React from 'react'
+import { Page, Card, Title, Box } from 'zmp-framework/react'
+import NavbarBack from '../components/navbar-back'
 
 const NotFoundPage = () => (
   <Page>
@@ -12,6 +12,6 @@ const NotFoundPage = () => (
       </Card>
     </Box>
   </Page>
-);
+)
 
-export default NotFoundPage;
+export default NotFoundPage

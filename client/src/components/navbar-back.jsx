@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, Navbar, NavLeft, Icon, NavTitle, NavRight } from 'zmp-framework/react';
+import React from 'react'
+import { Link, Navbar, NavLeft, Icon, NavTitle, NavRight } from 'zmp-framework/react'
 
 const NavbarBack = ({ title, linkRight, labelRight }) => {
   return (
@@ -19,7 +19,7 @@ const NavbarBack = ({ title, linkRight, labelRight }) => {
   )
 }
 
-NavbarBack.displayName = 'zmp-navbar';
+NavbarBack.displayName = 'zmp-navbar'
 
 
-export default NavbarBack;
+export default NavbarBack

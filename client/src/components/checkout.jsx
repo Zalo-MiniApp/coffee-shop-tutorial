@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Text, Actions, ActionsGroup, ActionsLabel, List, ListItem, Icon, Box, Avatar, Input, useStore, Link, Checkbox, zmp, Preloader } from 'zmp-framework/react';
+import React, { useEffect, useState } from 'react'
+import { Button, Text, Actions, ActionsGroup, ActionsLabel, List, ListItem, Icon, Box, Avatar, Input, useStore, Link, Checkbox, zmp, Preloader } from 'zmp-framework/react'
 import shop from '../static/icons/shop.svg'
 import deliveryIcon from '../static/icons/delivery.svg'
 import clockIcon from '../static/icons/clock.svg'
 import noteIcon from '../static/icons/note.svg'
-import { Price } from './prices';
-import ProductOrder from './product-order';
-import DeliveryMethodPicker from './delivery-method-picker';
-import store from '../store';
-import ShippingTimePicker from './shipping-time-picker';
+import { Price } from './prices'
+import ProductOrder from './product-order'
+import DeliveryMethodPicker from './delivery-method-picker'
+import store from '../store'
+import ShippingTimePicker from './shipping-time-picker'
 import '../css/checkout.scss'
 
 const Checkout = ({ children, onReturn }) => {
@@ -178,8 +178,8 @@ const Checkout = ({ children, onReturn }) => {
       </Actions>
     </>
   )
-};
+}
 
 Checkout.displayName = 'zmp-checkout'
 
-export default Checkout;
+export default Checkout

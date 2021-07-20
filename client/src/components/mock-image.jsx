@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import discount1 from '../static/icons/discount-1.png'
 import discount2 from '../static/icons/discount-2.png'
 import discount3 from '../static/icons/discount-3.png'
@@ -15,4 +15,4 @@ const MockImage = ({ image, ...props }) => {
 
 MockImage.displayName = 'zmp-mock-image'
 
-export default MockImage;
+export default MockImage

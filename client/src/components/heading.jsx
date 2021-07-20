@@ -1,9 +1,9 @@
-import React from 'react';
-import api from 'zmp-sdk';
-import { Avatar, Text, Button, List, ListItem, useStore } from 'zmp-framework/react';
+import React from 'react'
+import api from 'zmp-sdk'
+import { Avatar, Text, Button, List, ListItem, useStore } from 'zmp-framework/react'
 import pickup from '../static/icons/pickup.svg'
 import config from '../config'
-import { follow } from '../services/zalo';
+import { follow } from '../services/zalo'
 
 export const FollowOrMessage = () => {
   const user = useStore('user')
@@ -14,7 +14,7 @@ export const FollowOrMessage = () => {
       id: config.OA_ID,
       success: () => { },
       fail: () => { }
-    });
+    })
   }
 
   if (!user) return <></>
@@ -45,8 +45,8 @@ const Heading = () => {
       </ListItem>
     </List >
   )
-};
+}
 
 Heading.displayName = 'zmp-heading'
 
-export default Heading;
+export default Heading

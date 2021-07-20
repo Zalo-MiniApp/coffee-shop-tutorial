@@ -1,9 +1,9 @@
 
-import { createStore } from 'zmp-core/lite';
-import { zmp } from 'zmp-framework/react';
-import { checkout, getCurrentUser, getPlacedOrders, getProductsByCategory, login } from './services/coffee';
-import { loadAddresses, loadProductsFromCache, loadUserFromCache, saveProductsToCache, saveUserToCache } from './services/storage';
-import { follow, getAccessToken } from './services/zalo';
+import { createStore } from 'zmp-core/lite'
+import { zmp } from 'zmp-framework/react'
+import { checkout, getCurrentUser, getPlacedOrders, getProductsByCategory, login } from './services/coffee'
+import { loadAddresses, loadProductsFromCache, loadUserFromCache, saveProductsToCache, saveUserToCache } from './services/storage'
+import { follow, getAccessToken } from './services/zalo'
 
 const store = createStore({
   state: {
@@ -83,7 +83,7 @@ const store = createStore({
       return state.loadingProducts
     },
     shops({ state }) {
-      return state.shops;
+      return state.shops
     },
     selectedShop({ state }) {
       return state.shops.find(s => s.selected)
@@ -247,7 +247,7 @@ const store = createStore({
                 }
               },
             ],
-          }).open();
+          }).open()
         } else {
           zmp.toast.create({
             text: result.message,
@@ -281,4 +281,4 @@ const store = createStore({
   },
 })
 
-export default store;
+export default store

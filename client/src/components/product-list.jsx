@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { Row, Col, Title, Box, SkeletonBlock, useStore, SkeletonText, Text } from 'zmp-framework/react';
-import store from '../store';
-import Product from './product';
+import React, { useEffect } from 'react'
+import { Row, Col, Title, Box, SkeletonBlock, useStore, SkeletonText, Text } from 'zmp-framework/react'
+import store from '../store'
+import Product from './product'
 import '../css/product.scss'
 
 const ProductList = () => {
@@ -36,4 +36,4 @@ const ProductList = () => {
 
 ProductList.displayName = 'zmp-product-list'
 
-export default ProductList;
+export default ProductList

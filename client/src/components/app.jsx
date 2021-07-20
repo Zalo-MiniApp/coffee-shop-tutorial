@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 import {
   zmpready,
   App,
   View,
-} from 'zmp-framework/react';
-import store from '../store';
-import BottomNavigation from './bottom-navigation';
+} from 'zmp-framework/react'
+import store from '../store'
+import BottomNavigation from './bottom-navigation'
 
 const MyApp = () => {
 
@@ -15,12 +15,12 @@ const MyApp = () => {
     theme: 'auto', // Automatic theme detection
     // App store
     store: store,
-  };
+  }
 
   zmpready(() => {
     // Call ZMP APIs here
     store.dispatch('login')
-  });
+  })
 
   return (
     <App {...zmpparams} >
@@ -29,6 +29,6 @@ const MyApp = () => {
       <View main className="safe-areas" url="/" />
       <BottomNavigation />
     </App>
-  );
+  )
 }
-export default MyApp;
+export default MyApp

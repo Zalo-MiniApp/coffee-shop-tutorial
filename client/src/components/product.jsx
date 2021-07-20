@@ -1,7 +1,7 @@
-import React from 'react';
-import { Card, Text } from 'zmp-framework/react';
-import { Price } from './prices';
-import ProductOrder from './product-order';
+import React from 'react'
+import { Card, Text } from 'zmp-framework/react'
+import { Price } from './prices'
+import ProductOrder from './product-order'
 
 const Product = (props) => {
     const { name, price, image } = props
@@ -17,4 +17,4 @@ const Product = (props) => {
 
 Product.displayName = 'zmp-product'
 
-export default Product;
+export default Product

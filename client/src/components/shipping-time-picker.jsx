@@ -1,5 +1,5 @@
-import React, { useMemo } from "react";
-import { Picker } from "zmp-framework/react";
+import React, { useMemo } from "react"
+import { Picker } from "zmp-framework/react"
 
 const datePickerData = [
   {
@@ -25,14 +25,14 @@ const datePickerData = [
     values: [...Array(60)].map((v, i) => i),
     displayValues: [...Array(60)].map((v, i) => `${i} phút`)
   },
-];
+]
 
 const ShippingTimePicker = ({ onChange, ...props }) => {
   const handleChangeDate = (picker, values) => {
     if (onChange) {
       onChange(values)
     }
-  };
+  }
 
   const defaultValue = useMemo(() => {
     const now = datePickerData[0].values[0]
@@ -47,12 +47,12 @@ const ShippingTimePicker = ({ onChange, ...props }) => {
       onChange={handleChangeDate}
       defaultSelect={defaultValue}
       formatValue={(values, displayValues) => {
-        return `${displayValues[0]}, ${displayValues[1]} ${displayValues[2]}`;
+        return `${displayValues[0]}, ${displayValues[1]} ${displayValues[2]}`
       }}
     />
-  );
-};
+  )
+}
 
 ShippingTimePicker.displayName = 'zmp-shipping-time-picker'
 
-export default ShippingTimePicker;
+export default ShippingTimePicker

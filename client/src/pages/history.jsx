@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { Page, Box, Text, Button, zmp, useStore, List, ListItem, Avatar } from 'zmp-framework/react';
-import store from '../store';
+import React, { useEffect } from 'react'
+import { Page, Box, Text, Button, zmp, useStore, List, ListItem, Avatar } from 'zmp-framework/react'
+import store from '../store'
 import Loading from '../components/loading'
-import PlacedOrder from '../components/placed-order';
+import PlacedOrder from '../components/placed-order'
 
 const Heading = () => {
   const user = useStore('user')
@@ -22,7 +22,7 @@ const Heading = () => {
       </ListItem>
     </List>
   )
-};
+}
 
 const Empty = () => <Box className="d-flex h-100 h-center v-center text-center">
   <Box>
@@ -59,6 +59,6 @@ const History = () => {
         }
       </>}
     </Page>
-  );
+  )
 }
-export default History;
+export default History

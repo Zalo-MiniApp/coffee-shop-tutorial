@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Tabbar, Link, Box, Text, Button, useStore, zmp } from 'zmp-framework/react';
+import React, { useEffect, useState } from 'react'
+import { Tabbar, Link, Box, Text, Button, useStore, zmp } from 'zmp-framework/react'
 import { Price } from './prices'
 import cup from '../static/icons/cup.svg'
 import discount from '../static/icons/discount.svg'
@@ -54,9 +54,9 @@ const BottomNavigation = () => {
                 {name}
             </Link>)}
         </Tabbar>
-    </div>;
+    </div>
 }
 
 BottomNavigation.displayName = 'zmp-bottom-navigation'
 
-export default BottomNavigation;
+export default BottomNavigation

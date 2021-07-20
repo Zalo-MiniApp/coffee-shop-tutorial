@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Avatar, Text, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, Icon, useStore } from 'zmp-framework/react';
+import React, { useEffect, useState } from 'react'
+import { Avatar, Text, Button, Actions, ActionsGroup, ActionsLabel, ActionsButton, Icon, useStore } from 'zmp-framework/react'
 import pickup from '../static/icons/pickup.svg'
 import delivery from '../static/icons/delivery.svg'
-import ShopPicker from './shop-picker';
-import store from '../store';
-import AddressPicker from './address-picker';
+import ShopPicker from './shop-picker'
+import store from '../store'
+import AddressPicker from './address-picker'
 
 const DeliveryMethodPicker = ({ children, onReturn, onOpen }) => {
   const [showPicker, setShowPicker] = useState(false)
@@ -90,8 +90,8 @@ const DeliveryMethodPicker = ({ children, onReturn, onOpen }) => {
       }
     </Actions>
   </>
-};
+}
 
 DeliveryMethodPicker.displayName = 'zmp-delivery-method-picker'
 
-export default DeliveryMethodPicker;
+export default DeliveryMethodPicker
