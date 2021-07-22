@@ -7,9 +7,7 @@ import PlacedOrder from '../components/placed-order'
 const Heading = () => {
   const user = useStore('user')
 
-  if (!user) {
-    return <></>
-  }
+  if (!user) return null
 
   return (
     <List className="m-0">
@@ -35,10 +33,12 @@ const Empty = () => <Box className="d-flex h-100 h-center v-center text-center">
 const Orders = () => {
   const orders = useStore('orders')
 
-  return <Box m={4}>
-    <Text bold className="my-4">Lịch sử đơn hàng</Text>
-    {orders.map((order) => <Box key={order._id} mx={0} my={2}><PlacedOrder order={order} /></Box>)}
-  </Box>
+  return (
+    <Box m={4}>
+      <Text bold className="my-4">Lịch sử đơn hàng</Text>
+      {orders.map((order) => <Box key={order._id} mx={0} my={2}><PlacedOrder order={order} /></Box>)}
+    </Box>
+  )
 }
 
 const History = () => {

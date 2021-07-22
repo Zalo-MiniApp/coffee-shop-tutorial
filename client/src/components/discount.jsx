@@ -18,17 +18,19 @@ const Discount = ({ discount }) => {
     })
   }
 
-  return <Card className="discount-card" inset>
-    <MockImage image={image} className="discount-image" />
-    <div className="discount-summary">
-      <Text bold>{name}</Text>
-      <Text className="text-secondary">HSD: {expireDate}</Text>
-      <Button fill responsive onClick={useDiscount}>Áp dụng ngay</Button>
+  return (
+    <Card className="discount-card" inset>
+      <MockImage image={image} className="discount-image" />
+      <div className="discount-summary">
+        <Text bold>{name}</Text>
+        <Text className="text-secondary">HSD: {expireDate}</Text>
+        <Button fill responsive onClick={useDiscount}>Áp dụng ngay</Button>
 
-      <div className="pie top"></div>
-      <div className="pie bottom"></div>
-    </div>
-  </Card>
+        <div className="pie top"></div>
+        <div className="pie bottom"></div>
+      </div>
+    </Card>
+  )
 }
 
 Discount.displayName = 'zmp-discount'

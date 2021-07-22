@@ -11,13 +11,15 @@ export const Address = (props) => {
     store.dispatch('selectAddress', props)
   }
 
-  return <ActionsButton className={`bg-white ${selected ? 'active' : 'inactive'}`} onClick={selectAddress}>
-    <img src={delivery} className="custom-icon" />
-    <div className="description">
-      <Text className="mb-0" bold fontSize="16">{name} - {phone}</Text>
-      <Text className="text-secondary">{address}</Text>
-    </div>
-  </ActionsButton>
+  return (
+    <ActionsButton className={`bg-white ${selected ? 'active' : 'inactive'}`} onClick={selectAddress}>
+      <img src={delivery} className="custom-icon" />
+      <div className="description">
+        <Text className="mb-0" bold fontSize="16">{name} - {phone}</Text>
+        <Text className="text-secondary">{address}</Text>
+      </div>
+    </ActionsButton>
+  )
 }
 
 const AddressPicker = ({ onBack }) => {
