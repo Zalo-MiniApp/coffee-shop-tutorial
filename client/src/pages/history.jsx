@@ -25,7 +25,7 @@ const Heading = () => {
 const Empty = () => <Box className="d-flex h-100 h-center v-center text-center">
   <Box>
     <Text bold>Bạn chưa có đơn hàng!</Text>
-    <Text className="text-secondary mt-4 mb-8">Hãy đặt món để thưởng thức dịch vụ hấp dẫn tại Highlands Coffee nhé!</Text>
+    <Text className="text-secondary mt-4 mb-8">Hãy đặt món để thưởng thức dịch vụ hấp dẫn tại Coffee Shop nhé!</Text>
     <Button className="m-auto" typeName="primary" onClick={() => zmp.views.main.router.navigate('/')} large>Đặt món ngay</Button>
   </Box>
 </Box>

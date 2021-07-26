@@ -49,7 +49,7 @@ const store = createStore({
     discounts: [
       {
         code: 'GIAM20K',
-        name: 'Ưu đãi 20K! Đặt Highlands Coffee trên Zalo.',
+        name: 'Ưu đãi 20K! Đặt Coffee Shop trên Zalo.',
         expireDate: '10/05/2021',
         image: 'discount-1'
       }, {

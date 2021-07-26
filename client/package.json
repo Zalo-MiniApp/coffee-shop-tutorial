@@ -1,8 +1,8 @@
 {
-  "name": "highland-coffee",
+  "name": "coffee-shop",
   "private": true,
   "version": "1.0.0",
-  "description": "Highland Coffee",
+  "description": "Coffee Shop",
   "repository": "",
   "license": "UNLICENSED",
   "browserslist": [

@@ -1,7 +1,7 @@
 {
   "cwd": "/Users/nguyenhongphat0/Desktop/zalo",
   "newProject": true,
-  "name": "Highland Coffee",
+  "name": "Coffee Shop",
   "framework": "react",
   "template": "single-view",
   "cssPreProcessor": "scss",

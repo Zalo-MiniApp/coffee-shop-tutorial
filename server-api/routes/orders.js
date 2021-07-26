@@ -40,7 +40,7 @@ router.post('/checkout', async (req, res, next) => {
       note,
     })
     const detail = cart.map(item => `${item.quantity}x ${item.product.name}`).join(', ')
-    const response = await ZaloService.sendMessage(req.user.followerId, `Cảm ơn bạn đã đặt hàng tại Highland Coffee. Chi tiết đơn hàng: ${detail}. Tổng cộng: ${total} VND`)
+    const response = await ZaloService.sendMessage(req.user.followerId, `Cảm ơn bạn đã đặt hàng tại Coffee Shop. Chi tiết đơn hàng: ${detail}. Tổng cộng: ${total} VND`)
     console.log('[OA Message]', response)
     res.send({
       error: 0,
