@@ -28,17 +28,13 @@ export const FollowOrMessage = () => {
 
 const Heading = () => {
   const selectedShop = useStore('selectedShop')
-  const shipping = useStore('shipping')
 
   return (
     <List className="m-0">
       <ListItem>
         <Avatar src={pickup} />
         <div className="ml-4 flex-1">
-          {shipping ?
-            <Text bold className="mb-0">Coffee Shop</Text> :
-            <Text bold className="mb-0">Coffee Shop</Text>
-          }
+          <Text bold className="mb-0">Coffee Shop</Text>
           <Text className="ellipsis mb-0">
             {selectedShop.name} - {selectedShop.address}
           </Text>
