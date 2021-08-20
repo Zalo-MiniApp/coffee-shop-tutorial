@@ -165,7 +165,7 @@ const ProductOrder = ({ product, children, cartItem, cartIndex }) => {
                 <Box><Price className="text-primary" bold fontSize={20} amount={subtotal} /></Box>
               </Col>
             </Row>
-            <Row gap="gap_4" className="px-2 pb-2 m-0">
+            <Row gap="gap_4" className="actions">
               {cartItem ?
                 <Col>
                   {quantity > 0 ?

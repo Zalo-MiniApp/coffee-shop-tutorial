@@ -1,23 +1,27 @@
 .product-order {
   .product-preview {
-      .image {
-          flex: 1;
-          padding-right: 16px;
-      }
-      .description {
-          flex: 1 1 auto;
-          color: black;
-          align-self: center;
-          text-align: left;
-      }
+    .image {
+      flex: 1;
+      padding-right: 16px;
+    }
+    .description {
+      flex: 1 1 auto;
+      color: black;
+      align-self: center;
+      text-align: left;
+    }
   }
   .quantity-selector {
-      display: flex;
-      margin: auto;
-      color: black;
+    display: flex;
+    margin: auto;
+    color: black;
   }
   .note {
-      flex: 1;
-      height: 48px;
+    flex: 1;
+    height: 48px;
+  }
+  .actions {
+    margin: 8px;
+    margin-top: 0;
   }
 }

@@ -142,6 +142,7 @@
     position: sticky;
     bottom: 0;
     box-shadow: var(--zmp-button-raised-box-shadow);
+    border-top: none !important;
 }
 .actions-button a, .actions-label a, .button.button-fill {
     color: white;
