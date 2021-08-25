@@ -8,5 +8,8 @@
   "listCSS": [],
   "listSyncJS": [],
   "listAsyncJS": [],
-  "pages": []
+  "pages": [
+    "/discount",
+    "/history"
+  ]
 }
