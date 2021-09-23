@@ -7,6 +7,7 @@ import { follow, getAccessToken } from './services/zalo'
 
 const store = createStore({
   state: {
+    jwt: null,
     user: null,
     showCheckout: false,
     shipping: false,
@@ -176,6 +177,9 @@ const store = createStore({
       state.user = user
       saveUserToCache(user)
     },
+    setJwt({ state }, jwt) {
+      state.jwt = jwt
+    },
     reOrder({ state }, { cart, phone, note }) {
       state.cart = cart
       state.phone = phone
@@ -208,6 +212,9 @@ const store = createStore({
     },
     async fetchOrders({ state }) {
       state.loadingOrders = true
+      while (!state.jwt) {
+        await new Promise(resolve => setTimeout(resolve, 100))
+      }
       const orders = await getPlacedOrders()
       state.orders = orders
       state.loadingOrders = false

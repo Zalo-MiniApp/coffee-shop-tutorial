@@ -2,7 +2,8 @@
   "app": {
     "title": "Coffee Shop",
     "orientation": "auto",
-    "leftButton": "none"
+    "textColor": "white",
+    "leftButton": "both"
   },
   "debug": false,
   "listCSS": [],

@@ -1,23 +1,5 @@
 import api from 'zmp-sdk'
 
-export const saveToken = token => api.setStorage({
-  data: { token },
-  fail: (error) => console.log('Failed to save token to storage. Details: ', error)
-})
-
-export const loadToken = () => new Promise(resolve => {
-  api.getStorage({
-    keys: ['token'],
-    success: ({ token }) => {
-      resolve(token)
-    },
-    fail: (error) => {
-      console.log('Failed to get token from storage. Details: ', error)
-      resolve(null)
-    }
-  })
-})
-
 export const loadAddresses = () => new Promise(resolve => {
   api.getStorage({
     keys: ['addresses'],

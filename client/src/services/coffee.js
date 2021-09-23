@@ -1,11 +1,11 @@
 import config from '../config'
-import { loadToken, saveToken } from './storage'
+import store from '../store'
 
 const base = config.BASE_URL
 
 export const request = async (method, url, data) => {
   const headers = { 'Content-Type': 'application/json' }
-  const token = await loadToken()
+  const token = store.state.jwt
   if (token) {
     headers.Authorization = `Bearer ${token}`
   }
@@ -23,7 +23,7 @@ export const login = async (accessToken) => {
       accessToken
     })).json()
     if (response.data.jwt) {
-      await saveToken(response.data.jwt)
+      store.dispatch('setJwt', response.data.jwt)
       return true
     } else {
       return false
