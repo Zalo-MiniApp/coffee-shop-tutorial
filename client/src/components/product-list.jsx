@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Row, Col, Title, Box, SkeletonBlock, useStore, SkeletonText, Text } from 'zmp-framework/react'
+import { Row, Col, Title, Box, SkeletonBlock, useStore } from 'zmp-framework/react'
 import store from '../store'
 import Product from './product'
 import '../css/product.scss'
@@ -14,9 +14,6 @@ const ProductList = () => {
   return (
     <>
       {loading ? <Box m={0} px={4} pb={2}>
-        <SkeletonText effect="wave">
-          <Text fontSize={20}>Lorem ipsum dolor sit amet</Text>
-        </SkeletonText>
         <Row gap="gap_4" className="mt-4">
           <Col><SkeletonBlock effect="wave" height="200px" /></Col>
           <Col><SkeletonBlock effect="wave" height="200px" /></Col>

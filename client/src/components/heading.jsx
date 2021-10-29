@@ -21,7 +21,7 @@ export const FollowOrMessage = () => {
 
   return (
     <>
-      {user.isFollowing ? <Button className="ml-4" fill onClick={message}>Nhắn tin</Button> : <Button typeName="secondary ml-4" onClick={follow}>Theo dõi</Button>}
+      {user.isFollowing ? <Button className="ml-4" fill onClick={message}>Nhắn tin</Button> : <Button typeName="secondary" className="ml-4" onClick={follow}>Theo dõi</Button>}
     </>
   )
 }

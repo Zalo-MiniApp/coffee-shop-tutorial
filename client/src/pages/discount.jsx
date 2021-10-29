@@ -24,7 +24,7 @@ const DiscountPage = () => {
     <Page name="discount">
       {
         discounts.length > 0 ? <Box m={4}>
-          <Searchbar value={keyword} onChange={e => setKeyword(e.target.value)} type="text" placeholder="Tìm mã ưu đãi..." clearButton onSearchbarClear={() => setKeyword('')} />
+          <Searchbar className="discount-searchbar" value={keyword} onChange={e => setKeyword(e.target.value)} type="text" placeholder="Tìm mã ưu đãi..." clearButton onSearchbarClear={() => setKeyword('')} />
           <Text bold className="my-4">{filteredDiscounts.length > 0 ? 'Danh sách mã ưu đãi' : 'Không tìm thấy kết quả'}</Text>
           {filteredDiscounts.map((discount) => <Box key={discount.code} mx={0} my={2}><Discount discount={discount} /></Box>)}
         </Box> : <Box className="d-flex h-100 h-center v-center text-center">
