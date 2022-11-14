@@ -35,6 +35,7 @@ jobs:
         value: ${{ env.NEW_REFRESH_TOKEN }}
         token: ${{ secrets.REPO_ACCESS_TOKEN }}
     - run: npm install
+    - run: npm install -g zmp-cli
     - run: npx zmp-developer-token deploy ${{ matrix.mini-app-id }}
     - name: Report
       run: |
